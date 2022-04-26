@@ -64,10 +64,10 @@ public class Catalog {
    }
    public void changePrice(int id,int newPrice)
    {
-      Item temp;
+      Item temp=new Item();
       for (Item item :items)
       {
-         if(item.id==id)
+         if(item.getId()==id)
          {
             temp=item;
          }
