@@ -11,7 +11,6 @@ public class SimpleServer extends AbstractServer {
 
 	public SimpleServer(int port) {
 		super(port);
-		
 	}
 
 	@Override
@@ -26,23 +25,7 @@ public class SimpleServer extends AbstractServer {
 				e.printStackTrace();
 			}
 		}
-		else if (msgString.startsWith("#update")) {
-			//call update price function
-		}
-		else if (msgString.startsWith("#request")) {
-			String[] args = (msgString.split(":")[1]).split(",");
-			switch (args[0]){
-				case "Catalog":
-					//send the catalog
-					break;
-			}
-		}
 
-		/*
-		else if (msgString.startsWith("#")) {
-
-		}
-		*/
 
 	}
 
