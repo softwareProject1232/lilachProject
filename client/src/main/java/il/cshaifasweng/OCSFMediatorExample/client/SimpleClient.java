@@ -1,11 +1,13 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.CatalogData;
+import il.cshaifasweng.OCSFMediatorExample.entities.ItemData;
 import org.greenrobot.eventbus.EventBus;
 
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Warning;
 
-import javax.xml.catalog.Catalog;
+import java.io.IOException;
 
 public class SimpleClient extends AbstractClient {
 	
@@ -20,17 +22,25 @@ public class SimpleClient extends AbstractClient {
 		if (msg.getClass().equals(Warning.class)) {
 			EventBus.getDefault().post(new WarningEvent((Warning) msg));
 		}
-		else if (msg.getClass().equals(Catalog.class)) {
-			EventBus.getDefault().post(new CatalogRecievedEvent((Catalog) msg));
+		else if (msg.getClass().equals(CatalogData.class)) {
+			EventBus.getDefault().post(new CatalogRecievedEvent((CatalogData) msg));
 		}
 	}
 
-	public void changePrice(int price, Item item){
-		client.sendToServer("#update:price," + item.getId() + "," + Integer.toString(price)); //"update:price,<item id>,<new price>"
+	public void changePrice(int price, ItemData item){
+		try {
+			client.sendToServer("#update:price," + item.getId() + "," + Integer.toString(price)); //"update:price,<item id>,<new price>"
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void requestCatalog(){
-		client.sendToServer("#request:Catalog");
+		try {
+			client.sendToServer("#request:Catalog");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static SimpleClient getClient() {

@@ -1,13 +1,15 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
-public class CatalogRecievedEvent {
-    private Catalog catalog;
+import il.cshaifasweng.OCSFMediatorExample.entities.CatalogData;
 
-    public Catalog getCatalog() {
+public class CatalogRecievedEvent {
+    private CatalogData catalog;
+
+    public CatalogData getCatalog() {
         return catalog;
     }
 
-    public CatalogRecievedEvent(Catalog catalog) {
+    public CatalogRecievedEvent(CatalogData catalog) {
         this.catalog = catalog;
     }
 }
