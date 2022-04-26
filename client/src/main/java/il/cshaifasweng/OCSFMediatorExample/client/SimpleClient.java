@@ -26,11 +26,11 @@ public class SimpleClient extends AbstractClient {
 	}
 
 	public void changePrice(int price, Item item){
-		client.sendToServer("update:price," + item.getId() + "," + Integer.toString(price)); //"update:price,<item id>,<new price>"
+		client.sendToServer("#update:price," + item.getId() + "," + Integer.toString(price)); //"update:price,<item id>,<new price>"
 	}
 
 	public void requestCatalog(){
-		client.sendToServer("request:Catalog");
+		client.sendToServer("#request:Catalog");
 	}
 
 	public static SimpleClient getClient() {
