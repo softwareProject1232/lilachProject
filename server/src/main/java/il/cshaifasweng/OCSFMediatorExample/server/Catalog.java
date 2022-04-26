@@ -1,4 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
+import il.cshaifasweng.OCSFMediatorExample.entities.ItemData;
+import il.cshaifasweng.OCSFMediatorExample.entities.CatalogData;
+import il.cshaifasweng.OCSFMediatorExample.server.Item;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -61,6 +64,16 @@ public class Catalog {
       {
          items.add(item);
       }
+   }
+   public CatalogData getCatalogData()
+   {
+      CatalogData cat=new CatalogData();
+      for (Item item: items)
+      {
+         ItemData temp=new ItemData(item.getId(),item.getName(),item.getPrice(),item.getDescription());
+         cat.itemsdata.add(temp);
+      }
+      return cat;
    }
    public void changePrice(int id,int newPrice)
    {
