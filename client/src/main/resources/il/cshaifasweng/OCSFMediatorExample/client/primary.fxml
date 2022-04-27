@@ -3,32 +3,20 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<ScrollPane fx:id="scroll" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pannable="true" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.PrimaryController">
-  <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="401.0" prefWidth="15.0">
-         <children>
-            <GridPane fx:id="gridCatalog" layoutX="14.0" layoutY="201.0">
-              <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
-            <Button fx:id="btn" layoutX="255.0" layoutY="73.0" mnemonicParsing="false" onAction="#addFlower" text="Button" />
-         </children></AnchorPane>
-  </content>
-</ScrollPane>
+<VBox fx:id="vbox_main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.PrimaryController">
+   <children>
+      <ScrollPane fx:id="scroll" fitToWidth="true" pannable="true" prefHeight="800.0" prefWidth="1200.0" VBox.vgrow="NEVER">
+        <content>
+          <AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="1200.0">
+               <children>
+                  <Button fx:id="btn" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addFlower" text="Button" />
+                  <GridPane fx:id="gridCatalog" gridLinesVisible="true" hgap="50.0" layoutX="200.0" layoutY="69.0" vgap="50.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</VBox>
