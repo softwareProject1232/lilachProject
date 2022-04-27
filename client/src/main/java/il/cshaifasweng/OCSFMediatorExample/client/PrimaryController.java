@@ -46,6 +46,7 @@ public class PrimaryController {
 		ret.setPrefSize(50, 50);
 		ret.setBorder(new Border(new BorderStroke(Color.BLACK,
 				BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		// ret.setOnMouseClicked(); // Integrate with description window
 		ret.getChildren().add(name);
 		return ret;
 	}
