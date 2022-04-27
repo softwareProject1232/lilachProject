@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import il.cshaifasweng.OCSFMediatorExample.entities.ItemData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -42,18 +44,40 @@ public class PrimaryController {
 
 	private CatalogData data;
 	private Pane templateItem;
-	Pane generateItem(){
+
+	void buildCatalog(){
+		cleanUpCatalog();
+		int id;
+		String name;
+		int price;
+		String description;
+		for (ItemData item: data.itemsdata){
+			id = item.getId();
+			name = item.getName();
+			price = item.getPrice();
+			description = item.getDescription();
+
+		}
+	}
+	void cleanUpCatalog(){
+		gridCatalog = new GridPane();
+	}
+	Pane generateItem(int id, String name, int price, String description){
 		Pane ret = new Pane();
-		Label name = new Label("test");
-		ret.setPrefSize(50, 50);
+		Label l_id = new Label("ID: " + id);
+		Label l_name = new Label("Name: " + name);
+		Label l_price = new Label("Price: " + price);
+		Label l_description = new Label("Description: " + description);
+
+		ret.setPrefSize(100, 50);
 		ret.setBorder(new Border(new BorderStroke(Color.BLACK,
 				BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		// ret.setOnMouseClicked(); // Integrate with description window
-		ret.getChildren().add(name);
+		ret.getChildren().addAll(l_id, l_name, l_price, l_description);
 		return ret;
 	}
 	@FXML
-	void addFlower(ActionEvent event) {
+	void addFlower(Pane item) {
 		int rows = gridCatalog.getRowCount();
 		int cols = gridCatalog.getColumnCount();
 		if (i == rows){
@@ -63,7 +87,7 @@ public class PrimaryController {
 
 		}
 		Button temp = new Button("1");
-		gridCatalog.add(generateItem(), j, i, 1, 1);
+		gridCatalog.add(item, j, i, 1, 1);
 		j+=1;
 		if (j % cols == 0){
 			i+=1;
@@ -77,7 +101,7 @@ public class PrimaryController {
 		assert btn != null : "fx:id=\"btn\" was not injected: check your FXML file 'primary.fxml'.";
 		assert scroll != null : "fx:id=\"scroll\" was not injected: check your FXML file 'primary.fxml'.";
 		assert vbox_main != null : "fx:id=\"vbox_main\" was not injected: check your FXML file 'primary.fxml'.";
-		int colsCount = 9;
+		int colsCount = 6;
 		for(int i = 0; i<colsCount;i++){
 			gridCatalog.getColumnConstraints().add(new ColumnConstraints());
 		}
