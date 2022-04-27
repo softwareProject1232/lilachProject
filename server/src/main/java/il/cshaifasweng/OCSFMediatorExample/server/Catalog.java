@@ -27,7 +27,10 @@ import java.util.Random;
 public class Catalog {
    public List<Item> items;
    public Catalog(){
-       items=new ArrayList<Item>();
+      items=new ArrayList<Item>();
+      SessionFactory sessionFactory = getSessionFactory();
+      session = sessionFactory.openSession();
+      session.beginTransaction();
    }
    private static Session session;
 
@@ -60,10 +63,7 @@ public class Catalog {
       CriteriaQuery<Item> query = builder.createQuery(Item.class);
       query.from(Item.class);
       List<Item> data = session.createQuery(query).getResultList();
-      for (Item item :data)
-      {
-         items.add(item);
-      }
+      items.addAll(data);
    }
    public CatalogData getCatalogData()
    {
