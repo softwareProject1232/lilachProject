@@ -57,6 +57,16 @@ public class Catalog {
       session.save(greenFlower);
       session.save(yellowSunflower);
       session.save(blackAndWhite);
+      roses= new Item("rose",random.nextInt(100)+100,"pretty roses");
+      purpleFlower= new Item("purple flower",random.nextInt(100)+100, "purple unique flowers");
+      greenFlower= new Item("green flower",random.nextInt(100)+100,"green flowers which can be found only in china");
+      yellowSunflower=new Item("yellow sunflower",random.nextInt(100)+100,"unique sunflowers which can can be harvested only in israel");
+      blackAndWhite= new Item("black and white flower",random.nextInt(100)+100,"unique black and white flowers which are imported from italy");
+      session.save(roses);
+      session.save(purpleFlower);
+      session.save(greenFlower);
+      session.save(yellowSunflower);
+      session.save(blackAndWhite);
       session.flush();
       session.getTransaction().commit();
    }
@@ -66,6 +76,7 @@ public class Catalog {
       CriteriaQuery<Item> query = builder.createQuery(Item.class);
       query.from(Item.class);
       List<Item> data = session.createQuery(query).getResultList();
+      items.clear();
       items.addAll(data);
    }
    public CatalogData getCatalogData()

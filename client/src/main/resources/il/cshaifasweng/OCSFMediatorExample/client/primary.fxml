@@ -12,7 +12,6 @@
         <content>
           <AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0">
                <children>
-                  <Button fx:id="btn" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addFlower" text="Button" />
                   <GridPane fx:id="gridCatalog" hgap="50.0" layoutX="200.0" layoutY="69.0" vgap="50.0" />
                </children>
             </AnchorPane>

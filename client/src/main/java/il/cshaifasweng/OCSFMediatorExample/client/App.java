@@ -31,7 +31,7 @@ public class App extends Application {
     	client.openConnection();
         scene = new Scene(loadFXML("primary"), 1200, 800);
         stage.setScene(scene);
-        //stage.setMaximized(true);
+        stage.setMaximized(true);
         stage.show();
     }
 
