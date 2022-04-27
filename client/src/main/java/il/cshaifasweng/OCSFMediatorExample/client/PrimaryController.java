@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.net.URL;
@@ -41,8 +42,6 @@ public class PrimaryController {
 
 	private int i, j;
 
-	private Pane templateItem;
-
 	@Subscribe
 	public void onCatalogRecievedEvent(CatalogRecievedEvent event) {
 		System.out.format("Recieved catalog\n");
@@ -56,7 +55,7 @@ public class PrimaryController {
 		String name;
 		int price;
 		String description;
-		Pane pane;
+		VBox pane;
 		for (ItemData item: App.data.itemsdata){
 			id = item.getId();
 			name = item.getName();
@@ -81,28 +80,30 @@ public class PrimaryController {
 		gridCatalog.setLayoutX(200);
 		gridCatalog.setLayoutY(69);
 		anchor.getChildren().clear();
-		//<GridPane fx:id="gridCatalog" hgap="50.0" layoutX="200.0" layoutY="69.0" vgap="50.0" />
 		anchor.getChildren().add(gridCatalog);
 	}
-	Pane generateItem(int id, String name, int price, String description){
-		Pane ret = new Pane();
-		Label l_id = new Label("ID: " + id);
-		Label l_name = new Label("Name: " + name);
-		Label l_price = new Label("Price: " + price);
-		Label l_description = new Label("Description: " + description);
-		l_name.setTranslateY(10);
-		l_price.setTranslateY(20);
-		l_description.setTranslateY(30);
+	VBox generateItem(int id, String name, int price, String description){
+		VBox ret = new VBox();
+		Label l_name = new Label(name), l_price = new Label("Price: " + price + "$");
+		ret.setAlignment(Pos.CENTER);
 
-		ret.setPrefSize(200, 50);
+		ret.setPrefSize(100, 50);
 		ret.setBorder(new Border(new BorderStroke(Color.BLACK,
 				BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		// ret.setOnMouseClicked(); // Integrate with description window
-		ret.getChildren().addAll(l_id, l_name, l_price, l_description);
+		ret.setOnMouseClicked(event ->  {
+			App.thisitem = id-1;
+			System.out.format("Clicked ID: %s\n", id-1);
+			try {
+				App.setRoot("secondary");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		ret.getChildren().addAll(l_name, l_price);
 		return ret;
 	}
 	@FXML
-	void addFlower(Pane item) {
+	void addFlower(VBox item) {
 		int rows = gridCatalog.getRowCount();
 		int cols = gridCatalog.getColumnCount();
 		if (i == rows){
@@ -126,6 +127,7 @@ public class PrimaryController {
 		assert btn != null : "fx:id=\"btn\" was not injected: check your FXML file 'primary.fxml'.";
 		assert scroll != null : "fx:id=\"scroll\" was not injected: check your FXML file 'primary.fxml'.";
 		assert vbox_main != null : "fx:id=\"vbox_main\" was not injected: check your FXML file 'primary.fxml'.";
+
 
 		System.out.format("Sending request\n");
 		SimpleClient.getClient().requestCatalog();

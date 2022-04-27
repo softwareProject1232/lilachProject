@@ -21,17 +21,17 @@ import org.greenrobot.eventbus.Subscribe;
 public class App extends Application {
 
     private static Scene scene;
-    private SimpleClient client;
     public static CatalogData data;
+    public static int thisitem;
 
     @Override
     public void start(Stage stage) throws IOException {
-    	EventBus.getDefault().register(this);
-    	client = SimpleClient.getClient();
+        EventBus.getDefault().register(this);
+        SimpleClient client = SimpleClient.getClient();
     	client.openConnection();
         scene = new Scene(loadFXML("primary"), 1200, 800);
         stage.setScene(scene);
-        stage.setMaximized(true);
+        stage.setResizable(false);
         stage.show();
     }
 

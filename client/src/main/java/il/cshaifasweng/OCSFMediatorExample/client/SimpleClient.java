@@ -3,7 +3,7 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 import il.cshaifasweng.OCSFMediatorExample.entities.CatalogData;
 import il.cshaifasweng.OCSFMediatorExample.entities.ItemData;
 import org.greenrobot.eventbus.EventBus;
-
+import javafx.application.Platform;
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Warning;
 
@@ -20,10 +20,10 @@ public class SimpleClient extends AbstractClient {
 	@Override
 	protected void handleMessageFromServer(Object msg) {
 		if (msg.getClass().equals(Warning.class)) {
-			EventBus.getDefault().post(new WarningEvent((Warning) msg));
+			Platform.runLater(() -> EventBus.getDefault().post(new WarningEvent((Warning) msg)));
 		}
 		else if (msg.getClass().equals(CatalogData.class)) {
-			EventBus.getDefault().post(new CatalogRecievedEvent((CatalogData) msg));
+			Platform.runLater(() -> EventBus.getDefault().post(new CatalogRecievedEvent((CatalogData) msg)));
 		}
 	}
 
