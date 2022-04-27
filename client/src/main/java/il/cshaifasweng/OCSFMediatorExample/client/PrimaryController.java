@@ -42,12 +42,12 @@ public class PrimaryController {
 	private int i = 0;
 	private int j = 0;
 
-	private CatalogData data;
 	private Pane templateItem;
 
 	@Subscribe
 	public void onCatalogRecievedEvent(CatalogRecievedEvent event) {
-		data = event.getCatalog();
+		System.out.format("Recieved catalog\n");
+		App.data = event.getCatalog();
 		buildCatalog();
 	}
 
@@ -57,16 +57,23 @@ public class PrimaryController {
 		String name;
 		int price;
 		String description;
-		for (ItemData item: data.itemsdata){
+		Pane pane;
+		for (ItemData item: App.data.itemsdata){
 			id = item.getId();
 			name = item.getName();
 			price = item.getPrice();
 			description = item.getDescription();
-
+			pane = generateItem(id, name, price, description);
+			addFlower(pane);
 		}
 	}
 	void cleanUpCatalog(){
 		gridCatalog = new GridPane();
+		int colsCount = 6;
+		for(int i = 0; i<colsCount;i++){
+			gridCatalog.getColumnConstraints().add(new ColumnConstraints());
+		}
+		gridCatalog.setAlignment(Pos.CENTER);
 	}
 	Pane generateItem(int id, String name, int price, String description){
 		Pane ret = new Pane();
@@ -86,13 +93,13 @@ public class PrimaryController {
 	void addFlower(Pane item) {
 		int rows = gridCatalog.getRowCount();
 		int cols = gridCatalog.getColumnCount();
+		System.out.format("col count: %s\n", gridCatalog.getColumnCount());
 		if (i == rows){
 			gridCatalog.getRowConstraints().add(new RowConstraints());
 			i+=1;
 			System.out.format("Rows: %s\n", rows);
 
 		}
-		Button temp = new Button("1");
 		gridCatalog.add(item, j, i, 1, 1);
 		j+=1;
 		if (j % cols == 0){
@@ -108,10 +115,10 @@ public class PrimaryController {
 		assert btn != null : "fx:id=\"btn\" was not injected: check your FXML file 'primary.fxml'.";
 		assert scroll != null : "fx:id=\"scroll\" was not injected: check your FXML file 'primary.fxml'.";
 		assert vbox_main != null : "fx:id=\"vbox_main\" was not injected: check your FXML file 'primary.fxml'.";
-		int colsCount = 6;
-		for(int i = 0; i<colsCount;i++){
-			gridCatalog.getColumnConstraints().add(new ColumnConstraints());
-		}
-		gridCatalog.setAlignment(Pos.CENTER);
+
+		System.out.format("col count: %s\n", gridCatalog.getColumnCount());
+		System.out.format("Sending request\n");
+		SimpleClient.getClient().requestCatalog();
+		System.out.format("Sent request\n");
 	}
 }

@@ -10,9 +10,10 @@ public class App
 {
 	
 	private static SimpleServer server;
+    public static Catalog catalog;
     public static void main( String[] args ) throws IOException
     {
-        Catalog catalog=new Catalog();
+        catalog=new Catalog();
         catalog.generateItems();
         catalog.pullItemsFromCatalog();
         /*for(Item item: catalog.items)

@@ -30,7 +30,7 @@ public class Catalog {
       items=new ArrayList<Item>();
       SessionFactory sessionFactory = getSessionFactory();
       session = sessionFactory.openSession();
-      session.beginTransaction();
+
    }
    private static Session session;
 
@@ -45,6 +45,7 @@ public class Catalog {
    }
    public void generateItems()
    {
+      session.beginTransaction();
       Random random = new Random();
       Item roses= new Item("rose",random.nextInt(100)+100,"pretty roses");
       Item purpleFlower= new Item("purple flower",random.nextInt(100)+100, "purple unique flowers");
@@ -56,6 +57,8 @@ public class Catalog {
       session.save(greenFlower);
       session.save(yellowSunflower);
       session.save(blackAndWhite);
+      session.flush();
+      session.getTransaction().commit();
    }
    public void pullItemsFromCatalog()
    {
@@ -77,6 +80,7 @@ public class Catalog {
    }
    public void changePrice(int id,int newPrice)
    {
+      session.beginTransaction();
       Item temp=new Item();
       for (Item item :items)
       {
@@ -87,6 +91,8 @@ public class Catalog {
       }
       temp.setPrice(newPrice);
       session.save(temp);
+      session.flush();
+      session.getTransaction().commit();
    }
 
 }

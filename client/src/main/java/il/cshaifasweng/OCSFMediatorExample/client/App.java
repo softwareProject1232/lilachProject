@@ -1,5 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.CatalogData;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,7 @@ public class App extends Application {
 
     private static Scene scene;
     private SimpleClient client;
+    public static CatalogData data;
 
     @Override
     public void start(Stage stage) throws IOException {
