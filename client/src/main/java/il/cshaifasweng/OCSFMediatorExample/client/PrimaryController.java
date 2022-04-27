@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.paint.Color;
+import il.cshaifasweng.OCSFMediatorExample.entities.CatalogData;
 
 public class PrimaryController {
 
@@ -39,6 +40,7 @@ public class PrimaryController {
 	private int i = 0;
 	private int j = 0;
 
+	private CatalogData data;
 	private Pane templateItem;
 	Pane generateItem(){
 		Pane ret = new Pane();
@@ -46,6 +48,7 @@ public class PrimaryController {
 		ret.setPrefSize(50, 50);
 		ret.setBorder(new Border(new BorderStroke(Color.BLACK,
 				BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		// ret.setOnMouseClicked(); // Integrate with description window
 		ret.getChildren().add(name);
 		return ret;
 	}
