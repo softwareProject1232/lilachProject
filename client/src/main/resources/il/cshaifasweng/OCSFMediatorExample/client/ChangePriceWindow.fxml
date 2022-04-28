@@ -19,7 +19,7 @@
          </font>
       </Button>
       <TextField fx:id="priceText" layoutX="447.0" layoutY="312.0" prefHeight="142.0" prefWidth="352.0" />
-      <Label fx:id="itemName" layoutX="535.0" layoutY="117.0" prefHeight="69.0" prefWidth="177.0" textAlignment="JUSTIFY">
+      <Label fx:id="itemName" layoutX="-2.0" layoutY="117.0" prefHeight="102.0" prefWidth="1200.0" textAlignment="JUSTIFY">
          <font>
             <Font size="36.0" />
          </font>

@@ -2,8 +2,10 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.OverrunStyle;
 import javafx.scene.control.TextField;
 import org.greenrobot.eventbus.EventBus;
 
@@ -31,6 +33,7 @@ public class ChangePriceWindow {
 
     @FXML
     void initialize() {
+        itemName.setAlignment(Pos.CENTER);
         itemName.setText("Item: " + App.data.itemsdata.get(App.thisitem).getName());
     }
 
