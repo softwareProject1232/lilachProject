@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
-
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -17,6 +18,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class PrimaryCatalog {
 
@@ -43,7 +46,7 @@ public class PrimaryCatalog {
 	private int i, j;
 
 	@Subscribe
-	public void onCatalogRecievedEvent(CatalogRecievedEvent event) {
+	public void onCatalogRecievedEvent(CatalogRecievedEvent event) throws FileNotFoundException {
 		System.out.format("Received catalog\n");
 		App.data = event.getCatalog();
 		buildCatalog();
@@ -58,7 +61,7 @@ public class PrimaryCatalog {
 		}
 	}
 
-	void buildCatalog(){
+	void buildCatalog() throws FileNotFoundException {
 		cleanUpCatalog();
 		int id;
 		String name;
@@ -73,9 +76,11 @@ public class PrimaryCatalog {
 			id = item.getId();
 			name = item.getName();
 			price = item.getPrice();
+			Image image = new Image(new FileInputStream("https://images.pexels.com/photos/736230/pexels-photo-736230.jpeg?cs=srgb&dl=pexels-jonas-kakaroto-736230.jpg&fm=jpg"));
+			ImageView imageView = new ImageView(image);
 			description = item.getDescription();
 			System.out.format("id: %s\nname: %s\nprice: %s\ndescription: %s\n", id, name, price, description);
-			pane = generateItem(id, name, price, description);
+			pane = generateItem(id, name, price, description,imageView);
 			addFlower(pane);
 		}
 	}
@@ -113,7 +118,7 @@ public class PrimaryCatalog {
 		ret.getChildren().addAll(l_name);
 		return ret;
 	}
-	VBox generateItem(int id, String name, int price, String description){
+	VBox generateItem(int id, String name, int price, String description,ImageView im){
 		//TODO: use description
 		VBox ret = new VBox();
 		Label l_name = new Label(name), l_price = new Label("Price: " + price + "$");
@@ -144,7 +149,7 @@ public class PrimaryCatalog {
 				}
 			}
 		});
-		ret.getChildren().addAll(l_name, l_price);
+		ret.getChildren().addAll(im);
 		return ret;
 	}
 	@FXML
