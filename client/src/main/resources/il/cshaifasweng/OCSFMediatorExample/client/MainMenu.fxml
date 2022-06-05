@@ -10,10 +10,10 @@
    <children>
       <VBox fx:id="CustomerMenu" alignment="CENTER" layoutX="220.0" layoutY="100.0" prefHeight="261.0" prefWidth="160.0">
          <children>
-          <Button mnemonicParsing="false" onAction="#LoadLogin" prefHeight="26.0" prefWidth="245.0" text="Login/Sign up" />
             <Button mnemonicParsing="false" onAction="#LoadCatalog" prefHeight="26.0" prefWidth="245.0" text="Catalog" />
             <Button mnemonicParsing="false" onAction="#LoadBasket" prefHeight="26.0" prefWidth="245.0" text="Basket" />
             <Button mnemonicParsing="false" onAction="#LoadComplaints" prefHeight="26.0" prefWidth="245.0" text="Complaints" />
+          <Button mnemonicParsing="false" onAction="#LoadLogin" prefHeight="26.0" prefWidth="245.0" text="Log out" />
          </children>
       </VBox>
       <Text layoutX="225.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Menu" textAlignment="CENTER" wrappingWidth="150.8980712890625">
@@ -23,9 +23,9 @@
       </Text>
       <VBox fx:id="ManagerMenu" alignment="CENTER" disable="true" layoutX="220.0" layoutY="100.0" prefHeight="261.0" prefWidth="160.0" visible="false">
          <children>
-            <Button mnemonicParsing="false" onAction="#LoadLogin" prefHeight="26.0" prefWidth="245.0" text="Login/Sign up" />
             <Button mnemonicParsing="false" onAction="#LoadCatalog" prefHeight="26.0" prefWidth="245.0" text="Catalog" />
             <Button mnemonicParsing="false" onAction="#LoadReports" prefHeight="26.0" prefWidth="245.0" text="Reports" />
+            <Button mnemonicParsing="false" onAction="#LoadLogin" prefHeight="26.0" prefWidth="245.0" text="Log out" />
          </children>
       </VBox>
    </children>
