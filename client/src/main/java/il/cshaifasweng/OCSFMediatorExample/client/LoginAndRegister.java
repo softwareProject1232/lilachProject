@@ -84,7 +84,9 @@ public class LoginAndRegister {
                 System.out.format("Error: %s\n", e.getMessage());
             }
         }
-        System.out.format("Failed to login");
+        else{
+            System.out.format("Failed to login");
+        }
     }
     @FXML
     void initialize() {
