@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderData implements Serializable {
+    public String BranchName;
     private int id;
     public List<BasketItemData> items;
     public String bracha;
     public UserData orderedBy;
-    public String BranchName;
-    public int price;
+    public int totalPrice;
 
     public OrderData(){
         items = new ArrayList<BasketItemData>();

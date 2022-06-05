@@ -48,8 +48,8 @@ public class UpdateProduct {
 
     @FXML
     void removefromCatalog(ActionEvent event) {
-        //SimpleClient myclient=SimpleClient.getClient();
-        //myclient.changePrice(Integer.parseInt(nameTF.getText()),App.data.itemsdata.get(App.thisitem));
+        SimpleClient myclient=SimpleClient.getClient();
+        myclient.removeItem(App.data.itemsdata.get(App.thisitem));
     }
 
 }

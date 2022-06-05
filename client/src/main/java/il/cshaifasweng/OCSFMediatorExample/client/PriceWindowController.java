@@ -30,7 +30,7 @@ public class PriceWindowController {
     }
 
     @FXML
-    void updateValues(ActionEvent event) {
+    void changePriceAction(ActionEvent event) {
         SimpleClient myclient=SimpleClient.getClient();
         myclient.changePrice(Integer.parseInt(PriceTF.getText()),App.data.itemsdata.get(App.thisitem));
         myclient.changeDescription(descritionTF.getText(),App.data.itemsdata.get(App.thisitem));

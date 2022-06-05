@@ -42,8 +42,8 @@ public class Bucket {
     private int sum;
 
     @FXML
-    void Purchase(ActionEvent event) {
-
+    void Purchase(ActionEvent event) throws IOException {
+        App.setRoot("OrderMenu");
     }
 
     @FXML
@@ -59,7 +59,7 @@ public class Bucket {
         String description;
         HBox pane;
         int index = 0;
-        sum = 0;
+        App.orderData.totalPrice = 0;
         for (BasketItemData item: App.orderData.items){
             id = item.listItems.get(0).getId();
             name = item.listItems.get(0).getName();
@@ -68,10 +68,16 @@ public class Bucket {
             System.out.format("id: %s\nname: %s\nprice: %s\ndescription: %s\n", id, name, price, description);
             pane = generateItem(id, name, price, description,index);
             index++;
-            sum += price;
+            App.orderData.totalPrice += price;
             addItem(pane);
         }
-        total.setText("Total: " + sum + "$");
+        if(App.orderData.totalPrice >= 50 && App.userData.type != 1)
+        {
+            total.setText("Discount for buying over 50$\nTotal: " + App.orderData.totalPrice +"$ -> " + (int)(App.orderData.totalPrice*0.9) +"$");
+            App.orderData.totalPrice = (int)(App.orderData.totalPrice*0.9);
+        }
+        else
+            total.setText("Total: " + App.orderData.totalPrice + "$");
     }
     void cleanBucket(){
         ItemList.getChildren().removeAll();
