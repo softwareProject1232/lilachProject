@@ -3,7 +3,7 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util5.ResourceBundle;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.ItemData;
 import javafx.fxml.FXML;
@@ -88,6 +88,7 @@ public class PrimaryCatalog {
 		ret.setOnMouseClicked(event ->  {
 			App.thisitem = id-1;
 			System.out.format("Clicked ID: %s\n", id-1);
+			if()
 			try {
 				App.setRoot("UpdateProduct");
 			} catch (IOException e) {
