@@ -1,14 +1,14 @@
-package il.cshaifasweng.OCSFMediatorExample.client;
+package il.cshaifasweng.OCSFMediatorExample.entities;
 
 public class UserData {
     public String username;
     public String password;
     public String Email;
-    public boolean type;
+    public int type;
     public String CreditCard;
     public String id;
 
-    public UserData(String username, String password, String email, boolean type, String creditCard, String id) {
+    public UserData(String username, String password, String email, int type, String creditCard, String id) {
         this.username = username;
         this.password = password;
         Email = email;
@@ -41,11 +41,11 @@ public class UserData {
         Email = email;
     }
 
-    public boolean getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(boolean type) {
+    public void setType(int type) {
         this.type = type;
     }
 

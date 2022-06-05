@@ -28,54 +28,41 @@ public class Catalog {
    public List<Item> items;
    public Catalog(){
       items=new ArrayList<Item>();
-      SessionFactory sessionFactory = getSessionFactory();
-      session = sessionFactory.openSession();
-
    }
-   private static Session session;
 
-   private static SessionFactory getSessionFactory() throws HibernateException {
-      Configuration configuration = new Configuration();
-      configuration.addAnnotatedClass(Item.class);
-      ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-              .applySettings(configuration.getProperties())
-              .build();
-
-      return configuration.buildSessionFactory(serviceRegistry);
-   }
    public void generateItems()
    {
-      session.beginTransaction();
+      App.session.beginTransaction();
       Random random = new Random();
       Item roses= new Item("rose",random.nextInt(100)+100,"pretty roses");
       Item purpleFlower= new Item("purple flower",random.nextInt(100)+100, "purple unique flowers");
       Item greenFlower= new Item("green flower",random.nextInt(100)+100,"green flowers which can be found only in china");
       Item yellowSunflower=new Item("yellow sunflower",random.nextInt(100)+100,"unique sunflowers which can can be harvested only in israel");
       Item blackAndWhite= new Item("black and white flower",random.nextInt(100)+100,"unique black and white flowers which are imported from italy");
-      session.save(roses);
-      session.save(purpleFlower);
-      session.save(greenFlower);
-      session.save(yellowSunflower);
-      session.save(blackAndWhite);
+      App.session.save(roses);
+      App.session.save(purpleFlower);
+      App.session.save(greenFlower);
+      App.session.save(yellowSunflower);
+      App.session.save(blackAndWhite);
       roses= new Item("red Flower",random.nextInt(100)+100,"pretty red flowers from the east");
       purpleFlower= new Item("Brown flowers",random.nextInt(100)+100, "unique brown flowers");
       greenFlower= new Item("navy flower",random.nextInt(100)+100,"navy flowers which can be found only in usa");
       yellowSunflower=new Item("sakura sunflower",random.nextInt(100)+100,"unique sakura which can can be harvested only in japan");
       blackAndWhite= new Item("orange flower",random.nextInt(100)+100,"orange flowers from the sun");
-      session.save(roses);
-      session.save(purpleFlower);
-      session.save(greenFlower);
-      session.save(yellowSunflower);
-      session.save(blackAndWhite);
-      session.flush();
-      session.getTransaction().commit();
+      App.session.save(roses);
+      App.session.save(purpleFlower);
+      App.session.save(greenFlower);
+      App.session.save(yellowSunflower);
+      App.session.save(blackAndWhite);
+      App.session.flush();
+      App.session.getTransaction().commit();
    }
    public void pullItemsFromCatalog()
    {
-      CriteriaBuilder builder = session.getCriteriaBuilder();
+      CriteriaBuilder builder = App.session.getCriteriaBuilder();
       CriteriaQuery<Item> query = builder.createQuery(Item.class);
       query.from(Item.class);
-      List<Item> data = session.createQuery(query).getResultList();
+      List<Item> data = App.session.createQuery(query).getResultList();
       items.clear();
       items.addAll(data);
    }
@@ -91,7 +78,7 @@ public class Catalog {
    }
    public void changePrice(int id,int newPrice)
    {
-      session.beginTransaction();
+      App.session.beginTransaction();
       Item temp=new Item();
       for (Item item :items)
       {
@@ -101,9 +88,9 @@ public class Catalog {
          }
       }
       temp.setPrice(newPrice);
-      session.save(temp);
-      session.flush();
-      session.getTransaction().commit();
+      App.session.save(temp);
+      App.session.flush();
+      App.session.getTransaction().commit();
    }
 
 }

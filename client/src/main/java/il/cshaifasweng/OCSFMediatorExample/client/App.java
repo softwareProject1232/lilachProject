@@ -1,7 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.CatalogData;
-import il.cshaifasweng.OCSFMediatorExample.entities.ItemData;
+import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +15,7 @@ import java.io.IOException;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import il.cshaifasweng.OCSFMediatorExample.entities.CatalogData;
+
 /**
  * JavaFX App
  */

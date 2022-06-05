@@ -1,5 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
 import org.hibernate.SessionFactory;
 import il.cshaifasweng.OCSFMediatorExample.entities.ItemData;
 import il.cshaifasweng.OCSFMediatorExample.entities.CatalogData;
@@ -36,34 +37,21 @@ public class Users {
     public List<User> users;
     public Users(){
         users=new ArrayList<User>();
-        SessionFactory sessionFactory = getSessionFactory();
-        session = sessionFactory.openSession();
-
     }
-    private static Session session;
 
-    private static SessionFactory getSessionFactory() throws HibernateException {
-        Configuration configuration = new Configuration();
-        configuration.addAnnotatedClass(User.class);
-        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-                .applySettings(configuration.getProperties())
-                .build();
-
-        return configuration.buildSessionFactory(serviceRegistry);
-    }
     public void pullUsersFromDB()
     {
-        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaBuilder builder = App.session.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery(User.class);
         query.from(User.class);
-        List<User> data = session.createQuery(query).getResultList();
+        List<User> data = App.session.createQuery(query).getResultList();
         users.clear();
         users.addAll(data);
     }
 
     public void editUser(String username, String password, String email, int type,String cred,String taz, int id)
     {
-        session.beginTransaction();
+        App.session.beginTransaction();
         User temp;
         for (User user :users)
         {
@@ -73,36 +61,36 @@ public class Users {
                 user.setUsername(username);
                 user.setPassword(password);
                 user.setType(type);
-                session.save(user);
+                App.session.save(user);
                 break;
             }
         }
-        session.flush();
-        session.getTransaction().commit();
+        App.session.flush();
+        App.session.getTransaction().commit();
     }
 
     public void addUser(UserData userData)
     {
-        session.beginTransaction();
-        User user = new User(userData.username, userData.password, userData.email, userData.type, userData.cred, userData.taz);
-        session.save(user);
-        session.flush();
-        session.getTransaction().commit();
+        App.session.beginTransaction();
+        User user = new User(userData.username, userData.password, userData.Email, userData.type, userData.getCreditCard(), userData.getId());
+        App.session.save(user);
+        App.session.flush();
+        App.session.getTransaction().commit();
         users.add(user);
     }
 
-    public int Login(String username, String password)
+    public UserData Login(String username, String password)
     {
         User temp;
         for (User user :users)
         {
             if(user.getUsername() == username && user.getPassword() == password)
             {
-                return user.getType();
+                return user.getUserData();
             }
         }
 
-        return 0;
+        return new UserData("", "", "", 0, "", "");
     }
 
 }

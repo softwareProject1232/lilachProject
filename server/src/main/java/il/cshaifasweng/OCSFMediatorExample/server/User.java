@@ -1,5 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -30,6 +31,7 @@ public class User {
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "issuedBy")
     public List<Complaint> complaints;
+
     public User()
     {
         orders=new ArrayList<Order>();
@@ -48,6 +50,19 @@ public class User {
         this.type = type;
         this.creditCard=cred;
         this.taz=taz;
+    }
+    public User(UserData userData){
+        this.username = userData.username;
+        this.password = userData.password;
+        this.Email = userData.Email;
+        this.type = userData.type;
+        this.creditCard=userData.getCreditCard();
+        this.taz=userData.getId();
+    }
+
+    public UserData getUserData(){
+        UserData ret = new UserData(username, password, Email, type,creditCard,taz);
+        return ret;
     }
 
     public String getUsername() {
@@ -89,9 +104,4 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
-
-
-
-
-
 }

@@ -1,6 +1,8 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.BasketItemData;
 import il.cshaifasweng.OCSFMediatorExample.entities.ItemData;
+import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -8,38 +10,41 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "order")
+@Table(name = "tableOrder")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    public List<List<Item>> items;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "orderIn")
+    public List<BasketItem> items;
+
     public String bracha;
 
     @ManyToOne(fetch = FetchType.LAZY)
     public User orderedBy;
     public Order()
     {
-        items=new ArrayList<List<Item>>();
+        items=new ArrayList<BasketItem>();
     }
     public Order(OrderData orderData) {
-        items=new ArrayList<List<Item>>();
-        for(List<ItemData> list : orderData){
-            List<Item> itemList = new ArrayList<Item>();
-            for(ItemData itemData : list){
-                itemList.add(new Item(itemData));
+        items=new ArrayList<BasketItem>();
+        for(BasketItemData list : orderData.items){
+            BasketItem basketItem = new BasketItem();
+            for(ItemData itemData : list.listItems){
+                basketItem.listItems.add(new Item(itemData));
             }
-            items.add(itemList);
+            items.add(basketItem);
         }
         this.bracha = orderData.bracha;
-        this.orderedBy = orderData.orderedBy;
+        this.orderedBy = new User(orderData.orderedBy);
     }
 
-    public List<List<Item>> getItems() {
+    public List<BasketItem> getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(List<BasketItem> items) {
         this.items = items;
     }
 

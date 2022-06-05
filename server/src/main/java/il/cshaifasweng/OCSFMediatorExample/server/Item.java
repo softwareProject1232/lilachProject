@@ -2,6 +2,7 @@ package il.cshaifasweng.OCSFMediatorExample.server;
 import il.cshaifasweng.OCSFMediatorExample.entities.ItemData;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "item")
@@ -13,6 +14,10 @@ public class Item {
     private int price;
     private String description;
 
+    @ManyToMany(mappedBy = "listItems",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            targetEntity = BasketItem.class)
+    private List<BasketItem> BasketsInside;
 
     public Item()
     {}
