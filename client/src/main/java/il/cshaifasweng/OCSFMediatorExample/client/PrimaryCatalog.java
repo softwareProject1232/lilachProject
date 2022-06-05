@@ -78,13 +78,13 @@ public class PrimaryCatalog {
 			id = item.getId();
 			name = item.getName();
 			price = item.getPrice();
-			String path = "https://images.pexels.com/photos/736230/pexels-photo-736230.jpeg?cs=srgb&dl=pexels-jonas-kakaroto-736230.jpg&fm=jpg";
+			//String path = "https://images.pexels.com/photos/736230/pexels-photo-736230.jpeg?cs=srgb&dl=pexels-jonas-kakaroto-736230.jpg&fm=jpg";
 
-			Image image = new Image(path);
-			ImageView imageView = new ImageView(image);
+			//Image image = new Image(path);
+			//ImageView imageView = new ImageView(image);
 			description = item.getDescription();
 			System.out.format("id: %s\nname: %s\nprice: %s\ndescription: %s\n", id, name, price, description);
-			pane = generateItem(id, name, price, description,imageView);
+			pane = generateItem(id, name, price, description);
 			addFlower(pane);
 		}
 	}
@@ -122,7 +122,7 @@ public class PrimaryCatalog {
 		ret.getChildren().addAll(l_name);
 		return ret;
 	}
-	VBox generateItem(int id, String name, int price, String description,ImageView im){
+	VBox generateItem(int id, String name, int price, String description){
 		//TODO: use description
 		VBox ret = new VBox();
 		Label l_name = new Label(name), l_price = new Label("Price: " + price + "$");
