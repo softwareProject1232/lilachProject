@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="vbox_main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.LoginAndRegister">
+    <TabPane prefHeight="804.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE">
+        <Tab text="Login">
+            <!-- create a login section -->
+            <AnchorPane prefHeight="-Infinity" prefWidth="-Infinity" translateX="400.0" translateY="250.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+                <Label fx:id="label_username" layoutX="10.0" layoutY="10.0" text="Username" />
+                <Label fx:id="label_password" layoutX="10.0" layoutY="50.0" text="Password" />
+
+                <TextField fx:id="textfield_username_login" layoutX="100.0" layoutY="10.0" prefHeight="30.0" prefWidth="200.0" />
+                <TextField fx:id="textfield_password_login" layoutX="100.0" layoutY="50.0" prefHeight="30.0" prefWidth="200.0" />
+                <Button fx:id="button_login" layoutX="100.0" layoutY="100.0" mnemonicParsing="false" text="Login" />
+            </AnchorPane>
+        </Tab>
+        <Tab text="Register">
+            <AnchorPane maxHeight="300.0" maxWidth="500.0" prefHeight="-Infinity" prefWidth="-Infinity" translateX="400.0" translateY="250.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+                <Label fx:id="label_username_register" layoutX="10.0" layoutY="10.0" text="Username" />
+                <Label fx:id="label_password_register" layoutX="10.0" layoutY="50.0" text="Password" />
+                <Label fx:id="label_email_register" layoutX="10.0" layoutY="90.0" text="Email" />
+                <Label fx:id="label_type_register" layoutX="10.0" layoutY="130.0" text="Account Type" />
+                <Label fx:id="label_credit_card_register" layoutX="10.0" layoutY="170.0" text="Credit Card" />
+                <Label fx:id="label_id_register" layoutX="10.0" layoutY="210.0" text="ID #" />
+                <TextField fx:id="textfield_username_register" layoutX="111.0" layoutY="10.0" prefHeight="30.0" prefWidth="200.0" />
+                <TextField fx:id="textfield_password_register" layoutX="111.0" layoutY="50.0" prefHeight="30.0" prefWidth="200.0" />
+                <TextField fx:id="textfield_email_register" layoutX="111.0" layoutY="90.0" prefHeight="30.0" prefWidth="200.0" />
+                <ComboBox fx:id="type_dropdown" layoutX="111.0" layoutY="130.0" prefHeight="24.0" prefWidth="199.0" />
+                <TextField fx:id="textfield_credit_card_register" layoutX="111.0" layoutY="170.0" prefHeight="30.0" prefWidth="200.0" />
+                <TextField fx:id="textfield_id_register" layoutX="111.0" layoutY="210.0" prefHeight="30.0" prefWidth="200.0" />
+                <Button fx:id="register_login" layoutX="111.0" layoutY="254.0" mnemonicParsing="false" text="Register" />
+
+            </AnchorPane>
+        </Tab>
+    </TabPane>
+</VBox>

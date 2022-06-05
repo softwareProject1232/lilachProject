@@ -49,8 +49,8 @@ public class MainMenu {
     void initialize() {
         assert CustomerMenu != null : "fx:id=\"CustomerMenu\" was not injected: check your FXML file 'MainMenu.fxml'.";
         assert ManagerMenu != null : "fx:id=\"ManagerMenu\" was not injected: check your FXML file 'MainMenu.fxml'.";
-        boolean isManager = User.type == 4;
-        ManagerMenu.setDisable(isManager);
-        CustomerMenu.setDisable(!isManager);
+        //boolean isManager = User.type == 4;
+        //ManagerMenu.setDisable(isManager);
+        //CustomerMenu.setDisable(!isManager);
     }
 }

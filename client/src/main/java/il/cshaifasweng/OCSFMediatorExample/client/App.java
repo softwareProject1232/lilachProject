@@ -29,7 +29,7 @@ public class App extends Application {
         EventBus.getDefault().register(this);
         SimpleClient client = SimpleClient.getClient();
     	client.openConnection();
-        scene = new Scene(loadFXML("PrimaryCatalog"), 1200, 800);
+        scene = new Scene(loadFXML("LoginAndRegister"), 1200, 800);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
@@ -69,8 +69,5 @@ public class App extends Application {
 	public static void main(String[] args) {
         launch();
     }
-
-    public static CatalogData data;
-    public static int thisitem;
 
 }
