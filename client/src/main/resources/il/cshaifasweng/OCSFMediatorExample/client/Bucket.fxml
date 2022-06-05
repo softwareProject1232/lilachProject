@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.Bucket">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.Bucket">
    <children>
-      <ListView layoutX="155.0" layoutY="126.0" prefHeight="147.0" prefWidth="299.0">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </ListView>
-      <Button layoutX="273.0" layoutY="309.0" mnemonicParsing="false" text="Purchase" />
-      <Text layoutX="289.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Items:" />
+      <Button layoutX="273.0" layoutY="319.0" mnemonicParsing="false" onAction="#Purchase" text="Purchase" />
+      <Text layoutX="289.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Items:" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="41.0" layoutX="3.0" stroke="BLACK" strokeType="INSIDE" width="619.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Button fx:id="MainMenuButton" layoutX="17.0" layoutY="8.0" mnemonicParsing="false" onAction="#goToMainMenu" text="Main Menu" />
+      <ScrollPane fx:id="scroll" hbarPolicy="NEVER" layoutX="143.0" layoutY="100.0" prefHeight="200.0" prefWidth="354.0">
+        <content>
+          <AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="353.0">
+               <children>
+                  <VBox fx:id="ItemList" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="354.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <Text fx:id="total" layoutX="162.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total: 0$" />
    </children>
 </AnchorPane>

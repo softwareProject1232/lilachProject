@@ -47,6 +47,10 @@ public class PrimaryCatalog {
 		App.data = event.getCatalog();
 		buildCatalog();
 	}
+	@FXML
+	void goToMainMenu(ActionEvent event) throws IOException {
+		App.setRoot("MainMenu");
+	}
 
 	void buildCatalog(){
 		cleanUpCatalog();
@@ -169,12 +173,4 @@ public class PrimaryCatalog {
 		System.out.format("Sent request\n");
 	}
 
-	public void goToMainMenu(ActionEvent actionEvent) {
-		try{
-			App.setRoot("MainMenu");
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 }

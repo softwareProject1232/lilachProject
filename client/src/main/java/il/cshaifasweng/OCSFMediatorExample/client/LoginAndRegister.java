@@ -3,6 +3,7 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -77,9 +78,10 @@ public class LoginAndRegister {
         System.out.format("Received login\n");
         if (event.didSuccessfullyLogin()){
             App.userData = event.getUser();
+            App.orderData = new OrderData();
             try{
                 System.out.format("Logged in as %s\n", App.userData.getUsername());
-                App.setRoot("PrimaryCatalog");
+                App.setRoot("MainMenu");
             }
             catch(Exception e){
                 System.out.format("Error: %s\n", e.getMessage());

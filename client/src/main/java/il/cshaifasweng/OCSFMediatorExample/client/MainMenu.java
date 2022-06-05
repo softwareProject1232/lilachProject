@@ -16,7 +16,7 @@ public class MainMenu {
 
     @FXML
     void LoadBasket(ActionEvent event) throws IOException {
-        App.setRoot("Basket");
+        App.setRoot("Bucket");
     }
 
     @FXML
@@ -31,17 +31,12 @@ public class MainMenu {
 
     @FXML
     void LoadLogin(ActionEvent event) throws IOException {
-        App.setRoot("LoginScreen");
+        App.setRoot("LoginAndRegister");
     }
 
     @FXML
     void LoadReports(ActionEvent event) throws IOException {
         App.setRoot("ReportsScreen");
-    }
-
-    @FXML
-    void LoadSignup(ActionEvent event) throws IOException {
-        App.setRoot("SignupScreen");
     }
 
 
@@ -50,7 +45,10 @@ public class MainMenu {
         assert CustomerMenu != null : "fx:id=\"CustomerMenu\" was not injected: check your FXML file 'MainMenu.fxml'.";
         assert ManagerMenu != null : "fx:id=\"ManagerMenu\" was not injected: check your FXML file 'MainMenu.fxml'.";
         boolean isManager = App.userData.type == 4;
-        ManagerMenu.setDisable(isManager);
-        CustomerMenu.setDisable(!isManager);
+        ManagerMenu.setDisable(!isManager);
+        ManagerMenu.setVisible(isManager);
+        CustomerMenu.setDisable(isManager);
+        CustomerMenu.setVisible(!isManager);
+
     }
 }

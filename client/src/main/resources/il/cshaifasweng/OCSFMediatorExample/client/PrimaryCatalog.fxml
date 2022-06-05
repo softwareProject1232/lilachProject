@@ -5,18 +5,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 
 <?import javafx.scene.shape.Rectangle?>
-<VBox fx:id="vbox_main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.PrimaryCatalog">
+
+<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.PrimaryCatalog">
    <children>
-      <ScrollPane fx:id="scroll" fitToWidth="true" hbarPolicy="NEVER" pannable="true" prefHeight="800.0" prefWidth="1200.0" VBox.vgrow="NEVER">
-        <content>
-          <AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0">
-               <children>
-                  <GridPane fx:id="gridCatalog" hgap="50.0" layoutX="200.0" layoutY="69.0" vgap="50.0" />
-               </children>
-            </AnchorPane>
-        </content>
-      </ScrollPane>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="41.0" stroke="BLACK" strokeType="INSIDE" width="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
+      <Button fx:id="MainMenuButton" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" onAction="#goToMainMenu" prefHeight="26.0" prefWidth="82.0" text="Main Menu" />
+      <VBox fx:id="vbox_main" layoutY="50.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0">
+         <children>
+            <ScrollPane fx:id="scroll" fitToWidth="true" hbarPolicy="NEVER" pannable="true" prefHeight="800.0" prefWidth="1200.0" VBox.vgrow="NEVER">
+              <content>
+                <AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0">
+                     <children>
+                        <GridPane fx:id="gridCatalog" hgap="50.0" layoutX="200.0" layoutY="69.0" vgap="50.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+         </children>
+      </VBox>
    </children>
-</VBox>
+</AnchorPane>
