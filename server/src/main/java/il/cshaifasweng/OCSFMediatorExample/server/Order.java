@@ -22,15 +22,16 @@ public class Order {
     public String bracha;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    public Orders orderGroup;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     public User orderedBy;
     public Order()
     {
         items=new ArrayList<BasketItem>();
     }
-    public Order(OrderData orderData) {
+    public Order(OrderData orderData, Orders orderGroup) {
         App.session.beginTransaction();
-        Order order = new Order(orderData);
-
         items=new ArrayList<BasketItem>();
         for(BasketItemData list : orderData.items){
             BasketItem basketItem = new BasketItem();
@@ -45,6 +46,7 @@ public class Order {
 
         this.bracha = orderData.bracha;
         this.orderedBy = new User(orderData.orderedBy);
+        this.orderGroup = orderGroup;
     }
 
     public List<BasketItem> getItems() {

@@ -9,6 +9,7 @@ public class UserData implements Serializable {
     public int type;
     public String CreditCard;
     public String id;
+    public String branchName;
 
     public UserData(){
         this.username = "";
@@ -18,13 +19,14 @@ public class UserData implements Serializable {
         this.CreditCard = "";
         this.id = "";
     }
-    public UserData(String username, String password, String email, int type, String creditCard, String id) {
+    public UserData(String username, String password, String email, int type, String creditCard, String id, String branchName) {
         this.username = username;
         this.password = password;
         Email = email;
         this.type = type;
         CreditCard = creditCard;
         this.id = id;
+        this.branchName = branchName;
     }
 
     public String getUsername() {

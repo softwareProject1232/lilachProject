@@ -6,6 +6,7 @@ import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
 
 import java.io.IOException;
+import java.util.List;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.Warning;
 
@@ -28,7 +29,7 @@ public class SimpleServer extends AbstractServer {
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		System.out.format("received data\n");
 		if (UserData.class.equals(msg.getClass())) {
-			App.users.addUser(((UserData) msg));
+			App.branches.addUser(((UserData) msg));
 		} else if (String.class.equals(msg.getClass())) {
 			String msgString = msg.toString();
 			if (msgString.startsWith("#warning")) {
@@ -42,7 +43,7 @@ public class SimpleServer extends AbstractServer {
 						App.catalog.changePrice(Integer.parseInt(args[1]), Integer.parseInt(args[2]));
 						break;
 					case "user":
-						App.users.editUser(args[1], args[2], args[3], Integer.parseInt(args[4]), args[5], args[6], Integer.parseInt(args[7]));
+						App.branches.editUser(args[1], args[2], args[3], Integer.parseInt(args[4]), args[5], args[6], Integer.parseInt(args[7]), args[8]);
 						break;
 
 					case "cancelOrder":
@@ -59,6 +60,10 @@ public class SimpleServer extends AbstractServer {
 					case "Login":
 						UserData ret = App.branches.Login(args[1], args[2], args[3]);
 						SafeSendToClient(ret, client);
+						break;
+					case "Branches":
+						List<String> branchNames = App.branches.GetBranchNameList();
+						SafeSendToClient(branchNames, client);
 						break;
 				}
 			}

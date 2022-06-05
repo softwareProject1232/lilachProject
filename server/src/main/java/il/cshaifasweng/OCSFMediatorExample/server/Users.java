@@ -43,17 +43,20 @@ public class Users {
     @OneToOne(mappedBy = "users")
     public Branch branch;
 
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "userGroup")
     public List<User> users;
+
+
     public Users(){
         users=new ArrayList<User>();
     }
     public void generateUsers()
     {
         App.session.beginTransaction();
-        User tom= new User("tom123", "tom123", "tom@gmail.com", 4,"123456789","1324567");
-        User gil= new User("gil123", "gil123", "gil@gmail.com", 1,"123456789","1324567");
-        User amit= new User("amit123", "amit123", "amit@gmail.com", 2,"123456789","1324567");
-        User peleg= new User("peleg123", "peleg123", "peleg@gmail.com", 3,"123456789","1324567");
+        User tom= new User("tom123", "tom123", "tom@gmail.com", 4,"123456789","1324567", this);
+        User gil= new User("gil123", "gil123", "gil@gmail.com", 1,"123456789","1324567", this);
+        User amit= new User("amit123", "amit123", "amit@gmail.com", 2,"123456789","1324567", this);
+        User peleg= new User("peleg123", "peleg123", "peleg@gmail.com", 3,"123456789","1324567", this);
         App.session.save(tom);
         App.session.save(gil);
         App.session.save(amit);
@@ -80,7 +83,7 @@ public class Users {
         return null;
     }
 
-    public void editUser(String username, String password, String email, int type,String cred,String taz, int id)
+    public boolean editUser(String username, String password, String email, int type,String cred,String taz, int id)
     {
         App.session.beginTransaction();
         User temp;
@@ -93,17 +96,18 @@ public class Users {
                 user.setPassword(password);
                 user.setType(type);
                 App.session.save(user);
-                break;
+                return true;
             }
         }
         App.session.flush();
         App.session.getTransaction().commit();
+        return false;
     }
 
     public void addUser(UserData userData)
     {
         App.session.beginTransaction();
-        User user = new User(userData.username, userData.password, userData.Email, userData.type, userData.getCreditCard(), userData.getId());
+        User user = new User(userData.username, userData.password, userData.Email, userData.type, userData.getCreditCard(), userData.getId(), this);
         App.session.save(user);
         App.session.flush();
         App.session.getTransaction().commit();
@@ -121,7 +125,7 @@ public class Users {
             }
         }
 
-        return new UserData("", "", "", 0, "", "");
+        return new UserData("", "", "", 0, "", "", "");
     }
 
     public List<User> getUsers() {

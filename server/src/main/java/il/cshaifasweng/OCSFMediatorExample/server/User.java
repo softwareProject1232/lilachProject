@@ -32,6 +32,9 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "issuedBy")
     public List<Complaint> complaints;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    public Users userGroup;
+
     public User()
     {
         orders=new ArrayList<Order>();
@@ -42,7 +45,7 @@ public class User {
         taz="";
         creditCard="";
     }
-    public User(String username, String password, String email, int type,String cred,String taz) {
+    public User(String username, String password, String email, int type,String cred,String taz, Users userGroup) {
         orders=new ArrayList<Order>();
         this.username = username;
         this.password = password;
@@ -50,6 +53,7 @@ public class User {
         this.type = type;
         this.creditCard=cred;
         this.taz=taz;
+        this.userGroup = userGroup;
     }
     public User(UserData userData){
         this.username = userData.username;
@@ -61,7 +65,7 @@ public class User {
     }
 
     public UserData getUserData(){
-        UserData ret = new UserData(username, password, Email, type,creditCard,taz);
+        UserData ret = new UserData(username, password, Email, type,creditCard,taz,"");
         return ret;
     }
 
