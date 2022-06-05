@@ -70,4 +70,7 @@ public class App extends Application {
         launch();
     }
 
+    public static CatalogData data;
+    public static int thisitem;
+
 }
