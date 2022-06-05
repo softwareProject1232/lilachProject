@@ -9,16 +9,16 @@
 
 <VBox fx:id="vbox_main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.CustomSelection">
     <children>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0">
+        <buttons>
+          <Button fx:id="submitToCart" mnemonicParsing="false" onAction="#submitCustomZer" text="Finish Custom Zer" />
+        </buttons>
+      </ButtonBar>
         <ScrollPane fx:id="scroll" fitToWidth="true" hbarPolicy="NEVER" pannable="true" prefHeight="800.0" prefWidth="1200.0" VBox.vgrow="NEVER">
             <content>
                 <AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0">
                     <children>
-                        <GridPane fx:id="gridCatalog" hgap="50.0" layoutX="200.0" layoutY="69.0" vgap="50.0" />
-                  <ButtonBar layoutX="984.0" layoutY="15.0" prefHeight="40.0" prefWidth="200.0">
-                    <buttons>
-                      <Button fx:id="submitToCart" mnemonicParsing="false" onAction="#submitCustomZer" text="Finish Custom Zer" />
-                    </buttons>
-                  </ButtonBar>
+                        <GridPane fx:id="gridCatalog" hgap="50.0" layoutX="200.0" layoutY="69.0" prefWidth="42.0" vgap="50.0" />
                     </children>
                 </AnchorPane>
             </content>
