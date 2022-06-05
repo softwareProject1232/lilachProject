@@ -34,7 +34,31 @@ public class SimpleClient extends AbstractClient {
 
 	public void changePrice(int price, ItemData item){
 		try {
-			client.sendToServer("#update:price," + item.getId() + "," + Integer.toString(price)); //"update:price,<item id>,<new price>"
+			client.sendToServer("#update:ItemPrice," + item.getId() + "," + Integer.toString(price)); //"update:price,<item id>,<new price>"
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void changeDescription(String description, ItemData item){
+		try {
+			client.sendToServer("#update:ItemDescription," + item.getId() + "," + description); //"update:price,<item id>,<new price>"
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void changeName(String name, ItemData item){
+		try {
+			client.sendToServer("#update:ItemName," + item.getId() + "," + name); //"update:price,<item id>,<new price>"
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void addItem(String name, String description,int imagePrice,String imageURL, ItemData item){
+		try {
+			client.sendToServer("#update:ItemCreate," + name + "," + description+","+Integer.toString(imagePrice)+","+imageURL); //"update:price,<item id>,<new price>"
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
