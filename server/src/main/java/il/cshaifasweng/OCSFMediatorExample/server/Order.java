@@ -16,6 +16,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    public int price;
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "orderIn")
     public List<BasketItem> items;
 
@@ -51,6 +52,18 @@ public class Order {
 
     public List<BasketItem> getItems() {
         return items;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public void setItems(List<BasketItem> items) {
