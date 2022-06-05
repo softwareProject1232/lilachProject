@@ -33,7 +33,11 @@ public class PriceWindowController {
 
     @FXML
     void showCatalolgWindow(ActionEvent event) throws IOException {
-        App.setRoot("Primary");
+        try {
+            App.setRoot("PrimaryCatalog");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
