@@ -97,7 +97,7 @@ public class Users {
         User temp;
         for (User user :users)
         {
-            if(user.getUsername() == username && user.getPassword() == password)
+            if(user.getUsername().equals(username) && user.getPassword().equals(password))
             {
                 return user.getUserData();
             }
