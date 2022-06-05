@@ -185,4 +185,8 @@ public class PrimaryCatalog {
 		System.out.println("Sent request\n");
 	}
 
+	@FXML
+	void addItemAction(ActionEvent event) throws IOException {
+		App.setRoot("NewItem");
+	}
 }

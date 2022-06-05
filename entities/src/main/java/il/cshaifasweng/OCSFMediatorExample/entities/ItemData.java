@@ -8,6 +8,32 @@ public class ItemData implements Serializable{
     private String name;
     private int price;
     private String description;
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public List<ItemData> getZerList() {
+        return zerList;
+    }
+
+    public void setZerList(List<ItemData> zerList) {
+        this.zerList = zerList;
+    }
+
+    public int getIsZer() {
+        return isZer;
+    }
+
+    public void setIsZer(int isZer) {
+        this.isZer = isZer;
+    }
+
+    private String imageURL;
     public List<ItemData> zerList;
     public int isZer;
     public ItemData(int i,String n,int p,String d)
