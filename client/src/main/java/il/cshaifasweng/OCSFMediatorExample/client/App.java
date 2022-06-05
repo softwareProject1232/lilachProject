@@ -29,7 +29,7 @@ public class App extends Application {
         EventBus.getDefault().register(this);
         SimpleClient client = SimpleClient.getClient();
     	client.openConnection();
-        scene = new Scene(loadFXML("primary"), 1200, 800);
+        scene = new Scene(loadFXML("PrimaryCatalog"), 1200, 800);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

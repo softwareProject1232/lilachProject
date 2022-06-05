@@ -33,7 +33,7 @@ public class SecondaryController {
 
     @FXML
     void switchToCatalogWindow(ActionEvent event) throws IOException {
-        App.setRoot("primary");
+        App.setRoot("PrimaryCatalog");
     }
 
     @FXML
