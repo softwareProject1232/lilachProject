@@ -41,6 +41,13 @@ public class Orders {
     }
     public void CancelOrder(int id)
     {
-
+        for(Order or:orders)
+        {
+            if(or.getId()==id)
+            {
+                App.session.delete(or);
+                orders.remove(or);
+            }
+        }
     }
 }

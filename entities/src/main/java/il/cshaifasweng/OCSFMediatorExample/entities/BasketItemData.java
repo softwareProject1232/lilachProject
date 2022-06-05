@@ -1,9 +1,10 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BasketItemData {
+public class BasketItemData implements Serializable {
     public List<ItemData> listItems;
 
     public BasketItemData(List<ItemData> listItems) {

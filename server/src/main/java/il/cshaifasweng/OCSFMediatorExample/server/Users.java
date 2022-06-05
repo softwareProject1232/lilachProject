@@ -38,7 +38,20 @@ public class Users {
     public Users(){
         users=new ArrayList<User>();
     }
-
+    public void generateUsers()
+    {
+        App.session.beginTransaction();
+        User tom= new User("tom123", "tom123", "tom@gmail.com", 4,"123456789","1324567");
+        User gil= new User("gil123", "gil123", "gil@gmail.com", 1,"123456789","1324567");
+        User amit= new User("amit123", "amit123", "amit@gmail.com", 2,"123456789","1324567");
+        User peleg= new User("peleg123", "peleg123", "peleg@gmail.com", 3,"123456789","1324567");
+        App.session.save(tom);
+        App.session.save(gil);
+        App.session.save(amit);
+        App.session.save(peleg);
+        App.session.flush();
+        App.session.getTransaction().commit();
+    }
     public void pullUsersFromDB()
     {
         CriteriaBuilder builder = App.session.getCriteriaBuilder();

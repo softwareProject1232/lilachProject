@@ -1,5 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.ComplaintData;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,11 +15,23 @@ public class Complaint {
     public User issuedBy;
 
     public Complaint() {}
-
+    public Complaint(ComplaintData com)
+    {
+        complaintDescription=com.complaintDescription;
+        issuedBy=new User(com.issuedBy);
+    }
+    public ComplaintData getComplaintData()
+    {
+        ComplaintData com = new ComplaintData(complaintDescription,issuedBy.getUserData());
+        return com;
+    }
     public String getComplaintDescription() {
         return complaintDescription;
     }
-
+    public String Respond()
+    {
+        return "We are very sorry to hear your complaint, we are going to check the incident and understand what we did wrong\nThank you for your understanding";
+    }
     public void setComplaintDescription(String complaintDescription) {
         this.complaintDescription = complaintDescription;
     }

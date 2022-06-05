@@ -47,6 +47,10 @@ public class Order {
     public void setItems(List<BasketItem> items) {
         this.items = items;
     }
+    public int getId()
+    {
+        return id;
+    }
 
     public String getBracha() {
         return bracha;

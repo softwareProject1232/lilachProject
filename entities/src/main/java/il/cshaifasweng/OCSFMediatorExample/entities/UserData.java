@@ -1,6 +1,8 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 
-public class UserData {
+import java.io.Serializable;
+
+public class UserData implements Serializable {
     public String username;
     public String password;
     public String Email;

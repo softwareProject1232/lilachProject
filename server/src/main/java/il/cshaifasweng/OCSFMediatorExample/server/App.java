@@ -34,6 +34,7 @@ public class App
         }testing the catalog*/
 
         users = new Users();
+        users.generateUsers();
         users.pullUsersFromDB();
 
         orders = new Orders();
