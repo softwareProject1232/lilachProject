@@ -57,13 +57,13 @@ public class SimpleServer extends AbstractServer {
 						SafeSendToClient(App.catalog.getCatalogData(), client);
 						break;
 					case "Login":
-						UserData ret = App.users.Login(args[1], args[2]);
+						UserData ret = App.branches.Login(args[1], args[2], args[3]);
 						SafeSendToClient(ret, client);
 						break;
 				}
 			}
 		} else if (OrderData.class.equals(msg.getClass())) {
-			App.orders.MakeOrder((OrderData) msg);
+			App.branches.MakeOrder((OrderData) msg);
 		}
 
 		/*

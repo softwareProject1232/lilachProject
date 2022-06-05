@@ -8,14 +8,23 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "orders")
 public class Orders {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     public List<Order> orders;
+
+    @OneToOne(mappedBy = "orders")
+    public Branch branch;
 
     public Orders() {
         this.orders = new ArrayList<Order>();

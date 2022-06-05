@@ -12,7 +12,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import javax.persistence.Query;
+import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import il.cshaifasweng.OCSFMediatorExample.entities.CatalogData;
@@ -33,7 +33,16 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "users")
 public class Users {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @OneToOne(mappedBy = "users")
+    public Branch branch;
+
     public List<User> users;
     public Users(){
         users=new ArrayList<User>();
@@ -60,6 +69,15 @@ public class Users {
         List<User> data = App.session.createQuery(query).getResultList();
         users.clear();
         users.addAll(data);
+    }
+
+    public User SearchUserById(int id){
+        for(User user : users){
+            if(user.getId() == id){
+                return user;
+            }
+        }
+        return null;
     }
 
     public void editUser(String username, String password, String email, int type,String cred,String taz, int id)
@@ -106,4 +124,19 @@ public class Users {
         return new UserData("", "", "", 0, "", "");
     }
 
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

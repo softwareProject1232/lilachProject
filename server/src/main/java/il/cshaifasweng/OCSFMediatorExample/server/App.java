@@ -18,8 +18,7 @@ public class App
 	
 	private static SimpleServer server;
     public static Catalog catalog;
-    public static Users users;
-    public static Orders orders;
+    public static Branches branches;
     public static Session session;
     public static void main( String[] args ) throws IOException
     {
@@ -33,12 +32,16 @@ public class App
             System.out.println(item);
         }testing the catalog*/
 
-        users = new Users();
+        branches = new Branches();
+        branches.GenerateValues();
+
+
+        /*users = new Users();
         users.generateUsers();
         users.pullUsersFromDB();
 
         orders = new Orders();
-        orders.pullOrdersFromDB();
+        orders.pullOrdersFromDB();*/
 
         server = new SimpleServer(3024);
         server.listen();
@@ -51,6 +54,10 @@ public class App
         configuration.addAnnotatedClass(Order.class);
         configuration.addAnnotatedClass(Complaint.class);
         configuration.addAnnotatedClass(BasketItem.class);
+        configuration.addAnnotatedClass(Branch.class);
+        configuration.addAnnotatedClass(Orders.class);
+        configuration.addAnnotatedClass(Users.class);
+
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties())

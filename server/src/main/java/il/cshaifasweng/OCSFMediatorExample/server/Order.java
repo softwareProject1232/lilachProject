@@ -28,14 +28,21 @@ public class Order {
         items=new ArrayList<BasketItem>();
     }
     public Order(OrderData orderData) {
+        App.session.beginTransaction();
+        Order order = new Order(orderData);
+
         items=new ArrayList<BasketItem>();
         for(BasketItemData list : orderData.items){
             BasketItem basketItem = new BasketItem();
             for(ItemData itemData : list.listItems){
-                basketItem.listItems.add(new Item(itemData));
+                basketItem.listItems.add(App.catalog.SearchItemById(itemData.getId()));
             }
             items.add(basketItem);
+            App.session.save(basketItem);
         }
+        App.session.flush();
+        App.session.getTransaction().commit();
+
         this.bracha = orderData.bracha;
         this.orderedBy = new User(orderData.orderedBy);
     }
