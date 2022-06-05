@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
 import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
+import il.cshaifasweng.OCSFMediatorExample.server.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,6 +26,7 @@ public class LoginAndRegister {
     @FXML
     public ComboBox branch_list_login;
     public ComboBox branch_list_register;
+    public TextField textfield_id_register;
     @FXML
     private ResourceBundle resources;
 
@@ -144,8 +146,13 @@ public class LoginAndRegister {
     }
 
     public void login(ActionEvent actionEvent) {
+        //check that all fields are filled out and that branches are selected
+        if (textfield_username_login.getText().isEmpty() || textfield_password_login.getText().isEmpty() || branch_list_login.getSelectionModel().isEmpty()) {
+            System.out.println("Missing fields\n");
+            return;
+        }
         System.out.println("Sending request\n");
-        //SimpleClient.getClient().requestLogin(textfield_username_login.getText(), textfield_password_login.getText());
+        SimpleClient.getClient().requestLogin(textfield_username_login.getText(), textfield_password_login.getText(), branch_list_login.getSelectionModel().getSelectedItem().toString());
         System.out.println("Sent request\n");
     }
 
@@ -157,5 +164,20 @@ public class LoginAndRegister {
         catch(Exception e){
             System.out.println("Error: " + e.getMessage());
         }
+    }
+
+    public void register(ActionEvent actionEvent) {
+        //check that all fields are filled out and that branches are selected and also that type is selected
+        if (textfield_username_register.getText().isEmpty()
+                || textfield_password_register.getText().isEmpty() || textfield_email_register.getText().isEmpty()
+                || textfield_credit_card_register.getText().isEmpty() || branch_list_register.getSelectionModel().isEmpty()
+                || type_dropdown.getSelectionModel().isEmpty() || textfield_id_register.getText().isEmpty()) {
+            System.out.println("Missing fields\n");
+            return;
+        }
+        SimpleClient.getClient().requestRegister(new UserData(textfield_username_register.getText(), textfield_password_register.getText(), textfield_email_register.getText(),
+                type_dropdown.getSelectionModel().getSelectedIndex() + 1, textfield_credit_card_register.getText(), textfield_id_register.getText(), branch_list_register.getSelectionModel().getSelectedItem().toString()));
+        System.out.println("Sending request\n");
+        System.out.println("Sent request\n");
     }
 }

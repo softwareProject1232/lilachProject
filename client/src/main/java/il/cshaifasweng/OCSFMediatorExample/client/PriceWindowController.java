@@ -32,8 +32,18 @@ public class PriceWindowController {
     @FXML
     void updateValues(ActionEvent event) {
         SimpleClient myclient=SimpleClient.getClient();
-        myclient.changePrice(Integer.parseInt(nameTF.getText()),App.data.itemsdata.get(App.thisitem));
+        myclient.changePrice(Integer.parseInt(PriceTF.getText()),App.data.itemsdata.get(App.thisitem));
+        myclient.changeDescription(descritionTF.getText(),App.data.itemsdata.get(App.thisitem));
+        myclient.changeName(nameTF.getText(),App.data.itemsdata.get(App.thisitem));
 
+
+    }
+
+    @FXML
+    void initialize() {
+        PriceTF.setText(String.valueOf(App.data.itemsdata.get(App.thisitem).getPrice()));
+        PriceTF.setText(App.data.itemsdata.get(App.thisitem).getDescription());
+        PriceTF.setText(App.data.itemsdata.get(App.thisitem).getName());
 
     }
 
