@@ -43,17 +43,22 @@ public class SimpleServer extends AbstractServer {
 				String[] args = (msgString.split(":")[1]).split(",");
 				switch (args[0]) {
 					case "ItemPrice":
-						App.catalog.pullItemsFromCatalog();
 						App.catalog.changePrice(Integer.parseInt(args[1]), Integer.parseInt(args[2]));
+						App.catalog.pullItemsFromCatalog();
 						break;
 					case "ItemDescription":
-
+						App.catalog.changeDescription(Integer.parseInt(args[1]), args[2]);
+						App.catalog.pullItemsFromCatalog();
 						break;
 					case "ItemName":
-
+						App.catalog.changeName(Integer.parseInt(args[1]), args[2]);
+						App.catalog.pullItemsFromCatalog();
 						break;
 					case "ItemCreate":
-
+						App.catalog.addItem(args[1], Integer.parseInt(args[3]), args[2]);
+						break;
+					case "ItemRemove":
+						App.catalog.removeItem(Integer.parseInt(args[1]));
 						break;
 					case "user":
 						App.branches.editUser(args[1], args[2], args[3], Integer.parseInt(args[4]), args[5], args[6], Integer.parseInt(args[7]), args[8]);

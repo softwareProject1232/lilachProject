@@ -22,33 +22,15 @@ public class Branches {
         //generate branches
         //  generate users for branches
         Users users1 = new Users();
-        User user1 = new User("b1tom123", "b1tom123", "em@gmail.com", 4, "12345678", "123123123", users1);
-        User user2 = new User("b1amit123", "b1amit123", "em@gmail.com", 3, "12345678", "123123123", users1);
-        User user3 = new User("b1peleg123", "b1peleg123", "em@gmail.com", 2, "12345678", "123123123", users1);
         User user4 = new User("b1yaron123", "b1yaron123", "em@gmail.com", 1, "12345678", "123123123", users1);
-        App.session.save(user1);
-        App.session.save(user2);
-        App.session.save(user3);
         App.session.save(user4);
-        users1.users.add(user1);
-        users1.users.add(user2);
-        users1.users.add(user3);
         users1.users.add(user4);
 
         App.session.save(users1);
 
         Users users2 = new Users();
-        User user21 = new User("b2tom123", "b2tom123", "em@gmail.com", 4, "12345678", "123123123", users2);
-        User user22 = new User("b2amit123", "b2amit123", "em@gmail.com", 3, "12345678", "123123123", users2);
-        User user23 = new User("b2peleg123", "b2peleg123", "em@gmail.com", 2, "12345678", "123123123", users2);
         User user24 = new User("b2yaron123", "b2yaron123", "em@gmail.com", 1, "12345678", "123123123", users2);
-        App.session.save(user21);
-        App.session.save(user22);
-        App.session.save(user23);
         App.session.save(user24);
-        users2.users.add(user21);
-        users2.users.add(user22);
-        users2.users.add(user23);
         users2.users.add(user24);
 
         App.session.save(users2);
@@ -72,15 +54,12 @@ public class Branches {
         User userg1 = new User("gtom123", "gtom123", "em@gmail.com", 4, "12345678", "123123123", usersg);
         User userg2 = new User("gamit123", "gamit123", "em@gmail.com", 3, "12345678", "123123123", usersg);
         User userg3 = new User("gpeleg123", "gpeleg123", "em@gmail.com", 2, "12345678", "123123123", usersg);
-        User userg4 = new User("gyaron123", "gyaron123", "em@gmail.com", 1, "12345678", "123123123", usersg);
         App.session.save(userg1);
         App.session.save(userg2);
         App.session.save(userg3);
-        App.session.save(userg4);
         usersg.users.add(userg1);
         usersg.users.add(userg2);
         usersg.users.add(userg3);
-        usersg.users.add(userg4);
 
         this.networkUsers = usersg;
 

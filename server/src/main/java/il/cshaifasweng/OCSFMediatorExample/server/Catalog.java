@@ -66,6 +66,17 @@ public class Catalog {
       items.clear();
       items.addAll(data);
    }
+
+   public void addItem(String name, int price, String description){
+      App.session.beginTransaction();
+      Item item = new Item(name, price, description);
+      App.session.save(item);
+      App.session.flush();
+      App.session.getTransaction().commit();
+
+      items.add(item);
+   }
+
    public CatalogData getCatalogData()
    {
       CatalogData cat=new CatalogData();
@@ -103,4 +114,48 @@ public class Catalog {
       App.session.getTransaction().commit();
    }
 
+   public void changeDescription(int id,String description)
+   {
+      App.session.beginTransaction();
+      Item temp=new Item();
+      for (Item item :items)
+      {
+         if(item.getId()==id)
+         {
+            temp=item;
+         }
+      }
+      temp.setDescription(description);
+      App.session.save(temp);
+      App.session.flush();
+      App.session.getTransaction().commit();
+   }
+
+   public void changeName(int id,String name)
+   {
+      App.session.beginTransaction();
+      Item temp=new Item();
+      for (Item item :items)
+      {
+         if(item.getId()==id)
+         {
+            temp=item;
+         }
+      }
+      temp.setName(name);
+      App.session.save(temp);
+      App.session.flush();
+      App.session.getTransaction().commit();
+   }
+
+   public void removeItem(int id) {
+      for(Item item: items)
+      {
+         if(item.getId()==id)
+         {
+            App.session.delete(item);
+            items.remove(item);
+         }
+      }
+   }
 }
