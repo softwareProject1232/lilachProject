@@ -14,7 +14,7 @@ import java.io.IOException;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-
+import il.cshaifasweng.OCSFMediatorExample.entities.CatalogData;
 /**
  * JavaFX App
  */
@@ -69,5 +69,8 @@ public class App extends Application {
 	public static void main(String[] args) {
         launch();
     }
+
+    public static CatalogData data;
+    public static int thisitem;
 
 }
