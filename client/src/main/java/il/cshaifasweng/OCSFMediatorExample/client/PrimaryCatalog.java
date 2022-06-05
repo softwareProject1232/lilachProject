@@ -3,6 +3,8 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.ItemData;
@@ -87,7 +89,11 @@ public class PrimaryCatalog {
 		ret.setBorder(new Border(new BorderStroke(Color.BLACK,
 				BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		ret.setOnMouseClicked(event ->  {
-			//TODO: add custom flower
+			try {
+				App.setRoot("CustomSelection");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		});
 		ret.getChildren().addAll(l_name);
 		return ret;
@@ -97,17 +103,28 @@ public class PrimaryCatalog {
 		VBox ret = new VBox();
 		Label l_name = new Label(name), l_price = new Label("Price: " + price + "$");
 		ret.setAlignment(Pos.CENTER);
-
+		if(App.userData.type){
+			Button addToCart = new Button("Add to cart");
+			addToCart.setOnMouseClicked(event -> {
+				//initialize an empty list of itemData and push it to App.data.cartList
+				CartList cartList = new CartList(new ArrayList<ItemData>(App.data.itemsdata));
+				App.data.cartList.add(cartList);
+				System.out.format("Added to cart\n");
+			});
+			ret.getChildren().add(addToCart);
+		}
 		ret.setPrefSize(100, 50);
 		ret.setBorder(new Border(new BorderStroke(Color.BLACK,
 				BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		ret.setOnMouseClicked(event ->  {
 			App.thisitem = id-1;
 			System.out.format("Clicked ID: %s\n", id-1);
-			try {
-				App.setRoot("UpdateProduct");
-			} catch (IOException e) {
-				e.printStackTrace();
+			if(App.userData.type){
+				try {
+					App.setRoot("UpdateProduct");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 		ret.getChildren().addAll(l_name, l_price);
