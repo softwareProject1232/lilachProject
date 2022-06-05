@@ -71,7 +71,12 @@ public class Bucket {
             sum += price;
             addItem(pane);
         }
-        total.setText("Total: " + sum + "$");
+        if(sum >= 50 && App.userData.type != 1)
+        {
+            total.setText("Discount for buying over 50$\nTotal: " + sum +"$ -> " + (int)(sum*0.9) +"$");
+        }
+        else
+            total.setText("Total: " + sum + "$");
     }
     void cleanBucket(){
         ItemList.getChildren().removeAll();
