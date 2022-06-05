@@ -36,6 +36,7 @@ public class OrderMenu {
         OutputText.setText("Order Condirmed!, Thank you!");
         ConfirmOrder.setVisible(false);
         ConfirmOrder.setDisable(true);
+        App.orderData.items.clear();
     }
 
     @FXML
