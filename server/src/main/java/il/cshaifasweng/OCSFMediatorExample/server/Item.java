@@ -1,4 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
+import il.cshaifasweng.OCSFMediatorExample.entities.ItemData;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,6 +20,11 @@ public class Item {
         name=n;
         price=p;
         description=d;
+    }
+    public Item(ItemData itemData){
+        name = itemData.getName();
+        price = itemData.getPrice();
+        description = itemData.getDescription();
     }
 
     public int getId() {

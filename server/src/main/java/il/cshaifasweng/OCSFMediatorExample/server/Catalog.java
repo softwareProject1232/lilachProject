@@ -57,11 +57,11 @@ public class Catalog {
       session.save(greenFlower);
       session.save(yellowSunflower);
       session.save(blackAndWhite);
-      roses= new Item("rose",random.nextInt(100)+100,"pretty roses");
-      purpleFlower= new Item("purple flower",random.nextInt(100)+100, "purple unique flowers");
-      greenFlower= new Item("green flower",random.nextInt(100)+100,"green flowers which can be found only in china");
-      yellowSunflower=new Item("yellow sunflower",random.nextInt(100)+100,"unique sunflowers which can can be harvested only in israel");
-      blackAndWhite= new Item("black and white flower",random.nextInt(100)+100,"unique black and white flowers which are imported from italy");
+      roses= new Item("red Flower",random.nextInt(100)+100,"pretty red flowers from the east");
+      purpleFlower= new Item("Brown flowers",random.nextInt(100)+100, "unique brown flowers");
+      greenFlower= new Item("navy flower",random.nextInt(100)+100,"navy flowers which can be found only in usa");
+      yellowSunflower=new Item("sakura sunflower",random.nextInt(100)+100,"unique sakura which can can be harvested only in japan");
+      blackAndWhite= new Item("orange flower",random.nextInt(100)+100,"orange flowers from the sun");
       session.save(roses);
       session.save(purpleFlower);
       session.save(greenFlower);

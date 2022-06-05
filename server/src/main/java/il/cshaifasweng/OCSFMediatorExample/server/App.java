@@ -11,6 +11,8 @@ public class App
 	
 	private static SimpleServer server;
     public static Catalog catalog;
+    public static Users users;
+    public static Orders orders;
     public static void main( String[] args ) throws IOException
     {
         catalog=new Catalog();
@@ -20,7 +22,14 @@ public class App
         {
             System.out.println(item);
         }testing the catalog*/
-        server = new SimpleServer(3000);
+
+        users = new Users();
+        users.pullUsersFromDB();
+
+        orders = new Orders();
+        orders.pullOrdersFromDB();
+
+        server = new SimpleServer(3024);
         server.listen();
     }
 }
