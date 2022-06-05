@@ -1,14 +1,13 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.CatalogData;
-import il.cshaifasweng.OCSFMediatorExample.entities.ItemData;
-import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
+import il.cshaifasweng.OCSFMediatorExample.server.User;
 import org.greenrobot.eventbus.EventBus;
 import javafx.application.Platform;
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
-import il.cshaifasweng.OCSFMediatorExample.entities.Warning;
 
 import java.io.IOException;
+import java.util.List;
 
 public class SimpleClient extends AbstractClient {
 	
@@ -29,19 +28,62 @@ public class SimpleClient extends AbstractClient {
 		else if(msg.getClass().equals(UserData.class)) {
 			Platform.runLater(() -> EventBus.getDefault().post(new LoginReceivedEvent((UserData) msg)));
 		}
+		else if(msg.getClass().equals(BranchNameData.class)) {
+			Platform.runLater(() -> EventBus.getDefault().post(new BranchesReceivedEvent((BranchNameData) msg)));
+		}
 	}
 
 	public void changePrice(int price, ItemData item){
 		try {
-			client.sendToServer("#update:price," + item.getId() + "," + Integer.toString(price)); //"update:price,<item id>,<new price>"
+			client.sendToServer("#update:ItemPrice," + item.getId() + "," + Integer.toString(price)); //"update:price,<item id>,<new price>"
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void requestLogin(String un, String pass){
+	public void changeDescription(String description, ItemData item){
 		try {
-			client.sendToServer("#request:Login," + un + "," + pass);
+			client.sendToServer("#update:ItemDescription," + item.getId() + "," + description); //"update:price,<item id>,<new price>"
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void changeName(String name, ItemData item){
+		try {
+			client.sendToServer("#update:ItemName," + item.getId() + "," + name); //"update:price,<item id>,<new price>"
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void addItem(String name, String description,int imagePrice,String imageURL, ItemData item){
+		try {
+			client.sendToServer("#update:ItemCreate," + name + "," + description+","+Integer.toString(imagePrice)+","+imageURL); //"update:price,<item id>,<new price>"
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void requestLogin(String un, String pass, String branch){
+		try {
+			client.sendToServer("#request:Login," + un + "," + pass + "," + branch); //"request:Login,<username>,<password>,<branch>"
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void requestRegister(UserData user){
+		try{
+			client.sendToServer(user);
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	public void requestBranches(){
+		try {
+			client.sendToServer("#request:Branches"); //"request:Branches"
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

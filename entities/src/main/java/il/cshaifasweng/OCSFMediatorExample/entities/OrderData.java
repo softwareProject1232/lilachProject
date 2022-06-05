@@ -9,6 +9,8 @@ public class OrderData implements Serializable {
     public List<BasketItemData> items;
     public String bracha;
     public UserData orderedBy;
+    public String BranchName;
+    public int price;
 
     public OrderData(){
         items = new ArrayList<BasketItemData>();

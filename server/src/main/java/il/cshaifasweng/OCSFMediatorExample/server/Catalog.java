@@ -76,6 +76,16 @@ public class Catalog {
       }
       return cat;
    }
+
+   public Item SearchItemById(int id){
+      for(Item item : items){
+         if(item.getId() == id){
+            return item;
+         }
+      }
+      return null;
+   }
+
    public void changePrice(int id,int newPrice)
    {
       App.session.beginTransaction();

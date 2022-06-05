@@ -4,7 +4,7 @@ package il.cshaifasweng.OCSFMediatorExample.server;
 import javax.persistence.*;
 import java.util.List;
 @Entity
-@Table(name = "BsaketItem")
+@Table(name = "BasketItem")
 public class BasketItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

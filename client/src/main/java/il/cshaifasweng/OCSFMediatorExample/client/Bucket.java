@@ -91,7 +91,7 @@ public class Bucket {
         l_name.setUnderline(true);
         b_remove.setText("Remove");
         b_remove.setOnMouseClicked(event ->  {;
-            System.out.format("Clicked ID: %s\n", id-1);
+            System.out.println("Clicked ID: " + (id-1));
             App.orderData.items.remove(App.orderData.items.get(index));
             buildBucket();
         });

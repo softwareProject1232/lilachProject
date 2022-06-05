@@ -12,7 +12,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import javax.persistence.Query;
+import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import il.cshaifasweng.OCSFMediatorExample.entities.CatalogData;
@@ -33,18 +33,30 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "users")
 public class Users {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @OneToOne(mappedBy = "users")
+    public Branch branch;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "userGroup")
     public List<User> users;
+
+
     public Users(){
         users=new ArrayList<User>();
     }
     public void generateUsers()
     {
         App.session.beginTransaction();
-        User tom= new User("tom123", "tom123", "tom@gmail.com", 4,"123456789","1324567");
-        User gil= new User("gil123", "gil123", "gil@gmail.com", 1,"123456789","1324567");
-        User amit= new User("amit123", "amit123", "amit@gmail.com", 2,"123456789","1324567");
-        User peleg= new User("peleg123", "peleg123", "peleg@gmail.com", 3,"123456789","1324567");
+        User tom= new User("tom123", "tom123", "tom@gmail.com", 4,"123456789","1324567", this);
+        User gil= new User("gil123", "gil123", "gil@gmail.com", 1,"123456789","1324567", this);
+        User amit= new User("amit123", "amit123", "amit@gmail.com", 2,"123456789","1324567", this);
+        User peleg= new User("peleg123", "peleg123", "peleg@gmail.com", 3,"123456789","1324567", this);
         App.session.save(tom);
         App.session.save(gil);
         App.session.save(amit);
@@ -62,7 +74,16 @@ public class Users {
         users.addAll(data);
     }
 
-    public void editUser(String username, String password, String email, int type,String cred,String taz, int id)
+    public User SearchUserById(int id){
+        for(User user : users){
+            if(user.getId() == id){
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public boolean editUser(String username, String password, String email, int type,String cred,String taz, int id)
     {
         App.session.beginTransaction();
         User temp;
@@ -75,17 +96,18 @@ public class Users {
                 user.setPassword(password);
                 user.setType(type);
                 App.session.save(user);
-                break;
+                return true;
             }
         }
         App.session.flush();
         App.session.getTransaction().commit();
+        return false;
     }
 
     public void addUser(UserData userData)
     {
         App.session.beginTransaction();
-        User user = new User(userData.username, userData.password, userData.Email, userData.type, userData.getCreditCard(), userData.getId());
+        User user = new User(userData.username, userData.password, userData.Email, userData.type, userData.getCreditCard(), userData.getId(), this);
         App.session.save(user);
         App.session.flush();
         App.session.getTransaction().commit();
@@ -103,7 +125,22 @@ public class Users {
             }
         }
 
-        return new UserData("", "", "", 0, "", "");
+        return new UserData("", "", "", 0, "", "", "");
     }
 
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

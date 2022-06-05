@@ -1,24 +1,28 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
+import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "orders")
 public class Orders {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    public List<Order> orders;
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "orderGroup")
+    public List<Order> orderList;
+
+    @OneToOne(mappedBy = "orders")
+    public Branch branch;
 
     public Orders() {
-        this.orders = new ArrayList<Order>();
+        this.orderList = new ArrayList<Order>();
     }
 
     public void pullOrdersFromDB()
@@ -27,26 +31,26 @@ public class Orders {
         CriteriaQuery<Order> query = builder.createQuery(Order.class);
         query.from(Order.class);
         List<Order> data = App.session.createQuery(query).getResultList();
-        orders.clear();
-        orders.addAll(data);
+        orderList.clear();
+        orderList.addAll(data);
     }
 
     public void MakeOrder(OrderData orderData){
         App.session.beginTransaction();
-        Order order = new Order(orderData);
+        Order order = new Order(orderData, this);
         App.session.save(order);
         App.session.flush();
         App.session.getTransaction().commit();
-        orders.add(order);
+        orderList.add(order);
     }
     public void CancelOrder(int id)
     {
-        for(Order or:orders)
+        for(Order or: orderList)
         {
             if(or.getId()==id)
             {
                 App.session.delete(or);
-                orders.remove(or);
+                orderList.remove(or);
             }
         }
     }

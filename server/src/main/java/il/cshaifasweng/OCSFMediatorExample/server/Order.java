@@ -16,10 +16,14 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    public int price;
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "orderIn")
     public List<BasketItem> items;
 
     public String bracha;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    public Orders orderGroup;
 
     @ManyToOne(fetch = FetchType.LAZY)
     public User orderedBy;
@@ -27,21 +31,39 @@ public class Order {
     {
         items=new ArrayList<BasketItem>();
     }
-    public Order(OrderData orderData) {
+    public Order(OrderData orderData, Orders orderGroup) {
+        App.session.beginTransaction();
         items=new ArrayList<BasketItem>();
         for(BasketItemData list : orderData.items){
             BasketItem basketItem = new BasketItem();
             for(ItemData itemData : list.listItems){
-                basketItem.listItems.add(new Item(itemData));
+                basketItem.listItems.add(App.catalog.SearchItemById(itemData.getId()));
             }
             items.add(basketItem);
+            App.session.save(basketItem);
         }
+        App.session.flush();
+        App.session.getTransaction().commit();
+
         this.bracha = orderData.bracha;
         this.orderedBy = new User(orderData.orderedBy);
+        this.orderGroup = orderGroup;
     }
 
     public List<BasketItem> getItems() {
         return items;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public void setItems(List<BasketItem> items) {

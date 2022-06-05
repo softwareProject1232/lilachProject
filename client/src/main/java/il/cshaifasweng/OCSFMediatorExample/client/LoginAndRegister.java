@@ -1,10 +1,12 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
 import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
+import il.cshaifasweng.OCSFMediatorExample.server.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,7 +19,14 @@ import org.greenrobot.eventbus.Subscribe;
 
 public class LoginAndRegister {
 
+    @FXML
     public Button guest_login;
+    @FXML
+    public Label label_branch_login;
+    @FXML
+    public ComboBox branch_list_login;
+    public ComboBox branch_list_register;
+    public TextField textfield_id_register;
     @FXML
     private ResourceBundle resources;
 
@@ -75,24 +84,36 @@ public class LoginAndRegister {
     @FXML
     private VBox vbox_main;
 
+    private List<String> branches;
+
     @Subscribe
     public void onLoginRecievedEvent(LoginReceivedEvent event) {
-        System.out.format("Received login\n");
+        System.out.println("Received login\n");
         if (event.didSuccessfullyLogin()){
             App.userData = event.getUser();
             App.orderData = new OrderData();
             try{
-                System.out.format("Logged in as %s\n", App.userData.getUsername());
+                System.out.println("Logged in as " + App.userData.getUsername());
                 App.setRoot("MainMenu");
             }
             catch(Exception e){
-                System.out.format("Error: %s\n", e.getMessage());
+                System.out.println("Error: " + e.getMessage());
             }
         }
         else{
-            System.out.format("Failed to login\n");
+            System.out.println("Failed to login\n");
         }
 
+    }
+    @Subscribe
+    public void onBranchRecievedEvent(BranchesReceivedEvent event) {
+        System.out.println("Received branch\n");
+        branches = event.getBranches().getBranchList();
+        vbox_main.setVisible(true);
+        for (String branch : branches) {
+            branch_list_login.getItems().add(branch);
+            branch_list_register.getItems().add(branch);
+        }
     }
     @FXML
     void initialize() {
@@ -117,14 +138,22 @@ public class LoginAndRegister {
         type_dropdown.getItems().addAll(
                 "Branch",
                 "Network",
-                "Discount"
+                "Subscription"
         );
+        System.out.println("Sending Branches Request");
+        SimpleClient.getClient().requestBranches();
+        System.out.println("Sent Branches Request");
     }
 
     public void login(ActionEvent actionEvent) {
-        System.out.format("Sending request\n");
-        SimpleClient.getClient().requestLogin(textfield_username_login.getText(), textfield_password_login.getText());
-        System.out.format("Sent request\n");
+        //check that all fields are filled out and that branches are selected
+        if (textfield_username_login.getText().isEmpty() || textfield_password_login.getText().isEmpty() || branch_list_login.getSelectionModel().isEmpty()) {
+            System.out.println("Missing fields\n");
+            return;
+        }
+        System.out.println("Sending request\n");
+        SimpleClient.getClient().requestLogin(textfield_username_login.getText(), textfield_password_login.getText(), branch_list_login.getSelectionModel().getSelectedItem().toString());
+        System.out.println("Sent request\n");
     }
 
     public void login_as_guest(ActionEvent actionEvent) {
@@ -133,7 +162,22 @@ public class LoginAndRegister {
             App.setRoot("PrimaryCatalog");
         }
         catch(Exception e){
-            System.out.format("Error: %s\n", e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
+    }
+
+    public void register(ActionEvent actionEvent) {
+        //check that all fields are filled out and that branches are selected and also that type is selected
+        if (textfield_username_register.getText().isEmpty()
+                || textfield_password_register.getText().isEmpty() || textfield_email_register.getText().isEmpty()
+                || textfield_credit_card_register.getText().isEmpty() || branch_list_register.getSelectionModel().isEmpty()
+                || type_dropdown.getSelectionModel().isEmpty() || textfield_id_register.getText().isEmpty()) {
+            System.out.println("Missing fields\n");
+            return;
+        }
+        SimpleClient.getClient().requestRegister(new UserData(textfield_username_register.getText(), textfield_password_register.getText(), textfield_email_register.getText(),
+                type_dropdown.getSelectionModel().getSelectedIndex() + 1, textfield_credit_card_register.getText(), textfield_id_register.getText(), branch_list_register.getSelectionModel().getSelectedItem().toString()));
+        System.out.println("Sending request\n");
+        System.out.println("Sent request\n");
     }
 }
