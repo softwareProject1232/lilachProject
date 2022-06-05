@@ -33,15 +33,25 @@ public class SimpleServer extends AbstractServer {
 			App.branches.addUser(((UserData) msg));
 		} else if (String.class.equals(msg.getClass())) {
 			String msgString = msg.toString();
+			System.out.format("    data: " + msgString + "\n");
 			if (msgString.startsWith("#warning")) {
 				Warning warning = new Warning("Warning from server!");
 				SafeSendToClient(warning, client);
 			} else if (msgString.startsWith("#update")) {
 				String[] args = (msgString.split(":")[1]).split(",");
 				switch (args[0]) {
-					case "price":
+					case "ItemPrice":
 						App.catalog.pullItemsFromCatalog();
 						App.catalog.changePrice(Integer.parseInt(args[1]), Integer.parseInt(args[2]));
+						break;
+					case "ItemDescription":
+
+						break;
+					case "ItemName":
+
+						break;
+					case "ItemCreate":
+
 						break;
 					case "user":
 						App.branches.editUser(args[1], args[2], args[3], Integer.parseInt(args[4]), args[5], args[6], Integer.parseInt(args[7]), args[8]);

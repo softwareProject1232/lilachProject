@@ -18,6 +18,7 @@ public class Branch {
 
     public String name;
 
+
     public Branch() {
     }
 
@@ -26,6 +27,7 @@ public class Branch {
         this.orders = orders;
         this.name = name;
     }
+
 
     public int getId() {
         return id;
