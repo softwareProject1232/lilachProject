@@ -1,10 +1,12 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
-
+import javafx.event.ActionEvent;;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.BasketItemData;
 import il.cshaifasweng.OCSFMediatorExample.entities.ItemData;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -29,12 +31,14 @@ public class CustomSelection {
 
     @FXML
     private AnchorPane anchor;
-
+    @FXML
+    private Button submitToCart;
     @FXML
     private ScrollPane scroll;
     @FXML
     private GridPane gridCatalog;
 
+    private BasketItemData cartList;
     private int i, j;
 
     @Subscribe
@@ -46,6 +50,7 @@ public class CustomSelection {
 
     void buildCatalog(){
         cleanUpCatalog();
+        cartList = new BasketItemData();
         int id;
         String name;
         int price;
@@ -82,21 +87,20 @@ public class CustomSelection {
         VBox ret = new VBox();
         Label l_name = new Label(name), l_price = new Label("Price: " + price + "$");
         ret.setAlignment(Pos.CENTER);
-        if(App.userData.type){
-            Button addToCart = new Button("Add to zer");
-            addToCart.setOnMouseClicked(event -> {
-                App.data.cartList.add(App.data.itemsdata.get(id - 1));
+        Button addToCart = new Button("Add to zer");
+        addToCart.setOnMouseClicked(event -> {
+                cartList.listItems.add(App.data.itemsdata.get(id-1));
                 System.out.format("Added to cart\n");
-            });
-            ret.getChildren().add(addToCart);
-        }
+            System.out.format("Added to cart\n");
+        });
+        ret.getChildren().add(addToCart);
         ret.setPrefSize(100, 50);
         ret.setBorder(new Border(new BorderStroke(Color.BLACK,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         ret.setOnMouseClicked(event ->  {
             App.thisitem = id-1;
             System.out.format("Clicked ID: %s\n", id-1);
-            if(App.userData.type){
+            if(App.userData.type == 4){
                 try {
                     App.setRoot("UpdateProduct");
                 } catch (IOException e) {
@@ -124,7 +128,21 @@ public class CustomSelection {
             j=0;
         }
     }
-
+    @FXML
+    void submitCustomZer(ActionEvent event) {
+        System.out.format("Submitting custom zer\n");
+        if(cartList.listItems.size() > 0){
+            App.orderData.items.add(cartList);
+        }
+        else{
+            System.out.format("No items in cart\n");
+        }
+        try {
+            App.setRoot("PrimaryCatalog");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @FXML
     void initialize() {
         EventBus.getDefault().register(this);

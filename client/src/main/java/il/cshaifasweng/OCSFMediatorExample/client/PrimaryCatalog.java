@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.BasketItemData;
 import il.cshaifasweng.OCSFMediatorExample.entities.ItemData;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -103,12 +104,14 @@ public class PrimaryCatalog {
 		VBox ret = new VBox();
 		Label l_name = new Label(name), l_price = new Label("Price: " + price + "$");
 		ret.setAlignment(Pos.CENTER);
-		if(App.userData.type){
+		if(App.userData.type != 4){
 			Button addToCart = new Button("Add to cart");
 			addToCart.setOnMouseClicked(event -> {
 				//initialize an empty list of itemData and push it to App.data.cartList
-				CartList cartList = new CartList(new ArrayList<ItemData>(App.data.itemsdata));
-				App.data.cartList.add(cartList);
+				List<ItemData> temp = new ArrayList<ItemData>();
+				temp.add(App.data.itemsdata.get(id-1));
+				BasketItemData cartList = new BasketItemData(temp);
+				App.orderData.items.add(cartList);
 				System.out.format("Added to cart\n");
 			});
 			ret.getChildren().add(addToCart);
@@ -119,7 +122,7 @@ public class PrimaryCatalog {
 		ret.setOnMouseClicked(event ->  {
 			App.thisitem = id-1;
 			System.out.format("Clicked ID: %s\n", id-1);
-			if(App.userData.type){
+			if(App.userData.type == 4){
 				try {
 					App.setRoot("UpdateProduct");
 				} catch (IOException e) {
