@@ -31,6 +31,8 @@ public class SimpleServer extends AbstractServer {
 		System.out.format("received data\n");
 		if (UserData.class.equals(msg.getClass())) {
 			App.branches.addUser(((UserData) msg));
+			UserData ret = App.branches.Login(((UserData) msg).username, ((UserData) msg).password, ((UserData) msg).branchName);
+			SafeSendToClient(ret, client);
 		} else if (String.class.equals(msg.getClass())) {
 			String msgString = msg.toString();
 			System.out.format("    data: " + msgString + "\n");
