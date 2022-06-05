@@ -1,5 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.BranchNameData;
 import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
 import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
@@ -62,7 +63,7 @@ public class SimpleServer extends AbstractServer {
 						SafeSendToClient(ret, client);
 						break;
 					case "Branches":
-						List<String> branchNames = App.branches.GetBranchNameList();
+						BranchNameData branchNames =new BranchNameData(App.branches.GetBranchNameList());
 						SafeSendToClient(branchNames, client);
 						break;
 				}
