@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
 import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
+import il.cshaifasweng.OCSFMediatorExample.server.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -105,25 +106,6 @@ public class LoginAndRegister {
 
     }
     @Subscribe
-    public void onRegisteredRecievedEvent(RegisteredReceivedEvent event) {
-        System.out.println("Received register\n");
-        if (event.didSuccessfullyRegister()){
-            App.userData = event.getUser();
-            App.orderData = new OrderData();
-            try{
-                System.out.println("Registered and logged in as " + App.userData.getUsername());
-                App.setRoot("MainMenu");
-            }
-            catch(Exception e){
-                System.out.println("Error: " + e.getMessage());
-            }
-        }
-        else{
-            System.out.println("Failed to login\n");
-        }
-
-    }
-    @Subscribe
     public void onBranchRecievedEvent(BranchesReceivedEvent event) {
         System.out.println("Received branch\n");
         branches = event.getBranches().getBranchList();
@@ -193,8 +175,9 @@ public class LoginAndRegister {
             System.out.println("Missing fields\n");
             return;
         }
+        SimpleClient.getClient().requestRegister(new UserData(textfield_username_register.getText(), textfield_password_register.getText(), textfield_email_register.getText(),
+                type_dropdown.getSelectionModel().getSelectedIndex() + 1, textfield_credit_card_register.getText(), textfield_id_register.getText(), branch_list_register.getSelectionModel().getSelectedItem().toString()));
         System.out.println("Sending request\n");
-        SimpleClient.getClient().requestRegister(textfield_username_register.getText(), textfield_password_register.getText(), textfield_email_register.getText(), type_dropdown.getSelectionModel().getSelectedItem().toString(), textfield_credit_card_register.getText(), textfield_id_register.getText(), branch_list_register.getSelectionModel().getSelectedItem().toString());
         System.out.println("Sent request\n");
     }
 }

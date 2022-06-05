@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
+import il.cshaifasweng.OCSFMediatorExample.server.User;
 import org.greenrobot.eventbus.EventBus;
 import javafx.application.Platform;
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
@@ -72,6 +73,14 @@ public class SimpleClient extends AbstractClient {
 		}
 	}
 
+	public void requestRegister(UserData user){
+		try{
+			client.sendToServer(user);
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
+	}
 	public void requestBranches(){
 		try {
 			client.sendToServer("#request:Branches"); //"request:Branches"
