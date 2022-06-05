@@ -59,7 +59,14 @@ public class SimpleClient extends AbstractClient {
 
 	public void addItem(String name, String description,int imagePrice,String imageURL, ItemData item){
 		try {
-			client.sendToServer("#update:ItemCreate," + name + "," + description+","+Integer.toString(imagePrice)+","+imageURL); //"update:price,<item id>,<new price>"
+			client.sendToServer("#update:ItemCreate," + name + "," + description+","+Integer.toString(imagePrice)); //"update:price,<item id>,<new price>"
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void removeItem(ItemData item){
+		try {
+			client.sendToServer("#update:ItemRemove," + item.getId()); //"update:price,<item id>,<new price>"
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
