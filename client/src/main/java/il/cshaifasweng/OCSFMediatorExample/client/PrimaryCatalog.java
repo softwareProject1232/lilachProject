@@ -20,6 +20,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 public class PrimaryCatalog {
 
+	public Button MainMenuButton;
 	@FXML
 	private ResourceBundle resources;
 
@@ -48,8 +49,13 @@ public class PrimaryCatalog {
 		buildCatalog();
 	}
 	@FXML
-	void goToMainMenu(ActionEvent event) throws IOException {
-		App.setRoot("MainMenu");
+	void goTo(ActionEvent event) throws IOException {
+		if (App.userData.type != 0){
+			App.setRoot("MainMenu");
+		}
+		else{
+			App.setRoot("LoginAndRegister");
+		}
 	}
 
 	void buildCatalog(){
@@ -162,12 +168,9 @@ public class PrimaryCatalog {
 	@FXML
 	void initialize() {
 		EventBus.getDefault().register(this);
-		assert anchor != null : "fx:id=\"anchor\" was not injected: check your FXML file 'PrimaryCatalog.fxml'.";
-		assert btn != null : "fx:id=\"btn\" was not injected: check your FXML file 'PrimaryCatalog.fxml'.";
-		assert scroll != null : "fx:id=\"scroll\" was not injected: check your FXML file 'PrimaryCatalog.fxml'.";
-		assert vbox_main != null : "fx:id=\"vbox_main\" was not injected: check your FXML file 'PrimaryCatalog.fxml'.";
-
-
+		if(App.userData.type == 0){
+			MainMenuButton.setText("Back");
+		}
 		System.out.format("Sending request\n");
 		SimpleClient.getClient().requestCatalog();
 		System.out.format("Sent request\n");
