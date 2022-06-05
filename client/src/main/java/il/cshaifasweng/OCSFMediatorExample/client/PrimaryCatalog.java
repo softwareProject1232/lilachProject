@@ -89,7 +89,7 @@ public class PrimaryCatalog {
 			App.thisitem = id-1;
 			System.out.format("Clicked ID: %s\n", id-1);
 			try {
-				App.setRoot("secondary");
+				App.setRoot("UpdateProduct");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
