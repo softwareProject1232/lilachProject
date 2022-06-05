@@ -21,9 +21,10 @@ public class LoginAndRegister {
     @FXML
     public Button guest_login;
     @FXML
-    public Label label_branch;
+    public Label label_branch_login;
     @FXML
-    public ComboBox branch_list;
+    public ComboBox branch_list_login;
+    public ComboBox branch_list_register;
     @FXML
     private ResourceBundle resources;
 
@@ -102,12 +103,14 @@ public class LoginAndRegister {
         }
 
     }
+    @Subscribe
     public void onBranchRecievedEvent(BranchesReceivedEvent event) {
         System.out.println("Received branch\n");
         branches = event.getBranches().getBranchList();
         vbox_main.setVisible(true);
         for (String branch : branches) {
-            branch_list.getItems().add(branch);
+            branch_list_login.getItems().add(branch);
+            branch_list_register.getItems().add(branch);
         }
     }
     @FXML
