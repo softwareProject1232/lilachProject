@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.time.LocalTime;
 public class CatalogData implements Serializable{
     public List<ItemData> itemsdata;
-    public List<ItemData> cartList;
+    public List<CartList> cartList;
     public CatalogData()
     {
         itemsdata=new ArrayList<ItemData>();
