@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.BasketItemData;
 import il.cshaifasweng.OCSFMediatorExample.entities.ItemData;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -53,8 +54,11 @@ public class PrimaryCatalog {
 		String name;
 		int price;
 		String description;
-		VBox pane = generateCustomFlower();
-		addFlower(pane);
+		VBox pane;
+		if (App.userData.type != 4){
+			pane = generateCustomFlower();
+			addFlower(pane);
+		}
 		for (ItemData item: App.data.itemsdata){
 			id = item.getId();
 			name = item.getName();
@@ -112,7 +116,7 @@ public class PrimaryCatalog {
 				temp.add(App.data.itemsdata.get(id-1));
 				BasketItemData cartList = new BasketItemData(temp);
 				App.orderData.items.add(cartList);
-				System.out.format("Added to cart\n");
+				System.out.format("Added to cart regular flower\n");
 			});
 			ret.getChildren().add(addToCart);
 		}
@@ -163,5 +167,14 @@ public class PrimaryCatalog {
 		System.out.format("Sending request\n");
 		SimpleClient.getClient().requestCatalog();
 		System.out.format("Sent request\n");
+	}
+
+	public void goToMainMenu(ActionEvent actionEvent) {
+		try{
+			App.setRoot("MainMenu");
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

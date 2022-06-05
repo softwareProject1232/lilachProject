@@ -78,6 +78,7 @@ public class LoginAndRegister {
         if (event.didSuccessfullyLogin()){
             App.userData = event.getUser();
             try{
+                System.out.format("Logged in as %s\n", App.userData.getUsername());
                 App.setRoot("PrimaryCatalog");
             }
             catch(Exception e){
@@ -85,8 +86,9 @@ public class LoginAndRegister {
             }
         }
         else{
-            System.out.format("Failed to login");
+            System.out.format("Failed to login\n");
         }
+
     }
     @FXML
     void initialize() {
