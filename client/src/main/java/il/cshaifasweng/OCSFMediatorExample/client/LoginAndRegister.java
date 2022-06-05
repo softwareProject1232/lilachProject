@@ -2,12 +2,16 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 public class LoginAndRegister {
 
@@ -68,8 +72,23 @@ public class LoginAndRegister {
     @FXML
     private VBox vbox_main;
 
+    @Subscribe
+    public void onLoginRecievedEvent(LoginReceivedEvent event) {
+        System.out.format("Received login\n");
+        if (event.didSuccessfullyLogin()){
+            App.userData = event.getUser();
+            try{
+                App.setRoot("PrimaryCatalog");
+            }
+            catch(Exception e){
+                System.out.format("Error: %s\n", e.getMessage());
+            }
+        }
+        System.out.format("Failed to login");
+    }
     @FXML
     void initialize() {
+        EventBus.getDefault().register(this);
         assert button_login != null : "fx:id=\"button_login\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
         assert label_credit_card_register != null : "fx:id=\"label_credit_card_register\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
         assert label_email_register != null : "fx:id=\"label_email_register\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
@@ -94,4 +113,9 @@ public class LoginAndRegister {
         );
     }
 
+    public void login(ActionEvent actionEvent) {
+        System.out.format("Sending request\n");
+        SimpleClient.getClient().requestLogin(textfield_username_login.getText(), textfield_password_login.getText());
+        System.out.format("Sent request\n");
+    }
 }

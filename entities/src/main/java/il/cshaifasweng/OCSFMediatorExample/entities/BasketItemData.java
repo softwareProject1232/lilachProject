@@ -21,4 +21,5 @@ public class BasketItemData {
     public void setListItems(List<ItemData> listItems) {
         this.listItems = listItems;
     }
+
 }

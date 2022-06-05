@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.CatalogData;
+import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
 import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -26,12 +27,14 @@ public class App extends Application {
     public static int thisitem;
     public static UserData userData;
 
+    public static OrderData orderData;
+
     @Override
     public void start(Stage stage) throws IOException {
         EventBus.getDefault().register(this);
         SimpleClient client = SimpleClient.getClient();
     	client.openConnection();
-        scene = new Scene(loadFXML("PrimaryCatalog"), 1200, 800);
+        scene = new Scene(loadFXML("LoginAndRegister"), 1200, 800);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
