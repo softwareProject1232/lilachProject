@@ -59,7 +59,7 @@ public class PrimaryCatalog {
 		int price;
 		String description;
 		VBox pane;
-		if (App.userData.type != 4){
+		if (App.userData.type != 4 && App.userData.type != 0) {
 			pane = generateCustomFlower();
 			addFlower(pane);
 		}
@@ -112,7 +112,7 @@ public class PrimaryCatalog {
 		VBox ret = new VBox();
 		Label l_name = new Label(name), l_price = new Label("Price: " + price + "$");
 		ret.setAlignment(Pos.CENTER);
-		if(App.userData.type != 4){
+		if(App.userData.type != 4 && App.userData.type != 0){
 			Button addToCart = new Button("Add to cart");
 			addToCart.setOnMouseClicked(event -> {
 				//initialize an empty list of itemData and push it to App.data.cartList

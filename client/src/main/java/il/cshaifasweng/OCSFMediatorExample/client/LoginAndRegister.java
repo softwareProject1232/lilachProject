@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
+import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,6 +17,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 public class LoginAndRegister {
 
+    public Button guest_login;
     @FXML
     private ResourceBundle resources;
 
@@ -123,5 +125,15 @@ public class LoginAndRegister {
         System.out.format("Sending request\n");
         SimpleClient.getClient().requestLogin(textfield_username_login.getText(), textfield_password_login.getText());
         System.out.format("Sent request\n");
+    }
+
+    public void login_as_guest(ActionEvent actionEvent) {
+        App.userData = new UserData();
+        try{
+            App.setRoot("PrimaryCatalog");
+        }
+        catch(Exception e){
+            System.out.format("Error: %s\n", e.getMessage());
+        }
     }
 }
