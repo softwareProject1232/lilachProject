@@ -11,7 +11,7 @@ public class BranchNameData implements Serializable {
         this.bracnhList = bracnhList;
     }
 
-    public List<String> getBracnhList() {
+    public List<String> getBranchList() {
         return bracnhList;
     }
 

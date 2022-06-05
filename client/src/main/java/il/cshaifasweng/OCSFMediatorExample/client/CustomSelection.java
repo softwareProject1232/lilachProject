@@ -43,7 +43,7 @@ public class CustomSelection {
 
     @Subscribe
     public void onCatalogRecievedEvent(CatalogRecievedEvent event) {
-        System.out.format("Received catalog\n");
+        System.out.println("Received catalog\n");
         App.data = event.getCatalog();
         buildCatalog();
     }
@@ -90,8 +90,8 @@ public class CustomSelection {
         Button addToCart = new Button("Add to zer");
         addToCart.setOnMouseClicked(event -> {
                 cartList.listItems.add(App.data.itemsdata.get(id-1));
-                System.out.format("Added to cart\n");
-            System.out.format("Added to cart\n");
+                System.out.println("Added to cart\n");
+            System.out.println("Added to cart\n");
         });
         ret.getChildren().add(addToCart);
         ret.setPrefSize(100, 50);
@@ -99,7 +99,7 @@ public class CustomSelection {
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         ret.setOnMouseClicked(event ->  {
             App.thisitem = id-1;
-            System.out.format("Clicked ID: %s\n", id-1);
+            System.out.println("Clicked ID: " + (id-1));
             if(App.userData.type == 4){
                 try {
                     App.setRoot("UpdateProduct");
@@ -130,12 +130,12 @@ public class CustomSelection {
     }
     @FXML
     void submitCustomZer(ActionEvent event) {
-        System.out.format("Submitting custom zer\n");
+        System.out.println("Submitting custom zer\n");
         if(cartList.listItems.size() > 0){
             App.orderData.items.add(cartList);
         }
         else{
-            System.out.format("No items in cart\n");
+            System.out.println("No items in cart\n");
         }
         try {
             App.setRoot("PrimaryCatalog");
@@ -152,8 +152,8 @@ public class CustomSelection {
         assert vbox_main != null : "fx:id=\"vbox_main\" was not injected: check your FXML file 'PrimaryCatalog.fxml'.";
 
 
-        System.out.format("Sending request\n");
+        System.out.println("Sending request\n");
         SimpleClient.getClient().requestCatalog();
-        System.out.format("Sent request\n");
+        System.out.println("Sent request\n");
     }
 }

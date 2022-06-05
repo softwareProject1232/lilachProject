@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
@@ -17,7 +18,12 @@ import org.greenrobot.eventbus.Subscribe;
 
 public class LoginAndRegister {
 
+    @FXML
     public Button guest_login;
+    @FXML
+    public Label label_branch;
+    @FXML
+    public ComboBox branch_list;
     @FXML
     private ResourceBundle resources;
 
@@ -75,24 +81,34 @@ public class LoginAndRegister {
     @FXML
     private VBox vbox_main;
 
+    private List<String> branches;
+
     @Subscribe
     public void onLoginRecievedEvent(LoginReceivedEvent event) {
-        System.out.format("Received login\n");
+        System.out.println("Received login\n");
         if (event.didSuccessfullyLogin()){
             App.userData = event.getUser();
             App.orderData = new OrderData();
             try{
-                System.out.format("Logged in as %s\n", App.userData.getUsername());
+                System.out.println("Logged in as " + App.userData.getUsername());
                 App.setRoot("MainMenu");
             }
             catch(Exception e){
-                System.out.format("Error: %s\n", e.getMessage());
+                System.out.println("Error: " + e.getMessage());
             }
         }
         else{
-            System.out.format("Failed to login\n");
+            System.out.println("Failed to login\n");
         }
 
+    }
+    public void onBranchRecievedEvent(BranchesReceivedEvent event) {
+        System.out.println("Received branch\n");
+        branches = event.getBranches().getBranchList();
+        vbox_main.setVisible(true);
+        for (String branch : branches) {
+            branch_list.getItems().add(branch);
+        }
     }
     @FXML
     void initialize() {
@@ -117,14 +133,17 @@ public class LoginAndRegister {
         type_dropdown.getItems().addAll(
                 "Branch",
                 "Network",
-                "Discount"
+                "Subscription"
         );
+        System.out.println("Sending Branches Request");
+        SimpleClient.getClient().requestBranches();
+        System.out.println("Sent Branches Request");
     }
 
     public void login(ActionEvent actionEvent) {
-        System.out.format("Sending request\n");
-        SimpleClient.getClient().requestLogin(textfield_username_login.getText(), textfield_password_login.getText());
-        System.out.format("Sent request\n");
+        System.out.println("Sending request\n");
+        //SimpleClient.getClient().requestLogin(textfield_username_login.getText(), textfield_password_login.getText());
+        System.out.println("Sent request\n");
     }
 
     public void login_as_guest(ActionEvent actionEvent) {
@@ -133,7 +152,7 @@ public class LoginAndRegister {
             App.setRoot("PrimaryCatalog");
         }
         catch(Exception e){
-            System.out.format("Error: %s\n", e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
     }
 }

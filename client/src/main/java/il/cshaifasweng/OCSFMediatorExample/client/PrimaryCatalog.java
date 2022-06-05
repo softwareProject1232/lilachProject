@@ -1,8 +1,10 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +48,8 @@ public class PrimaryCatalog {
 	private int i, j;
 
 	@Subscribe
-	public void onCatalogRecievedEvent(CatalogRecievedEvent event) throws FileNotFoundException {
-		System.out.format("Received catalog\n");
+	public void onCatalogRecievedEvent(CatalogRecievedEvent event) throws FileNotFoundException, MalformedURLException {
+		System.out.println("Received catalog\n");
 		App.data = event.getCatalog();
 		buildCatalog();
 	}
@@ -61,7 +63,7 @@ public class PrimaryCatalog {
 		}
 	}
 
-	void buildCatalog() throws FileNotFoundException {
+	void buildCatalog() throws FileNotFoundException, MalformedURLException {
 		cleanUpCatalog();
 		int id;
 		String name;
@@ -76,7 +78,9 @@ public class PrimaryCatalog {
 			id = item.getId();
 			name = item.getName();
 			price = item.getPrice();
-			Image image = new Image(new FileInputStream("https://images.pexels.com/photos/736230/pexels-photo-736230.jpeg?cs=srgb&dl=pexels-jonas-kakaroto-736230.jpg&fm=jpg"));
+			String path = "https://images.pexels.com/photos/736230/pexels-photo-736230.jpeg?cs=srgb&dl=pexels-jonas-kakaroto-736230.jpg&fm=jpg";
+
+			Image image = new Image(path);
 			ImageView imageView = new ImageView(image);
 			description = item.getDescription();
 			System.out.format("id: %s\nname: %s\nprice: %s\ndescription: %s\n", id, name, price, description);
@@ -131,7 +135,7 @@ public class PrimaryCatalog {
 				temp.add(App.data.itemsdata.get(id-1));
 				BasketItemData cartList = new BasketItemData(temp);
 				App.orderData.items.add(cartList);
-				System.out.format("Added to cart regular flower\n");
+				System.out.println("Added to cart regular flower\n");
 			});
 			ret.getChildren().add(addToCart);
 		}
@@ -140,7 +144,7 @@ public class PrimaryCatalog {
 				BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		ret.setOnMouseClicked(event ->  {
 			App.thisitem = id-1;
-			System.out.format("Clicked ID: %s\n", id-1);
+			System.out.println("Clicked ID: " + (id-1));
 			if(App.userData.type == 4){
 				try {
 					App.setRoot("UpdateProduct");
@@ -149,7 +153,7 @@ public class PrimaryCatalog {
 				}
 			}
 		});
-		ret.getChildren().addAll(im);
+		ret.getChildren().addAll(l_name);
 		return ret;
 	}
 	@FXML
@@ -158,7 +162,7 @@ public class PrimaryCatalog {
 		int cols = gridCatalog.getColumnCount();
 		if (i == rows){
 			gridCatalog.getRowConstraints().add(new RowConstraints());
-			System.out.format("Added Row: %s\n", rows);
+			System.out.println("Added Row: " + rows);
 
 		}
 		System.out.format("Added Item: (%s, %s)\n", i, j);
@@ -176,9 +180,9 @@ public class PrimaryCatalog {
 		if(App.userData.type == 0){
 			MainMenuButton.setText("Back");
 		}
-		System.out.format("Sending request\n");
+		System.out.println("Sending request\n");
 		SimpleClient.getClient().requestCatalog();
-		System.out.format("Sent request\n");
+		System.out.println("Sent request\n");
 	}
 
 }
