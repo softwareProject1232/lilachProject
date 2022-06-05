@@ -2,24 +2,19 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.ItemData;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import il.cshaifasweng.OCSFMediatorExample.entities.CatalogData;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-public class PrimaryController {
+public class PrimaryCatalog {
 
 	@FXML
 	private ResourceBundle resources;
@@ -123,10 +118,10 @@ public class PrimaryController {
 	@FXML
 	void initialize() {
 		EventBus.getDefault().register(this);
-		assert anchor != null : "fx:id=\"anchor\" was not injected: check your FXML file 'primary.fxml'.";
-		assert btn != null : "fx:id=\"btn\" was not injected: check your FXML file 'primary.fxml'.";
-		assert scroll != null : "fx:id=\"scroll\" was not injected: check your FXML file 'primary.fxml'.";
-		assert vbox_main != null : "fx:id=\"vbox_main\" was not injected: check your FXML file 'primary.fxml'.";
+		assert anchor != null : "fx:id=\"anchor\" was not injected: check your FXML file 'PrimaryCatalog.fxml'.";
+		assert btn != null : "fx:id=\"btn\" was not injected: check your FXML file 'PrimaryCatalog.fxml'.";
+		assert scroll != null : "fx:id=\"scroll\" was not injected: check your FXML file 'PrimaryCatalog.fxml'.";
+		assert vbox_main != null : "fx:id=\"vbox_main\" was not injected: check your FXML file 'PrimaryCatalog.fxml'.";
 
 
 		System.out.format("Sending request\n");
