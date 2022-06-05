@@ -12,6 +12,7 @@ public class Branches {
     public Complaints complaints;
 
     public Branches() {
+        branchList = new ArrayList<Branch>();
     }
 
     public void GenerateValues(){
@@ -63,6 +64,9 @@ public class Branches {
 
         App.session.save(b1);
         App.session.save(b2);
+
+        branchList.add(b1);
+        branchList.add(b2);
 
         Users usersg = new Users();
         User userg1 = new User("gtom123", "gtom123", "em@gmail.com", 4, "12345678", "123123123", usersg);
@@ -137,10 +141,15 @@ public class Branches {
         if(branch != null){
             user = branch.getUsers().Login(username, password);
             if(user.getUsername().length() > 0 && user.getPassword().length() > 0 && user.getEmail().length() > 0 && user.getCreditCard().length() > 0 && user.getId().length() > 0 && user.getType() > 0)
+            {
+                user.branchName = branchName;
                 return user;
+            }
         }
 
-        return networkUsers.Login(username, password);
+        user = networkUsers.Login(username, password);
+        user.branchName = branchName;
+        return user;
     }
 
     public void MakeOrder(OrderData data) {
