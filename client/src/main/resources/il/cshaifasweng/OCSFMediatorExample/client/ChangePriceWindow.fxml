@@ -6,20 +6,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+
 <AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ChangePriceWindow">
    <children>
-      <Button layoutX="522.0" layoutY="646.0" mnemonicParsing="false" onAction="#showCatalogWindow" prefHeight="92.0" prefWidth="205.0" text="Cancel">
+      <Button layoutX="522.0" layoutY="646.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="205.0" text="Show Catalog">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Button layoutX="536.0" layoutY="500.0" mnemonicParsing="false" onAction="#changePriceAction" prefHeight="92.0" prefWidth="177.0" text="Change Price">
+      <Button layoutX="536.0" layoutY="500.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="177.0" text="Change Price">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <TextField fx:id="priceText" layoutX="447.0" layoutY="312.0" prefHeight="142.0" prefWidth="352.0" />
-      <Label fx:id="itemName" layoutX="-2.0" layoutY="117.0" prefHeight="102.0" prefWidth="1200.0" textAlignment="JUSTIFY">
+      <TextField layoutX="447.0" layoutY="312.0" prefHeight="142.0" prefWidth="352.0" />
+      <Label layoutX="535.0" layoutY="117.0" prefHeight="69.0" prefWidth="177.0" text="Item name" textAlignment="JUSTIFY">
          <font>
             <Font size="36.0" />
          </font>

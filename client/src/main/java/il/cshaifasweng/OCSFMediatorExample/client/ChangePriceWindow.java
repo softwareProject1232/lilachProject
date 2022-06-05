@@ -22,13 +22,13 @@ public class ChangePriceWindow {
     @FXML
     void changePriceAction(ActionEvent event) throws IOException {
         SimpleClient.getClient().changePrice(Integer.parseInt(priceText.getText()),App.data.itemsdata.get(App.thisitem));
-        App.setRoot("primary");
+        App.setRoot("PrimaryCatalog");
 
     }
 
     @FXML
     void showCatalogWindow(ActionEvent event) throws IOException {
-        App.setRoot("primary");
+        App.setRoot("PrimaryCatalog");
     }
 
     @FXML

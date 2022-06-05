@@ -2,14 +2,12 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
-import java.util.Objects;
 
-public class SecondaryController {
+public class UpdateProduct {
 
     @FXML
     private Label DescriptionLabel;
@@ -33,7 +31,7 @@ public class SecondaryController {
 
     @FXML
     void switchToCatalogWindow(ActionEvent event) throws IOException {
-        App.setRoot("primary");
+        App.setRoot("PrimaryCatalog");
     }
 
     @FXML

@@ -39,7 +39,7 @@ public class PrimaryCatalog {
 
 	@Subscribe
 	public void onCatalogRecievedEvent(CatalogRecievedEvent event) {
-		System.out.format("Recieved catalog\n");
+		System.out.format("Received catalog\n");
 		App.data = event.getCatalog();
 		buildCatalog();
 	}
@@ -50,7 +50,8 @@ public class PrimaryCatalog {
 		String name;
 		int price;
 		String description;
-		VBox pane;
+		VBox pane = generateCustomFlower();
+		addFlower(pane);
 		for (ItemData item: App.data.itemsdata){
 			id = item.getId();
 			name = item.getName();
@@ -77,7 +78,22 @@ public class PrimaryCatalog {
 		anchor.getChildren().clear();
 		anchor.getChildren().add(gridCatalog);
 	}
+	VBox generateCustomFlower(){
+		VBox ret = new VBox();
+		Label l_name = new Label("Custom Flower");
+		ret.setAlignment(Pos.CENTER);
+
+		ret.setPrefSize(100, 50);
+		ret.setBorder(new Border(new BorderStroke(Color.BLACK,
+				BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		ret.setOnMouseClicked(event ->  {
+			//TODO: add custom flower
+		});
+		ret.getChildren().addAll(l_name);
+		return ret;
+	}
 	VBox generateItem(int id, String name, int price, String description){
+		//TODO: use description
 		VBox ret = new VBox();
 		Label l_name = new Label(name), l_price = new Label("Price: " + price + "$");
 		ret.setAlignment(Pos.CENTER);
@@ -89,7 +105,7 @@ public class PrimaryCatalog {
 			App.thisitem = id-1;
 			System.out.format("Clicked ID: %s\n", id-1);
 			try {
-				App.setRoot("secondary");
+				App.setRoot("UpdateProduct");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
