@@ -46,4 +46,10 @@ public class UpdateProduct {
         priceText.setText(Integer.toString(App.data.itemsdata.get(App.thisitem).getPrice()));//insert price
     }
 
+    @FXML
+    void removefromCatalog(ActionEvent event) {
+        //SimpleClient myclient=SimpleClient.getClient();
+        //myclient.changePrice(Integer.parseInt(nameTF.getText()),App.data.itemsdata.get(App.thisitem));
+    }
+
 }
