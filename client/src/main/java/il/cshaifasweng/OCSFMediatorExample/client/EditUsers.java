@@ -47,7 +47,7 @@ public class EditUsers {
 	public List<UserData> currentList;
 	@Subscribe
 	public void onUserListDataRecievedEvent(ReceivedUserListEvent event) {
-		System.out.println("Received catalog\n");
+		System.out.println("Received user list\n");
 		currentList = event.getUsers().users;
 		buildList();
 	}
@@ -62,7 +62,7 @@ public class EditUsers {
 		VBox pane;
 		for (UserData user: currentList){
 			name = user.getUsername();
-			System.out.format("User: %s\n", name);
+			System.out.println(user.toString());
 			pane = generateItem(name, user);
 			addUser(pane);
 		}
@@ -71,7 +71,7 @@ public class EditUsers {
 		gridCatalog = new GridPane();
 		i = 0;
 		j = 0;
-		int colsCount = 6;
+		int colsCount = 4;
 		for(int i_col = 0; i_col<colsCount;i_col++){
 			gridCatalog.getColumnConstraints().add(new ColumnConstraints());
 		}
@@ -98,7 +98,7 @@ public class EditUsers {
 			System.out.println("Added User\n");
 		});
 		ret.getChildren().add(viewUser);
-		ret.setPrefSize(100, 50);
+		ret.setPrefSize(150, 60);
 		ret.setBorder(new Border(new BorderStroke(Color.BLACK,
 				BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		ret.getChildren().addAll(l_name);
@@ -126,7 +126,7 @@ public class EditUsers {
 	void initialize() {
 		EventBus.getDefault().register(this);
 		System.out.println("Sending request\n");
-		SimpleClient.getClient().requestUsers("net");
+		SimpleClient.getClient().requestUsers("network");
 		System.out.println("Sent request\n");
 	}
 }
