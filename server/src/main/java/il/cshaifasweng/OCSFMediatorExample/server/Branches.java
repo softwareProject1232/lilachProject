@@ -151,4 +151,9 @@ public class Branches {
             networkUsers.addUser(userData);
         }
     }
+
+    public void CancelOrder(int id, String branchName) {
+        Branch branch = GetBranchByName(branchName);
+        branch.orders.CancelOrder(id);
+    }
 }
