@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="il.cshaifasweng.OCSFMediatorExample.client.NewItem"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.NewItem">
+   <children>
+      <Text layoutX="150.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
+      <TextField fx:id="NameTF" layoutX="209.0" layoutY="60.0" />
+      <Text layoutX="137.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
+      <TextField fx:id="DescriptionTF" layoutX="209.0" layoutY="104.0" />
+      <Text layoutX="154.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" />
+      <TextField fx:id="PriceTF" layoutX="209.0" layoutY="158.0" />
+      <Text layoutX="140.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ImageURL" />
+      <TextField fx:id="ImageTF" layoutX="209.0" layoutY="225.0" />
+      <Button fx:id="addItemButton" layoutX="258.0" layoutY="306.0" mnemonicParsing="false" onAction="#addItemAction" text="Add item" />
+   </children>
 </AnchorPane>

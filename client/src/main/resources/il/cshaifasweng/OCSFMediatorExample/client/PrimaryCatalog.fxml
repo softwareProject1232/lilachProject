@@ -7,9 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<?import javafx.scene.shape.Rectangle?>
-
-<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.PrimaryCatalog">
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.PrimaryCatalog">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="41.0" stroke="BLACK" strokeType="INSIDE" width="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
       <Button fx:id="MainMenuButton" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" onAction="#goTo" prefHeight="26.0" prefWidth="82.0" text="Main Menu" />
@@ -26,5 +24,6 @@
             </ScrollPane>
          </children>
       </VBox>
+      <Button fx:id="addItemButton" layoutX="1060.0" layoutY="8.0" mnemonicParsing="false" onAction="#addItemAction" text="Add Item" />
    </children>
 </AnchorPane>

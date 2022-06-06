@@ -26,7 +26,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="updatePrice" mnemonicParsing="false" onAction="#changeToPriceWindow" prefHeight="48.0" prefWidth="134.0" text="Update Price" translateX="200.0" translateY="140.0">
+      <Button fx:id="updatePrice" mnemonicParsing="false" onAction="#changeToPriceWindow" prefHeight="48.0" prefWidth="134.0" text="Change Item" translateX="200.0" translateY="140.0">
          <font>
             <Font size="18.0" />
          </font>
