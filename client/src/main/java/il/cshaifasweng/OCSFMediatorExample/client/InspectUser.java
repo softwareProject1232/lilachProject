@@ -46,4 +46,48 @@ public class InspectUser {
     public void SwapToMainMenu(ActionEvent actionEvent) throws IOException {
         App.setRoot("MainMenu");
     }
+
+    public void updateUser(ActionEvent actionEvent) throws IOException {
+        UserData newUser = new UserData(
+                curr.getUsername(),
+                curr.getPassword(),
+                curr.getEmail(),
+                curr.getType(),
+                curr.getCreditCard(),
+                curr.getId(),
+                curr.getDbId(),
+                curr.getBranchName()
+        );
+        boolean changed = false;
+        if(!username_label.getText().equals(newUser.getUsername())) {
+            newUser.setUsername(username_label.getText());
+            changed = true;
+        }
+        if(!password_label.getText().equals(newUser.getPassword())) {
+            newUser.setPassword(password_label.getText());
+            changed = true;
+        }
+        if(!email_label.getText().equals(newUser.getEmail())) {
+            newUser.setEmail(email_label.getText());
+            changed = true;
+        }
+        if(!type_dropdown.getValue().equals(newUser.getType() == 4 ? "Manager" : type_dropdown.getPromptText())) {
+            newUser.setType(type_dropdown.getValue().equals("Manager") ? 4 : type_dropdown.getValue().equals("Branch") ? 0 : type_dropdown.getValue().equals("Network") ? 1 : 2);
+            changed = true;
+        }
+        if(!id_label.getText().equals(newUser.getId())) {
+            newUser.setId(id_label.getText());
+            changed = true;
+        }
+        if(!cc_label.getText().equals(newUser.getCreditCard())) {
+            newUser.setCreditCard(cc_label.getText());
+            changed = true;
+        }
+        SimpleClient.getClient().updateUser(newUser);
+
+        if(changed) {
+            App.editingUser = newUser;
+            App.setRoot("MainMenu");
+        }
+    }
 }

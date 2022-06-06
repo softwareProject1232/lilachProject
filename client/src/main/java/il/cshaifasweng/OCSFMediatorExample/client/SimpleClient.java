@@ -83,6 +83,14 @@ public class SimpleClient extends AbstractClient {
 		}
 	}
 
+	public void updateUser(UserData user){
+		try {
+			client.sendToServer("#update:user," + user.getUsername() + "," + user.getPassword() + "," + user.getEmail() + "," +
+					user.getType() + "," + user.getCreditCard() + "," + user.getId() + "," + user.getDbId() + "," + user.getBranchName()); //"update:user,<username>,<password>,<email>,<type>,<credit card>,<id>,<branch>"
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	public void requestRegister(UserData user){
 		try{
 			client.sendToServer(user);

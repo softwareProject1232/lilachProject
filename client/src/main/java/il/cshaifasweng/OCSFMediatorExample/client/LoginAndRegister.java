@@ -176,7 +176,7 @@ public class LoginAndRegister {
             return;
         }
         SimpleClient.getClient().requestRegister(new UserData(textfield_username_register.getText(), textfield_password_register.getText(), textfield_email_register.getText(),
-                type_dropdown.getSelectionModel().getSelectedIndex() + 1, textfield_credit_card_register.getText(), textfield_id_register.getText(), branch_list_register.getSelectionModel().getSelectedItem().toString()));
+                type_dropdown.getSelectionModel().getSelectedIndex() + 1, textfield_credit_card_register.getText(), textfield_id_register.getText(), -1, branch_list_register.getSelectionModel().getSelectedItem().toString()));
         System.out.println("Sending request\n");
         System.out.println("Sent request\n");
     }

@@ -88,4 +88,12 @@ public class UserData implements Serializable {
     public void setDbId(int dbId) {
         this.dbId = dbId;
     }
+
+    public void setBranchName(String branchName){
+    	this.branchName = branchName;
+    }
+
+    public String getBranchName(){
+    	return branchName;
+    }
 }
