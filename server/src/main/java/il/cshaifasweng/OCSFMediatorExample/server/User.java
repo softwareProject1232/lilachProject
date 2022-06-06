@@ -99,4 +99,44 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getTaz() {
+        return taz;
+    }
+
+    public void setTaz(String taz) {
+        this.taz = taz;
+    }
+
+    public String getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(String creditCard) {
+        this.creditCard = creditCard;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public List<Complaint> getComplaints() {
+        return complaints;
+    }
+
+    public void setComplaints(List<Complaint> complaints) {
+        this.complaints = complaints;
+    }
+
+    public Users getUserGroup() {
+        return userGroup;
+    }
+
+    public void setUserGroup(Users userGroup) {
+        this.userGroup = userGroup;
+    }
 }

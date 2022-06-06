@@ -71,6 +71,8 @@ public class Users {
                 user.setUsername(username);
                 user.setPassword(password);
                 user.setType(type);
+                user.setCreditCard(cred);
+                user.setTaz(taz);
                 App.session.save(user);
                 App.session.flush();
                 App.session.getTransaction().commit();
