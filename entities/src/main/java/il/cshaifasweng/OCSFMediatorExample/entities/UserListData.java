@@ -11,4 +11,8 @@ public class UserListData  implements Serializable {
         users = new ArrayList<UserData>();
     }
 
+    public void add(UserListData other)
+    {
+        users.addAll(other.users);
+    }
 }

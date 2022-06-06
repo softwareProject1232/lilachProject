@@ -3,6 +3,7 @@ package il.cshaifasweng.OCSFMediatorExample.server;
 import il.cshaifasweng.OCSFMediatorExample.entities.ComplaintData;
 import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
 import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
+import il.cshaifasweng.OCSFMediatorExample.entities.UserListData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -139,7 +140,7 @@ public class Branches {
 
     public void editUser(String username, String password, String email, int type,String cred,String taz, int id, String branchName) {
         Branch branch = GetBranchByName(branchName);
-        if(!branch.users.editUser(username, password, email, type, cred, taz, id))
+        if(branch == null || !branch.users.editUser(username, password, email, type, cred, taz, id))
             networkUsers.editUser(username, password, email, type, cred, taz, id);
     }
 
@@ -160,5 +161,20 @@ public class Branches {
 
     public void addComplaint(ComplaintData complaintData) {
         complaints.addComplaint(complaintData);
+    }
+
+    public UserListData GetUserList(String branchName) {
+        if(branchName.equals("network")) {
+            UserListData userListData = networkUsers.GetUserList();
+            //add all users from all branches to the list
+            for(Branch branch : branchList) {
+                userListData.add(branch.getUsers().GetUserList());
+            }
+            return userListData;
+        }
+        else{
+            Branch branch = GetBranchByName(branchName);
+            return branch.users.GetUserList();
+        }
     }
 }

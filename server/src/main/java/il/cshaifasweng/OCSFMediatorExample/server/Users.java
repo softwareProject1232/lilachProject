@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
+import il.cshaifasweng.OCSFMediatorExample.entities.UserListData;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -71,11 +72,11 @@ public class Users {
                 user.setPassword(password);
                 user.setType(type);
                 App.session.save(user);
+                App.session.flush();
+                App.session.getTransaction().commit();
                 return true;
             }
         }
-        App.session.flush();
-        App.session.getTransaction().commit();
         return false;
     }
 
@@ -117,5 +118,13 @@ public class Users {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public UserListData GetUserList() {
+        UserListData userListData = new UserListData();
+        for (User user : users) {
+            userListData.users.add(user.getUserData());
+        }
+        return userListData;
     }
 }
