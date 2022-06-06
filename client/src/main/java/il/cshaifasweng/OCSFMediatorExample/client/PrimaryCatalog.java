@@ -82,8 +82,8 @@ public class PrimaryCatalog {
 
 			Image image = new Image(path);
 			ImageView imageView = new ImageView(image);
-			imageView.setFitHeight(20);
-			imageView.setFitWidth(20);
+			imageView.setFitHeight(60);
+			imageView.setFitWidth(60);
 			imageView.setPreserveRatio(false);
 			description = item.getDescription();
 			System.out.format("id: %s\nname: %s\nprice: %s\ndescription: %s\n", id, name, price, description);
@@ -156,7 +156,7 @@ public class PrimaryCatalog {
 				}
 			}
 		});
-		ret.getChildren().addAll(im);
+		ret.getChildren().addAll(l_name, l_price, im);
 		return ret;
 	}
 	@FXML
