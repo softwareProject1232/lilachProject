@@ -57,7 +57,7 @@ public class User {
     }
 
     public UserData getUserData(){
-        return new UserData(username, password, Email, type,creditCard,taz,id,"");
+        return new UserData(username, password, Email, type,creditCard,taz,id,(userGroup!=null && userGroup.branch != null)?userGroup.branch.name:"network");
     }
 
     public String getUsername() {

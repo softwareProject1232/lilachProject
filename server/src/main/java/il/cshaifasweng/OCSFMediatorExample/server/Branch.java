@@ -24,6 +24,7 @@ public class Branch {
 
     public Branch(Users users, Orders orders, String name) {
         this.users = users;
+        this.users.branch = this;
         this.orders = orders;
         this.name = name;
     }
