@@ -96,4 +96,8 @@ public class UserData implements Serializable {
     public String getBranchName(){
     	return branchName;
     }
+
+    public String toString(){
+    	return "UserData [username=" + username + ", password=" + password + ", Email=" + Email + ", type=" + type + ", CreditCard=" + CreditCard + ", id=" + id + ", dbId=" + dbId + ", branchName=" + branchName + "]";
+    }
 }
