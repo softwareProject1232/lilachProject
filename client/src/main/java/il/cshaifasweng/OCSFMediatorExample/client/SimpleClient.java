@@ -31,6 +31,9 @@ public class SimpleClient extends AbstractClient {
 		else if(msg.getClass().equals(BranchNameData.class)) {
 			Platform.runLater(() -> EventBus.getDefault().post(new BranchesReceivedEvent((BranchNameData) msg)));
 		}
+		else if(msg.getClass().equals(UserListData.class)) {
+			Platform.runLater(() -> EventBus.getDefault().post(new ReceivedUserListEvent((UserListData) msg)));
+		}
 	}
 
 	public void changePrice(int price, ItemData item){
@@ -102,10 +105,16 @@ public class SimpleClient extends AbstractClient {
 			e.printStackTrace();
 		}
 	}
-
+	public void requestUsers(String branch){
+		try {
+			client.sendToServer("#request:userList," + branch);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	public static SimpleClient getClient() {
 		if (client == null) {
-			client = new SimpleClient("192.168.1.34", 3024);
+			client = new SimpleClient("192.168.1.30", 3024);
 		}
 		return client;
 	}

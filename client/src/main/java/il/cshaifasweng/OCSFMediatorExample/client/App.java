@@ -29,6 +29,8 @@ public class App extends Application {
 
     public static OrderData orderData;
 
+    public static int editingID;
+
     @Override
     public void start(Stage stage) throws IOException {
         EventBus.getDefault().register(this);
