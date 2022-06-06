@@ -78,7 +78,7 @@ public class PrimaryCatalog {
 			id = item.getId();
 			name = item.getName();
 			price = item.getPrice();
-			//String path = "https://images.pexels.com/photos/736230/pexels-photo-736230.jpeg?cs=srgb&dl=pexels-jonas-kakaroto-736230.jpg&fm=jpg";
+			//String path = item.getImageURL();
 
 			//Image image = new Image(path);
 			//ImageView imageView = new ImageView(image);

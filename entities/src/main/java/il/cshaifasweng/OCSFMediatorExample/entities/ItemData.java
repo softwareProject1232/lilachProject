@@ -8,49 +8,27 @@ public class ItemData implements Serializable{
     private String name;
     private int price;
     private String description;
-
-    public String getImageURL() {
-        return imageURL;
-    }
-
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
-    }
-
-    public List<ItemData> getZerList() {
-        return zerList;
-    }
-
-    public void setZerList(List<ItemData> zerList) {
-        this.zerList = zerList;
-    }
-
-    public int getIsZer() {
-        return isZer;
-    }
-
-    public void setIsZer(int isZer) {
-        this.isZer = isZer;
-    }
-
     private String imageURL;
     public List<ItemData> zerList;
     public int isZer;
-    public ItemData(int i,String n,int p,String d)
+
+    public ItemData(int i,String n,int p,String d, String imageURL)
     {
         id=i;
         name=n;
         price=p;
         description=d;
         isZer=0;
+        this.imageURL=imageURL;
     }
-    public ItemData(int i,String n,int p,String d,int isZerin)
+    public ItemData(int i,String n,int p,String d, String imageURL, int isZerin)
     {
         id=i;
         name=n;
         price=p;
         description=d;
         isZer=isZerin;
+        this.imageURL=imageURL;
     }
 
     public int getId() {
@@ -83,5 +61,29 @@ public class ItemData implements Serializable{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public List<ItemData> getZerList() {
+        return zerList;
+    }
+
+    public void setZerList(List<ItemData> zerList) {
+        this.zerList = zerList;
+    }
+
+    public int getIsZer() {
+        return isZer;
+    }
+
+    public void setIsZer(int isZer) {
+        this.isZer = isZer;
     }
 }

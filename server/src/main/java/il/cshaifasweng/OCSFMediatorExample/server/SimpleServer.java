@@ -47,8 +47,8 @@ public class SimpleServer extends AbstractServer {
 						App.catalog.changeName(Integer.parseInt(args[1]), args[2]);
 						App.catalog.pullItemsFromCatalog();
 					}
-					case "ItemCreate" -> // create new item #update:ItemCreate,itemName,itemDescription,itemPrice
-							App.catalog.addItem(args[1], Integer.parseInt(args[3]), args[2]);
+					case "ItemCreate" -> // create new item #update:ItemCreate,itemName,itemDescription,itemPrice,itemImageURL
+							App.catalog.addItem(args[1], Integer.parseInt(args[3]), args[2], args[4]);
 					case "ItemRemove" -> // remove item #update:ItemRemove,itemId
 							App.catalog.removeItem(Integer.parseInt(args[1]));
 					case "user" -> // update user #update:user,username,password,email,type,creditCard,taz,id,branchName
