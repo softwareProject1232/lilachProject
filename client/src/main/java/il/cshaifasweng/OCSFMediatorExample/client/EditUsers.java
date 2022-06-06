@@ -63,7 +63,7 @@ public class EditUsers {
 		for (UserData user: currentList){
 			name = user.getUsername();
 			System.out.format("User: %s\n", name);
-			pane = generateItem(name, user.getDbId());
+			pane = generateItem(name, user);
 			addUser(pane);
 		}
 	}
@@ -83,13 +83,13 @@ public class EditUsers {
 		anchor.getChildren().clear();
 		anchor.getChildren().add(gridCatalog);
 	}
-	VBox generateItem(String un, int dbid){
+	VBox generateItem(String un, UserData user){
 		VBox ret = new VBox();
 		Label l_name = new Label(un);
 		ret.setAlignment(Pos.CENTER);
 		Button viewUser = new Button("Inspect User");
 		viewUser.setOnMouseClicked(event -> {
-			App.editingID = dbid;
+			App.editingUser = user;
 			try {
 				App.setRoot("InspectUser");
 			} catch (IOException e) {
@@ -126,7 +126,7 @@ public class EditUsers {
 	void initialize() {
 		EventBus.getDefault().register(this);
 		System.out.println("Sending request\n");
-		SimpleClient.getClient().requestUsers("");
+		SimpleClient.getClient().requestUsers("net");
 		System.out.println("Sent request\n");
 	}
 }

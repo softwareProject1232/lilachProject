@@ -29,7 +29,7 @@ public class App extends Application {
 
     public static OrderData orderData;
 
-    public static int editingID;
+    public static UserData editingUser;
 
     @Override
     public void start(Stage stage) throws IOException {
