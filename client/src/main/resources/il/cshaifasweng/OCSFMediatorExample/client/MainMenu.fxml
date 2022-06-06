@@ -23,6 +23,7 @@
       </Text>
       <VBox fx:id="ManagerMenu" alignment="CENTER" disable="true" layoutX="220.0" layoutY="100.0" prefHeight="261.0" prefWidth="160.0" visible="false">
          <children>
+            <Button mnemonicParsing="false" onAction="#SwitchToEdit" prefHeight="24.0" prefWidth="165.0" text="Edit Users Info" />
             <Button mnemonicParsing="false" onAction="#LoadCatalog" prefHeight="26.0" prefWidth="245.0" text="Catalog" />
             <Button mnemonicParsing="false" onAction="#LoadReports" prefHeight="26.0" prefWidth="245.0" text="Reports" />
             <Button mnemonicParsing="false" onAction="#LoadLogin" prefHeight="26.0" prefWidth="245.0" text="Log out" />

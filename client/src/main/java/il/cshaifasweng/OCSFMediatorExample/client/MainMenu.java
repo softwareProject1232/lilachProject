@@ -2,6 +2,7 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -13,6 +14,10 @@ public class MainMenu {
 
     @FXML
     private VBox ManagerMenu;
+
+    public void SwitchToEdit(ActionEvent actionEvent) throws IOException {
+        App.setRoot("EditUsers");
+    }
 
     @FXML
     void LoadBasket(ActionEvent event) throws IOException {
