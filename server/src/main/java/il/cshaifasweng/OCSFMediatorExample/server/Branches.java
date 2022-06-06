@@ -1,5 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.ComplaintData;
 import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
 import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
 
@@ -155,5 +156,9 @@ public class Branches {
     public void CancelOrder(int id, String branchName) {
         Branch branch = GetBranchByName(branchName);
         branch.orders.CancelOrder(id);
+    }
+
+    public void addComplaint(ComplaintData complaintData) {
+        complaints.addComplaint(complaintData);
     }
 }

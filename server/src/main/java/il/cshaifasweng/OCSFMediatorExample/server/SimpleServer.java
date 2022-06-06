@@ -1,9 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.BranchNameData;
-import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
-import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
-import il.cshaifasweng.OCSFMediatorExample.entities.Warning;
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
 
@@ -78,6 +75,9 @@ public class SimpleServer extends AbstractServer {
 			}
 		} else if (OrderData.class.equals(msg.getClass())) { // Make an order | <OrderData>
 			App.branches.MakeOrder((OrderData) msg);
+		}
+		else if (msg.getClass().equals(ComplaintData.class)) { // Make a complaint | <ComplaintData>
+			App.branches.addComplaint((ComplaintData) msg);
 		}
 	}
 }
