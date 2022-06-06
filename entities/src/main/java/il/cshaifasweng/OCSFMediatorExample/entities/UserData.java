@@ -10,6 +10,7 @@ public class UserData implements Serializable {
     public String CreditCard;
     public String id;
     public String branchName;
+    public int dbId;
 
     public UserData(){
         this.username = "";
@@ -18,14 +19,17 @@ public class UserData implements Serializable {
         this.type = 0;
         this.CreditCard = "";
         this.id = "";
+        this.dbId = 0;
+        this.branchName = "";
     }
-    public UserData(String username, String password, String email, int type, String creditCard, String id, String branchName) {
+    public UserData(String username, String password, String email, int type, String creditCard, String id, int dbId, String branchName) {
         this.username = username;
         this.password = password;
         Email = email;
         this.type = type;
         CreditCard = creditCard;
         this.id = id;
+        this.dbId = dbId;
         this.branchName = branchName;
     }
 
@@ -75,5 +79,13 @@ public class UserData implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public int getDbId() {
+        return dbId;
+    }
+
+    public void setDbId(int dbId) {
+        this.dbId = dbId;
     }
 }

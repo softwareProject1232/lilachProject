@@ -57,7 +57,7 @@ public class User {
     }
 
     public UserData getUserData(){
-        return new UserData(username, password, Email, type,creditCard,taz,"");
+        return new UserData(username, password, Email, type,creditCard,taz,id,"");
     }
 
     public String getUsername() {

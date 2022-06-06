@@ -100,7 +100,7 @@ public class Users {
             }
         }
 
-        return new UserData("", "", "", 0, "", "", "");
+        return new UserData("", "", "", 0, "", "", 0, "");
     }
 
     public List<User> getUsers() {
