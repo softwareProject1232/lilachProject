@@ -3,15 +3,11 @@ package il.cshaifasweng.OCSFMediatorExample.server;
 import il.cshaifasweng.OCSFMediatorExample.entities.BranchNameData;
 import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
 import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
+import il.cshaifasweng.OCSFMediatorExample.entities.Warning;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
 
 import java.io.IOException;
-import java.util.List;
-
-import il.cshaifasweng.OCSFMediatorExample.entities.Warning;
-
-import il.cshaifasweng.OCSFMediatorExample.server.Catalog;
 
 public class SimpleServer extends AbstractServer {
 	public SimpleServer(int port) {
@@ -42,46 +38,42 @@ public class SimpleServer extends AbstractServer {
 			} else if (msgString.startsWith("#update")) {
 				String[] args = (msgString.split(":")[1]).split(",");
 				switch (args[0]) {
-					case "ItemPrice": // update item price #update:ItemPrice,itemId,newPrice
+					case "ItemPrice" -> { // update item price #update:ItemPrice,itemId,newPrice
 						App.catalog.changePrice(Integer.parseInt(args[1]), Integer.parseInt(args[2]));
 						App.catalog.pullItemsFromCatalog();
-						break;
-					case "ItemDescription": // update item description #update:ItemDescription,itemId,newDescription
+					}
+					case "ItemDescription" -> { // update item description #update:ItemDescription,itemId,newDescription
 						App.catalog.changeDescription(Integer.parseInt(args[1]), args[2]);
 						App.catalog.pullItemsFromCatalog();
-						break;
-					case "ItemName": // update item name #update:ItemName,itemId,newName
+					}
+					case "ItemName" -> { // update item name #update:ItemName,itemId,newName
 						App.catalog.changeName(Integer.parseInt(args[1]), args[2]);
 						App.catalog.pullItemsFromCatalog();
-						break;
-					case "ItemCreate": // create new item #update:ItemCreate,itemName,itemDescription,itemPrice
-						App.catalog.addItem(args[1], Integer.parseInt(args[3]), args[2]);
-						break;
-					case "ItemRemove": // remove item #update:ItemRemove,itemId
-						App.catalog.removeItem(Integer.parseInt(args[1]));
-						break;
-					case "user": // update user #update:user,username,password,email,type,creditCard,taz,id,branchName
-						App.branches.editUser(args[1], args[2], args[3], Integer.parseInt(args[4]), args[5], args[6], Integer.parseInt(args[7]), args[8]);
-						break;
-					case "cancelOrder": // cancel order #update:cancelOrder,orderId,branchName
-						App.branches.CancelOrder(Integer.parseInt(args[1]), args[2]);
-						break;
+					}
+					case "ItemCreate" -> // create new item #update:ItemCreate,itemName,itemDescription,itemPrice
+							App.catalog.addItem(args[1], Integer.parseInt(args[3]), args[2]);
+					case "ItemRemove" -> // remove item #update:ItemRemove,itemId
+							App.catalog.removeItem(Integer.parseInt(args[1]));
+					case "user" -> // update user #update:user,username,password,email,type,creditCard,taz,id,branchName
+							App.branches.editUser(args[1], args[2], args[3], Integer.parseInt(args[4]), args[5], args[6], Integer.parseInt(args[7]), args[8]);
+					case "cancelOrder" -> // cancel order #update:cancelOrder,orderId,branchName
+							App.branches.CancelOrder(Integer.parseInt(args[1]), args[2]);
 				}
 			} else if (msgString.startsWith("#request")) {
 				String[] args = (msgString.split(":")[1]).split(",");
 				switch (args[0]) {
-					case "Catalog": // request catalog #request:Catalog
+					case "Catalog" -> { // request catalog #request:Catalog
 						App.catalog.pullItemsFromCatalog();
 						SafeSendToClient(App.catalog.getCatalogData(), client);
-						break;
-					case "Login": // request login #request:Login,username,password,branchName
+					}
+					case "Login" -> { // request login #request:Login,username,password,branchName
 						UserData ret = App.branches.Login(args[1], args[2], args[3]);
 						SafeSendToClient(ret, client);
-						break;
-					case "Branches": // request branches #request:Branches
-						BranchNameData branchNames =new BranchNameData(App.branches.GetBranchNameList());
+					}
+					case "Branches" -> { // request branches #request:Branches
+						BranchNameData branchNames = new BranchNameData(App.branches.GetBranchNameList());
 						SafeSendToClient(branchNames, client);
-						break;
+					}
 				}
 			}
 		} else if (OrderData.class.equals(msg.getClass())) { // Make an order | <OrderData>

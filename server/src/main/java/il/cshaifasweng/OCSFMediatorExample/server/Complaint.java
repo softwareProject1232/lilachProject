@@ -4,7 +4,6 @@ import il.cshaifasweng.OCSFMediatorExample.entities.ComplaintData;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "complaint")

@@ -4,7 +4,6 @@ package il.cshaifasweng.OCSFMediatorExample.server;
 import il.cshaifasweng.OCSFMediatorExample.entities.HistogramData;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class Report {
 
@@ -65,8 +64,7 @@ public class Report {
         java.time.LocalDate date = LocalDate.now();
         for(int i=0;i<=7;i++) {
             for (Complaint c : App.branches.complaints.complaints) {
-                date.minusDays(i);
-                if (date.isAfter(c.getDate())) {
+                if (date.minusDays(i).isAfter(c.getDate())) {
                     hs.complaintsNumber.set(i,hs.complaintsNumber.get(i)+1);
                 }
             }

@@ -1,7 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.ComplaintData;
-import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

@@ -1,16 +1,8 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,8 +57,7 @@ public class User {
     }
 
     public UserData getUserData(){
-        UserData ret = new UserData(username, password, Email, type,creditCard,taz,"");
-        return ret;
+        return new UserData(username, password, Email, type,creditCard,taz,"");
     }
 
     public String getUsername() {
