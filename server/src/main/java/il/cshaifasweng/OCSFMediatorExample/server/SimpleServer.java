@@ -33,7 +33,7 @@ public class SimpleServer extends AbstractServer {
 				Warning warning = new Warning("Warning from server!");
 				SafeSendToClient(warning, client);
 			} else if (msgString.startsWith("#update")) {
-				String[] args = (msgString.split(":")[1]).split(",");
+				String[] args = (msgString.split(":", -1)[1]).split(",", -1);
 				switch (args[0]) {
 					case "ItemPrice" -> { // update item price #update:ItemPrice,itemId,newPrice
 						App.catalog.changePrice(Integer.parseInt(args[1]), Integer.parseInt(args[2]));
