@@ -42,7 +42,7 @@ public class OrderList {
     private ScrollPane scroll;
 
     public List<OrderData> currentList;
-    //@Subscribe
+    @Subscribe
     public void onUserOrderDataRecievedEvent(ReceivedOrderListDataEvent event) {
         System.out.println("Received user order list\n");
         currentList = event.getOrders().orders;
@@ -60,10 +60,9 @@ public class OrderList {
         HBox pane;
         int index = 0;
 
-        //for (OrderData comp: currentList){
-        for (int i = 0; i < 10; i++) {
-            price = (int) (Math.random() * 100);
-            date = LocalDate.now();
+        for (OrderData comp: currentList){
+            price = comp.getTotalPrice();
+            date = comp.getDate();
             pane = generateItem(date, price);
             index++;
             addItem(pane);
@@ -90,7 +89,7 @@ public class OrderList {
         ret.setBorder(new Border(new BorderStroke(Color.BLACK,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
-        ret.getChildren().addAll(l_date,l_price, l_price,refund);
+        ret.getChildren().addAll(l_date,l_price,refund);
         return ret;
     }
     @FXML
@@ -99,11 +98,10 @@ public class OrderList {
     }
     @FXML
     void initialize() {
-        //EventBus.getDefault().register(this);
-        //System.out.println("Sending request\n");
-        //SimpleClient.getClient().requestOrdersByUser(App.userData.getDbId(), App.userData.getBranchName());
-        //System.out.println("Sent request\n");
-        buildGrid();
+        EventBus.getDefault().register(this);
+        System.out.println("Sending request\n");
+        SimpleClient.getClient().requestOrdersByUser(App.userData.getDbId(), App.userData.getBranchName());
+        System.out.println("Sent request\n");
     }
 
 }
