@@ -59,12 +59,29 @@ public class Bucket {
         String description;
         HBox pane;
         int index = 0;
+        int zer_count = 0;
         App.orderData.totalPrice = 0;
         for (BasketItemData item: App.orderData.items){
-            id = item.listItems.get(0).getId();
-            name = item.listItems.get(0).getName();
-            price = item.listItems.get(0).getPrice();
-            description = item.listItems.get(0).getDescription();
+            if(item.listItems.size() == 1)
+            {
+                id = item.listItems.get(0).getId();
+                name = item.listItems.get(0).getName();
+                price = item.listItems.get(0).getPrice();
+                description = item.listItems.get(0).getDescription();
+            }
+            else
+            {
+                zer_count++;
+                id = 0;
+                name = "Zer " + zer_count;
+                price = 0;
+                description = "";
+                for(ItemData it:item.listItems){
+                    price += it.getPrice();
+                    description += it.getName() + ", ";
+                }
+                description.substring(0, description.length() - 2);
+            }
             System.out.format("id: %s\nname: %s\nprice: %s\ndescription: %s\n", id, name, price, description);
             pane = generateItem(id, name, price, description,index);
             index++;
