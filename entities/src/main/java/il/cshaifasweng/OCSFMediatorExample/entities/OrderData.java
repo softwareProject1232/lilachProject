@@ -87,4 +87,8 @@ public class OrderData implements Serializable {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
+    public String toString(){
+        return "OrderData [id=" + id + ", items=" + items + ", bracha=" + bracha + ", orderedBy=" + orderedBy + ", totalPrice=" + totalPrice + ", date=" + date + "]";
+    }
 }
