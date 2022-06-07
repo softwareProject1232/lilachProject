@@ -42,8 +42,8 @@ public class PriceWindowController {
     @FXML
     void initialize() {
         PriceTF.setText(String.valueOf(App.data.itemsdata.get(App.thisitem).getPrice()));
-        PriceTF.setText(App.data.itemsdata.get(App.thisitem).getDescription());
-        PriceTF.setText(App.data.itemsdata.get(App.thisitem).getName());
+        descritionTF.setText(App.data.itemsdata.get(App.thisitem).getDescription());
+        nameTF.setText(App.data.itemsdata.get(App.thisitem).getName());
 
     }
 
