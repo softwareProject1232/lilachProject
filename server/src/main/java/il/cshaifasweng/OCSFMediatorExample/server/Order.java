@@ -101,6 +101,6 @@ public class Order {
             BasketItemData t=or.GetBasketItemData();
             list.add(t);
         }
-        return new OrderData(list,bracha,orderedBy.getUserData());
+        return new OrderData(list,bracha,orderedBy.getUserData(), price,date,orderGroup.branch.name);
     }
 }
