@@ -19,7 +19,7 @@ public class Branches {
     }
 
     public void GenerateValues(){
-        App.session.beginTransaction();
+        App.SafeStartTransaction();
 
 
         //generate branches

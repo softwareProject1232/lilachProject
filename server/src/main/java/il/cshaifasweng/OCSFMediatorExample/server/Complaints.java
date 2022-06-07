@@ -24,7 +24,7 @@ public class Complaints {
         complaints.addAll(data);
     }
     public void addComplaint(ComplaintData complaintData){
-        App.session.beginTransaction();
+        App.SafeStartTransaction();
         Complaint com = new Complaint(complaintData);
         App.session.save(com);
         App.session.flush();

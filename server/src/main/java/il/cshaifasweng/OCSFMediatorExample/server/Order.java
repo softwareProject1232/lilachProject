@@ -33,7 +33,7 @@ public class Order {
         items=new ArrayList<BasketItem>();
     }
     public Order(OrderData orderData, Orders orderGroup) {
-        App.session.beginTransaction();
+        App.SafeStartTransaction();
         items=new ArrayList<BasketItem>();
         for(BasketItemData list : orderData.items){
             BasketItem basketItem = new BasketItem();

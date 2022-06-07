@@ -17,7 +17,7 @@ public class Catalog {
 
    public void generateItems()
    {
-      App.session.beginTransaction();
+      App.SafeStartTransaction();
       Random random = new Random();
       Item roses = new Item("rose",random.nextInt(100)+100,"pretty roses", "https://www.desicomments.com/dc3/19/439319/4393191.jpg");
       Item purpleFlower = new Item("purple flower",random.nextInt(100)+100, "purple unique flowers", "https://www.allaboutgardening.com/wp-content/uploads/2021/08/Weeds-With-Purple-Flowers-in-Field-1200x667.jpg");
@@ -53,7 +53,7 @@ public class Catalog {
    }
 
    public void addItem(String name, int price, String description, String imageUrl){
-      App.session.beginTransaction();
+      App.SafeStartTransaction();
       Item item = new Item(name, price, description, imageUrl);
       App.session.save(item);
       App.session.flush();
@@ -84,7 +84,7 @@ public class Catalog {
 
    public void changePrice(int id,int newPrice)
    {
-      App.session.beginTransaction();
+      App.SafeStartTransaction();
       Item temp=new Item();
       for (Item item :items)
       {
@@ -101,7 +101,7 @@ public class Catalog {
 
    public void changeDescription(int id,String description)
    {
-      App.session.beginTransaction();
+      App.SafeStartTransaction();
       Item temp=new Item();
       for (Item item :items)
       {
@@ -118,7 +118,7 @@ public class Catalog {
 
    public void changeName(int id,String name)
    {
-      App.session.beginTransaction();
+      App.SafeStartTransaction();
       Item temp=new Item();
       for (Item item :items)
       {

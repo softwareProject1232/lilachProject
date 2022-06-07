@@ -65,4 +65,9 @@ public class App
 
         return configuration.buildSessionFactory(serviceRegistry);
     }
+
+    public static void SafeStartTransaction(){
+        if(!session.getTransaction().isActive())
+            session.beginTransaction();
+    }
 }
