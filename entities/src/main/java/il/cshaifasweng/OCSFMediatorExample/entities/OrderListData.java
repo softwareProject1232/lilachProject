@@ -1,9 +1,10 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderListData {
+public class OrderListData implements Serializable {
     public List<OrderData> orders;
 
     public OrderListData(List<OrderData> orders) {

@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.io.IOException;
@@ -39,6 +40,7 @@ public class ReviewComplaints {
     public void onReceivedComplientEvent(ReceivedComplientEvent event) {
         System.out.println("Received complient list\n");
         copmlientlist = event.getComplients();
+        buildComplaints();
     }
 
     void buildComplaints(){
@@ -49,14 +51,19 @@ public class ReviewComplaints {
         String description;
         HBox pane;
         int index = 0;
+        if(copmlientlist!=null) {
+            for (ComplaintData comp : copmlientlist.getComplaints()) {
+                user = comp.issuedBy;
+                description = comp.complaintDescription;
 
-        for (ComplaintData comp: copmlientlist.getComplaints()){
-            user = comp.issuedBy;
-            description = comp.complaintDescription;
-
-            pane = generateItem(user,description);
-            index++;
-            addItem(pane);
+                pane = generateItem(user, description);
+                index++;
+                addItem(pane);
+            }
+        }
+        else
+        {
+            System.out.format("null complients");
         }
     }
     void cleanComplaints(){
@@ -94,7 +101,9 @@ public class ReviewComplaints {
         assert MainMenuButton != null : "fx:id=\"MainMenuButton\" was not injected: check your FXML file 'ReviewComplaint.fxml'.";
         assert anchor != null : "fx:id=\"anchor\" was not injected: check your FXML file 'ReviewComplaint.fxml'.";
         assert scroll != null : "fx:id=\"scroll\" was not injected: check your FXML file 'ReviewComplaint.fxml'.";
-
+        SimpleClient myclient=SimpleClient.getClient();
+        EventBus.getDefault().register(this);
+        myclient.requestComplaints(App.userData.branchName);
         buildComplaints();
     }
 }
