@@ -148,18 +148,18 @@ public class SimpleClient extends AbstractClient {
 			e.printStackTrace();
 		}
 	}
-	public static SimpleClient getClient() {
-		if (client == null) {
-			client = new SimpleClient("127.0.0.1", 3024);
-		}
-		return client;
-	}
-
 	public void requestOrdersByUser(int dbid, String branch){
 		try {
 			client.sendToServer("#request:userOrders,"+dbid+","+branch);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static SimpleClient getClient() {
+		if (client == null) {
+			client = new SimpleClient("192.168.1.30", 3024);
+		}
+		return client;
 	}
 }

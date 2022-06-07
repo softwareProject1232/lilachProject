@@ -32,8 +32,8 @@ public class OrderMenu {
 
     @FXML
     void doConfirmOrder(ActionEvent event) {
-        ToggleGroup group = (ToggleGroup) event.getSource();
-        String selected = group.getSelectedToggle().toString();
+        //ToggleGroup group = (ToggleGroup) event.getSource();
+        //String selected = group.getSelectedToggle().toString();
         OrderData order = new OrderData(App.orderData.items, "", App.userData, App.orderData.totalPrice, LocalDate.now());
         System.out.println("Sending order to server");
         SimpleClient.getClient().MakeOrder(order);
