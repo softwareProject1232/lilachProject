@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 public class App 
 {
-	
+
 	private static SimpleServer server;
     public static Catalog catalog;
     public static Branches branches;
@@ -66,8 +66,16 @@ public class App
         return configuration.buildSessionFactory(serviceRegistry);
     }
 
+
+    private static int TransactionDepth = 0;
     public static void SafeStartTransaction(){
-        if(!session.getTransaction().isActive())
+        if(TransactionDepth++ == 0) {
             session.beginTransaction();
+        }
+    }
+    public static void SafeCommit(){
+        if(--TransactionDepth == 0) {
+            session.getTransaction().commit();
+        }
     }
 }

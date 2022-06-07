@@ -41,7 +41,7 @@ public class Orders {
         Order order = new Order(orderData, this);
         App.session.save(order);
         App.session.flush();
-        App.session.getTransaction().commit();
+        App.SafeCommit();
         orderList.add(order);
     }
     public void CancelOrder(int id)
@@ -54,7 +54,7 @@ public class Orders {
                 orderList.remove(or);
                 App.session.delete(or);
                 App.session.flush();
-                App.session.getTransaction().commit();
+                App.SafeCommit();
             }
         }
     }

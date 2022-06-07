@@ -38,7 +38,7 @@ public class Users {
         App.session.save(amit);
         App.session.save(peleg);
         App.session.flush();
-        App.session.getTransaction().commit();
+        App.SafeCommit();
     }
     public void pullUsersFromDB()
     {
@@ -75,7 +75,7 @@ public class Users {
                 user.setTaz(taz);
                 App.session.save(user);
                 App.session.flush();
-                App.session.getTransaction().commit();
+                App.SafeCommit();
                 return true;
             }
         }
@@ -88,7 +88,7 @@ public class Users {
         User user = new User(userData.username, userData.password, userData.Email, userData.type, userData.getCreditCard(), userData.getId(), this);
         App.session.save(user);
         App.session.flush();
-        App.session.getTransaction().commit();
+        App.SafeCommit();
         users.add(user);
     }
 

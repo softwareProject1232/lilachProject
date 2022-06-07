@@ -44,7 +44,7 @@ public class Order {
             App.session.save(basketItem);
         }
         App.session.flush();
-        App.session.getTransaction().commit();
+        App.SafeCommit();
 
         this.bracha = orderData.bracha;
         this.orderedBy = new User(orderData.orderedBy);

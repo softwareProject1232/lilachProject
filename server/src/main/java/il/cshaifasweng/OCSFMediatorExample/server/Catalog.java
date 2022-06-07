@@ -40,7 +40,7 @@ public class Catalog {
       App.session.save(yellowSunflower);
       App.session.save(blackAndWhite);
       App.session.flush();
-      App.session.getTransaction().commit();
+      App.SafeCommit();
    }
    public void pullItemsFromCatalog()
    {
@@ -57,7 +57,7 @@ public class Catalog {
       Item item = new Item(name, price, description, imageUrl);
       App.session.save(item);
       App.session.flush();
-      App.session.getTransaction().commit();
+      App.SafeCommit();
 
       items.add(item);
    }
@@ -96,7 +96,7 @@ public class Catalog {
       temp.setPrice(newPrice);
       App.session.save(temp);
       App.session.flush();
-      App.session.getTransaction().commit();
+      App.SafeCommit();
    }
 
    public void changeDescription(int id,String description)
@@ -113,7 +113,7 @@ public class Catalog {
       temp.setDescription(description);
       App.session.save(temp);
       App.session.flush();
-      App.session.getTransaction().commit();
+      App.SafeCommit();
    }
 
    public void changeName(int id,String name)
@@ -130,7 +130,7 @@ public class Catalog {
       temp.setName(name);
       App.session.save(temp);
       App.session.flush();
-      App.session.getTransaction().commit();
+      App.SafeCommit();
    }
 
    public void removeItem(int id) {
