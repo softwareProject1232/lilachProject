@@ -34,7 +34,7 @@ public class OrderMenu {
     void doConfirmOrder(ActionEvent event) {
         //ToggleGroup group = (ToggleGroup) event.getSource();
         //String selected = group.getSelectedToggle().toString();
-        OrderData order = new OrderData(App.orderData.items, "", App.userData, App.orderData.totalPrice, LocalDate.now());
+        OrderData order = new OrderData(App.orderData.items, "", App.userData, App.orderData.totalPrice, LocalDate.now(), App.userData.getBranchName());
         System.out.println("Sending order to server");
         SimpleClient.getClient().MakeOrder(order);
         System.out.println("Order sent to server");
