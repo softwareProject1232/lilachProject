@@ -1,9 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.ComplaintData;
-import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
-import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
-import il.cshaifasweng.OCSFMediatorExample.entities.UserListData;
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -195,6 +192,21 @@ public class Branches {
         else{
             Branch branch = GetBranchByName(branchName);
             return branch.users.GetUserList();
+        }
+    }
+
+    public OrderListData getUserOrders(int id, String branchName) {
+        //if branch name is network, get orders from all branches
+        if(branchName.equals("network")) {
+            OrderListData orderListData = new OrderListData();
+            for(Branch branch : branchList) {
+                orderListData.addOrderListData(branch.orders.getUserOrders(id));
+            }
+            return orderListData;
+        }
+        else{
+            Branch branch = GetBranchByName(branchName);
+            return branch.orders.getUserOrders(id);
         }
     }
 }
