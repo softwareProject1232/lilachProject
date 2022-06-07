@@ -26,6 +26,7 @@ public class Branch {
         this.users = users;
         this.users.branch = this;
         this.orders = orders;
+        this.orders.branch = this;
         this.name = name;
     }
 

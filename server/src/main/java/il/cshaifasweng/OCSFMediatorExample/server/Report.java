@@ -40,12 +40,12 @@ public class Report {
     {
         if(branchName.equals("network"))
         {
-            Orders o=new Orders();
+            OrderListData o=new OrderListData();
             for(Branch b:App.branches.branchList)
             {
-                o.orderList.addAll(b.orders.orderList);
+                o.addOrderListData(b.orders.GetOrderListData());
             }
-            return o.GetOrderListData();
+            return o;
         }
         else {
             Branch b = App.branches.GetBranchByName(branchName);
