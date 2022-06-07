@@ -50,7 +50,7 @@ public class SimpleClient extends AbstractClient {
 		}
 	}
 
-	public void sendComplaint(ComplaintData complaint, ItemData item){
+	public void sendComplaint(ComplaintData complaint){
 		try {
 			client.sendToServer(complaint); //"update:price,<item id>,<new price>"
 		} catch (IOException e) {
