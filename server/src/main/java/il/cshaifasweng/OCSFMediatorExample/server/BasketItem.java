@@ -21,7 +21,7 @@ public class BasketItem {
     @ManyToOne(fetch = FetchType.LAZY)
     public Order orderIn;
 
-    public BasketItem() {List<Item> listItems = new ArrayList<Item>();}
+    public BasketItem() {this.listItems = new ArrayList<Item>();}
     public BasketItem(List<Item> ilist)
     {
         listItems =ilist;
