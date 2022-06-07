@@ -28,7 +28,7 @@ public class Users {
     }
     public void generateUsers()
     {
-        App.session.beginTransaction();
+        App.SafeStartTransaction();
         User tom= new User("tom123", "tom123", "tom@gmail.com", 4,"123456789","1324567", this);
         User gil= new User("gil123", "gil123", "gil@gmail.com", 1,"123456789","1324567", this);
         User amit= new User("amit123", "amit123", "amit@gmail.com", 2,"123456789","1324567", this);
@@ -61,7 +61,7 @@ public class Users {
 
     public boolean editUser(String username, String password, String email, int type,String cred,String taz, int id)
     {
-        App.session.beginTransaction();
+        App.SafeStartTransaction();
         User temp;
         for (User user :users)
         {
@@ -84,7 +84,7 @@ public class Users {
 
     public void addUser(UserData userData)
     {
-        App.session.beginTransaction();
+        App.SafeStartTransaction();
         User user = new User(userData.username, userData.password, userData.Email, userData.type, userData.getCreditCard(), userData.getId(), this);
         App.session.save(user);
         App.session.flush();

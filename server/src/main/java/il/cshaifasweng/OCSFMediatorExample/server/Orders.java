@@ -37,7 +37,7 @@ public class Orders {
     }
 
     public void MakeOrder(OrderData orderData){
-        App.session.beginTransaction();
+        App.SafeStartTransaction();
         Order order = new Order(orderData, this);
         App.session.save(order);
         App.session.flush();
@@ -50,7 +50,7 @@ public class Orders {
         {
             if(or.getId()==id)
             {
-                App.session.beginTransaction();
+                App.SafeStartTransaction();
                 orderList.remove(or);
                 App.session.delete(or);
                 App.session.flush();
