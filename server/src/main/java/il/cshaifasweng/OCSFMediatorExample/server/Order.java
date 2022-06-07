@@ -49,7 +49,8 @@ public class Order {
         this.bracha = orderData.bracha;
         this.orderedBy = App.branches.SearchUserById(orderData.orderedBy.dbId);
         this.orderGroup = orderGroup;
-        this.date=orderData.date;
+        this.date = orderData.date;
+        this.price = orderData.totalPrice;
     }
 
     public List<BasketItem> getItems() {
