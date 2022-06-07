@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 
 public class Bucket {
 
+    public Button purchase_button;
     @FXML
     private ResourceBundle resources;
 
@@ -52,6 +53,8 @@ public class Bucket {
     }
 
     void buildBucket(){
+        if (App.orderData.items.size() == 0)
+            purchase_button.setDisable(true);
         cleanBucket();
         int id;
         String name;
@@ -128,12 +131,8 @@ public class Bucket {
 
     @FXML
     void initialize() {
-        assert ItemList != null : "fx:id=\"ItemList\" was not injected: check your FXML file 'Bucket.fxml'.";
-        assert MainMenuButton != null : "fx:id=\"MainMenuButton\" was not injected: check your FXML file 'Bucket.fxml'.";
-        assert anchor != null : "fx:id=\"anchor\" was not injected: check your FXML file 'Bucket.fxml'.";
-        assert scroll != null : "fx:id=\"scroll\" was not injected: check your FXML file 'Bucket.fxml'.";
-        assert total != null : "fx:id=\"total\" was not injected: check your FXML file 'Bucket.fxml'.";
-
+        if (App.orderData.items.size() == 0)
+            purchase_button.setDisable(true);
         buildBucket();
     }
 

@@ -28,7 +28,7 @@ public class Complaints {
         Complaint com = new Complaint(complaintData);
         App.session.save(com);
         App.session.flush();
-        App.session.getTransaction().commit();
+        App.SafeCommit();
         complaints.add(com);
     }
     public ComplaintData GetComplaintData(Complaint c)

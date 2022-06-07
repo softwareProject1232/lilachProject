@@ -73,7 +73,7 @@ public class Branches {
 
 
         App.session.flush();
-        App.session.getTransaction().commit();
+        App.SafeCommit();
     }
 
     public List<String> GetBranchNameList(){
