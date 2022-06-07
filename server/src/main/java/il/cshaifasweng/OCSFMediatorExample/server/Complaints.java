@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.ComplaintData;
+import il.cshaifasweng.OCSFMediatorExample.entities.ComplaintListData;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -29,5 +30,20 @@ public class Complaints {
         App.session.flush();
         App.session.getTransaction().commit();
         complaints.add(com);
+    }
+    public ComplaintData GetComplaintData(Complaint c)
+    {
+        ComplaintData com=new ComplaintData(c.complaintDescription,c.issuedBy.getUserData());
+        return com;
+    }
+    public ComplaintListData GetComplaintListData()
+    {
+        List <ComplaintData> list= new ArrayList<ComplaintData>();
+        for(Complaint c: complaints)
+        {
+            ComplaintData t=GetComplaintData(c);
+            list.add(t);
+        }
+        return new ComplaintListData(list);
     }
 }

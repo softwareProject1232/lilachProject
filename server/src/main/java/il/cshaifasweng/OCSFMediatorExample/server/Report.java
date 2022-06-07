@@ -1,13 +1,14 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
 
+import il.cshaifasweng.OCSFMediatorExample.entities.ComplaintListData;
 import il.cshaifasweng.OCSFMediatorExample.entities.HistogramData;
 
 import java.time.LocalDate;
 
 public class Report {
 
-    public int getIncome(String branchName)
+    public static int getIncome(String branchName)
     {
         if(branchName.equals("network")) {
             int sum = 0;
@@ -34,7 +35,7 @@ public class Report {
         }
 
     }
-    public Orders getOrders(String branchName)
+    public static Orders getOrders(String branchName)
     {
         if(branchName.equals("network"))
         {
@@ -54,7 +55,7 @@ public class Report {
             return new Orders();
         }
     }
-    public HistogramData reportComplaints()
+    public static HistogramData reportComplaints()
     {
         HistogramData hs= new HistogramData();
         for(int i=0;i<8;i++)
@@ -70,6 +71,9 @@ public class Report {
             }
         }
         return hs;
-
+    }
+    public static ComplaintListData GetAllComplaints()
+    {
+        return App.branches.complaints.GetComplaintListData();
     }
 }
