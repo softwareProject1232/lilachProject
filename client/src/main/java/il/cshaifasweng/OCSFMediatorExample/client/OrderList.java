@@ -64,6 +64,7 @@ public class OrderList {
         int index = 0;
 
         for (OrderData comp: currentList){
+            System.out.format("Order: %s\n", comp.toString());
             price = comp.getTotalPrice();
             date = comp.getDate();
             pane = generateItem(date, price);
