@@ -33,7 +33,8 @@ public class Complaints {
 
     @FXML
     void sentComplaint(ActionEvent event) {
-
+        // add server support
+        TextField.setText("");
     }
 
     @FXML

@@ -38,7 +38,11 @@ public class PriceWindowController {
 
 
     }
-
+    @FXML
+    void removefromCatalog(ActionEvent event) {
+        SimpleClient myclient=SimpleClient.getClient();
+        myclient.removeItem(App.data.itemsdata.get(App.thisitem));
+    }
     @FXML
     void initialize() {
         PriceTF.setText(String.valueOf(App.data.itemsdata.get(App.thisitem).getPrice()));
