@@ -11,7 +11,7 @@ public class OrderData implements Serializable {
     public String bracha;
     public UserData orderedBy;
     public int totalPrice;
-
+    public java.time.LocalDate date;
     public OrderData(){
         items = new ArrayList<BasketItemData>();
     }

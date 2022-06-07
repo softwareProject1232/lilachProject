@@ -15,7 +15,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    public java.time.LocalDate date;
     public int price;
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "orderIn")
     public List<BasketItem> items;
@@ -48,6 +48,7 @@ public class Order {
         this.bracha = orderData.bracha;
         this.orderedBy = new User(orderData.orderedBy);
         this.orderGroup = orderGroup;
+        this.date=orderData.date;
     }
 
     public List<BasketItem> getItems() {
