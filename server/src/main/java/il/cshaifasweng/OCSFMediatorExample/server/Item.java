@@ -85,4 +85,8 @@ public class Item {
     public String toString(){//overriding the toString() method
         return "id: "+id+", name: "+name+",\ndescription: "+description;
     }
+
+    public ItemData GetItemData() {
+        return new ItemData(id, name, price, description, imageUrl);
+    }
 }

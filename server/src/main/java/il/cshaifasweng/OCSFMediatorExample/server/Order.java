@@ -17,6 +17,7 @@ public class Order {
     private int id;
     public java.time.LocalDate date;
     public int price;
+
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "orderIn")
     public List<BasketItem> items;
 
@@ -89,5 +90,16 @@ public class Order {
 
     public void setOrderedBy(User orderedBy) {
         this.orderedBy = orderedBy;
+    }
+
+    public OrderData GetOrderData()
+    {
+        List<BasketItemData> list= new ArrayList<BasketItemData>();
+        for(BasketItem or: items)
+        {
+            BasketItemData t=or.GetBasketItemData();
+            list.add(t);
+        }
+        return new OrderData(list,bracha,orderedBy.getUserData());
     }
 }

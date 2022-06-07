@@ -3,6 +3,7 @@ package il.cshaifasweng.OCSFMediatorExample.server;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.ComplaintListData;
 import il.cshaifasweng.OCSFMediatorExample.entities.HistogramData;
+import il.cshaifasweng.OCSFMediatorExample.entities.OrderListData;
 
 import java.time.LocalDate;
 
@@ -35,7 +36,7 @@ public class Report {
         }
 
     }
-    public static Orders getOrders(String branchName)
+    public static OrderListData getOrdersReport(String branchName)
     {
         if(branchName.equals("network"))
         {
@@ -44,15 +45,15 @@ public class Report {
             {
                 o.orderList.addAll(b.orders.orderList);
             }
-            return o;
+            return o.GetOrderListData();
         }
         else {
             Branch b = App.branches.GetBranchByName(branchName);
             if(b!=null)
             {
-                return b.getOrders();
+                return b.getOrders().GetOrderListData();
             }
-            return new Orders();
+            return new Orders().GetOrderListData();
         }
     }
     public static HistogramData reportComplaints()

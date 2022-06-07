@@ -3,6 +3,9 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import il.cshaifasweng.OCSFMediatorExample.entities.ComplaintData;
+import il.cshaifasweng.OCSFMediatorExample.server.Complaint;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -33,7 +36,9 @@ public class Complaints {
 
     @FXML
     void sentComplaint(ActionEvent event) {
-        // add server support
+        SimpleClient myclient=SimpleClient.getClient();
+        ComplaintData cmp=new ComplaintData(TextField.toString(),App.userData);
+        myclient.sendComplaint(cmp,App.data.itemsdata.get(App.thisitem));
         TextField.setText("");
     }
 

@@ -75,6 +75,20 @@ public class SimpleServer extends AbstractServer {
 						UserListData userListData = App.branches.GetUserList(args[1]);
 						SafeSendToClient(userListData, client);
 					}
+					case "complaints" -> { // request complaints #request:complaints
+						ComplaintListData complaintListData = App.branches.getComplaints().GetComplaintListData();
+						SafeSendToClient(complaintListData, client);
+					}
+					// add a case for requesting reports here
+					case "report" -> {
+						if(args[1].equals("orders")) {
+							SafeSendToClient(Report.getOrdersReport(args[2]), client); // request orders report #request:report,orders,branchName
+						} else if(args[1].equals("complaints")) {
+							SafeSendToClient(Report.reportComplaints(), client); // request complaints report #request:report,complaints
+						} else if(args[1].equals("income")) {
+							SafeSendToClient(Report.getIncome(args[2]), client); // request income report #request:report,income,branchName
+						}
+					}
 				}
 			}
 		} else if (OrderData.class.equals(msg.getClass())) { // Make an order | <OrderData>

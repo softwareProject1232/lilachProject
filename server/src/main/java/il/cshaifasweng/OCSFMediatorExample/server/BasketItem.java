@@ -1,7 +1,11 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
 
+import il.cshaifasweng.OCSFMediatorExample.entities.BasketItemData;
+import il.cshaifasweng.OCSFMediatorExample.entities.ItemData;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 @Entity
 @Table(name = "BasketItem")
@@ -37,5 +41,14 @@ public class BasketItem {
 
     public void setListItems(List<Item> listItems) {
         this.listItems = listItems;
+    }
+
+    public BasketItemData GetBasketItemData() {
+        BasketItemData basketItemData = new BasketItemData();
+        basketItemData.listItems = new ArrayList<ItemData>();
+        for (Item item : listItems) {
+            basketItemData.listItems.add(item.GetItemData());
+        }
+        return basketItemData;
     }
 }

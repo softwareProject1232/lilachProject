@@ -34,11 +34,22 @@ public class SimpleClient extends AbstractClient {
 		else if(msg.getClass().equals(UserListData.class)) {
 			Platform.runLater(() -> EventBus.getDefault().post(new ReceivedUserListEvent((UserListData) msg)));
 		}
+		else if(msg.getClass().equals(ComplaintListData.class)) {
+			Platform.runLater(() -> EventBus.getDefault().post(new ReceivedComplientEvent((ComplaintListData) msg)));
+		}
 	}
 
 	public void changePrice(int price, ItemData item){
 		try {
 			client.sendToServer("#update:ItemPrice," + item.getId() + "," + Integer.toString(price)); //"update:price,<item id>,<new price>"
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void sendComplaint(ComplaintData complaint, ItemData item){
+		try {
+			client.sendToServer(complaint); //"update:price,<item id>,<new price>"
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -116,6 +127,13 @@ public class SimpleClient extends AbstractClient {
 	public void requestUsers(String branch){
 		try {
 			client.sendToServer("#request:userList," + branch);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void requestComplaints(String branch){
+		try {
+			client.sendToServer("#request:complaints,"+branch);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
