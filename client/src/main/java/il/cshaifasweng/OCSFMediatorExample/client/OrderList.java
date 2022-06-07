@@ -41,11 +41,14 @@ public class OrderList {
     @FXML
     private ScrollPane scroll;
 
+    @FXML
+    private Label balance;
+
     public List<OrderData> currentList;
     @Subscribe
     public void onUserOrderDataRecievedEvent(ReceivedOrderListDataEvent event) {
-        System.out.println("Received user order list\n");
         currentList = event.getOrders().orders;
+        System.out.println("Received user order list of size\n" + currentList.size());
         buildGrid();
     }
     @FXML

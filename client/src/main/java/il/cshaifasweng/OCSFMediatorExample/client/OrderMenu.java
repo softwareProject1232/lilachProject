@@ -1,13 +1,17 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
 import javafx.scene.control.Label;
+import org.greenrobot.eventbus.EventBus;
+import org.hibernate.criterion.Order;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class OrderMenu {
 
@@ -28,12 +32,13 @@ public class OrderMenu {
 
     @FXML
     void doConfirmOrder(ActionEvent event) {
-        /**************************************************
-        PUT BACKEND STUFF HERE!!!!
-         *********************************************/
-
-
-        OutputText.setText("Order Condirmed!, Thank you!");
+        ToggleGroup group = (ToggleGroup) event.getSource();
+        String selected = group.getSelectedToggle().toString();
+        OrderData order = new OrderData(App.orderData.items, "", App.userData, App.orderData.totalPrice, LocalDate.now());
+        System.out.println("Sending order to server");
+        SimpleClient.getClient().MakeOrder(order);
+        System.out.println("Order sent to server");
+        OutputText.setText("Order Confirmed!, Thank you!");
         ConfirmOrder.setVisible(false);
         ConfirmOrder.setDisable(true);
         App.orderData.items.clear();

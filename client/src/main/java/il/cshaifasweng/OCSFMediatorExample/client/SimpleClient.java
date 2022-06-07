@@ -97,6 +97,13 @@ public class SimpleClient extends AbstractClient {
 		}
 	}
 
+	public void  MakeOrder(OrderData order){
+		try {
+			client.sendToServer(order);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	public void updateUser(UserData user){
 		try {
 			client.sendToServer("#update:user," + user.getUsername() + "," + user.getPassword() + "," + user.getEmail() + "," +
@@ -143,7 +150,7 @@ public class SimpleClient extends AbstractClient {
 	}
 	public static SimpleClient getClient() {
 		if (client == null) {
-			client = new SimpleClient("192.168.1.30", 3024);
+			client = new SimpleClient("127.0.0.1", 3024);
 		}
 		return client;
 	}

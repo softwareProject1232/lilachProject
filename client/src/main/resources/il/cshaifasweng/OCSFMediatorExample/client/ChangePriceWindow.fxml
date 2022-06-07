@@ -33,5 +33,11 @@
       <TextField fx:id="nameTF" layoutX="581.0" layoutY="40.0" prefHeight="69.0" prefWidth="358.0" promptText="name text" />
       <Text layoutX="124.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Description:" wrappingWidth="235.93292236328125" />
       <TextField fx:id="descritionTF" layoutX="579.0" layoutY="233.0" prefHeight="69.0" prefWidth="358.0" promptText="descrition text" />
+      <Label layoutX="123.0" layoutY="339.0" text="Apply discount:">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <TextField fx:id="discountTF" layoutX="581.0" layoutY="331.0" prefHeight="69.0" prefWidth="358.0" promptText="discount" />
    </children>
 </AnchorPane>

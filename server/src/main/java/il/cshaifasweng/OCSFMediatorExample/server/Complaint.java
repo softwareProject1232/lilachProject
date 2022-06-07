@@ -39,7 +39,7 @@ public class Complaint {
     {
         date=java.time.LocalDate.now();
         complaintDescription=com.complaintDescription;
-        issuedBy=new User(com.issuedBy);
+        issuedBy=App.branches.SearchUserById(com.issuedBy.dbId);
     }
     public ComplaintData getComplaintData()
     {

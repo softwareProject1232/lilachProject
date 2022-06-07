@@ -25,6 +25,9 @@ public class PriceWindowController {
     private Button updateButton;
 
     @FXML
+    private TextField discountTF;
+
+    @FXML
     void showCatalolgWindow(ActionEvent event) throws IOException {
         App.setRoot("PrimaryCatalog");
     }
@@ -35,7 +38,7 @@ public class PriceWindowController {
         myclient.changePrice(Integer.parseInt(PriceTF.getText()),App.data.itemsdata.get(App.thisitem));
         myclient.changeDescription(descritionTF.getText(),App.data.itemsdata.get(App.thisitem));
         myclient.changeName(nameTF.getText(),App.data.itemsdata.get(App.thisitem));
-
+        myclient.changeDiscount(Integer.parseInt(discountTF.getText()),App.data.itemsdata.get(App.thisitem));
 
     }
     @FXML
@@ -48,6 +51,7 @@ public class PriceWindowController {
         PriceTF.setText(String.valueOf(App.data.itemsdata.get(App.thisitem).getPrice()));
         descritionTF.setText(App.data.itemsdata.get(App.thisitem).getDescription());
         nameTF.setText(App.data.itemsdata.get(App.thisitem).getName());
+        discountTF.setText(App.data.itemsdata.get(App.thisitem).getDiscount());
 
     }
 

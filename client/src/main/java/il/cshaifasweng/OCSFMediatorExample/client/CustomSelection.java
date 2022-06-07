@@ -11,6 +11,8 @@ import il.cshaifasweng.OCSFMediatorExample.entities.ItemData;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import org.greenrobot.eventbus.EventBus;
@@ -60,9 +62,16 @@ public class CustomSelection {
             id = item.getId();
             name = item.getName();
             price = item.getPrice();
+            String path = item.getImageURL();
+
+            Image image = new Image(path);
+            ImageView imageView = new ImageView(image);
+            imageView.setFitHeight(60);
+            imageView.setFitWidth(60);
+            imageView.setPreserveRatio(false);
             description = item.getDescription();
             System.out.format("id: %s\nname: %s\nprice: %s\ndescription: %s\n", id, name, price, description);
-            pane = generateItem(id, name, price, description);
+            pane = generateItem(id, name, price, description,imageView);
             addFlower(pane);
         }
     }
@@ -82,7 +91,7 @@ public class CustomSelection {
         anchor.getChildren().clear();
         anchor.getChildren().add(gridCatalog);
     }
-    VBox generateItem(int id, String name, int price, String description){
+    VBox generateItem(int id, String name, int price, String description, ImageView im){
         //TODO: use description
         VBox ret = new VBox();
         Label l_name = new Label(name), l_price = new Label("Price: " + price + "$");
@@ -108,7 +117,7 @@ public class CustomSelection {
                 }
             }
         });
-        ret.getChildren().addAll(l_name, l_price);
+        ret.getChildren().addAll(l_name, l_price, im);
         return ret;
     }
     @FXML
