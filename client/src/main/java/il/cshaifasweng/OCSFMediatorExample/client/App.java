@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.CatalogData;
+import il.cshaifasweng.OCSFMediatorExample.entities.ComplaintListData;
 import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
 import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
 import javafx.application.Application;
@@ -30,6 +31,8 @@ public class App extends Application {
     public static OrderData orderData;
 
     public static UserData editingUser;
+
+    public static ComplaintListData compliantsData;
 
     @Override
     public void start(Stage stage) throws IOException {
