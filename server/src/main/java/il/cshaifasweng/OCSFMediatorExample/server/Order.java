@@ -47,7 +47,7 @@ public class Order {
         App.SafeCommit();
 
         this.bracha = orderData.bracha;
-        this.orderedBy = new User(orderData.orderedBy);
+        this.orderedBy = App.branches.SearchUserById(orderData.orderedBy.dbId);
         this.orderGroup = orderGroup;
         this.date=orderData.date;
     }
