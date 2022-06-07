@@ -23,6 +23,14 @@ public class OrderData implements Serializable {
         this.orderedBy = orderedBy;
     }
 
+    public OrderData(List<BasketItemData> items, String bracha, UserData orderedBy, int totalPrice, LocalDate date) {
+        this.items = items;
+        this.bracha = bracha;
+        this.orderedBy = orderedBy;
+        this.totalPrice = totalPrice;
+        this.date = date;
+    }
+
     public String getBranchName() {
         return BranchName;
     }

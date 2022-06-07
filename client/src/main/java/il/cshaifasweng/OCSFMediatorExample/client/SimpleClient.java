@@ -97,6 +97,13 @@ public class SimpleClient extends AbstractClient {
 		}
 	}
 
+	public void  MakeOrder(OrderData order){
+		try {
+			client.sendToServer(order);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	public void updateUser(UserData user){
 		try {
 			client.sendToServer("#update:user," + user.getUsername() + "," + user.getPassword() + "," + user.getEmail() + "," +
