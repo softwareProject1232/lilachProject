@@ -47,6 +47,14 @@ public class SimpleClient extends AbstractClient {
 		}
 	}
 
+	public void sendComplaint(ComplaintData complaint, ItemData item){
+		try {
+			client.sendToServer(complaint); //"update:price,<item id>,<new price>"
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void changeDescription(String description, ItemData item){
 		try {
 			client.sendToServer("#update:ItemDescription," + item.getId() + "," + description); //"update:price,<item id>,<new price>"
