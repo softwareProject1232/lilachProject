@@ -50,8 +50,11 @@ public class Orders {
         {
             if(or.getId()==id)
             {
-                App.session.delete(or);
+                App.session.beginTransaction();
                 orderList.remove(or);
+                App.session.delete(or);
+                App.session.flush();
+                App.session.getTransaction().commit();
             }
         }
     }
@@ -64,6 +67,17 @@ public class Orders {
         {
             OrderData t=or.GetOrderData();
             list.add(t);
+        }
+        return new OrderListData(list);
+    }
+
+    public OrderListData getUserOrders(int id) {
+        List<OrderData> list = new ArrayList<OrderData>();
+        for (Order or : orderList) {
+            if (or.getOrderedBy().getId() == id) {
+                OrderData t = or.GetOrderData();
+                list.add(t);
+            }
         }
         return new OrderListData(list);
     }
