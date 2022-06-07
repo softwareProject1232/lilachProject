@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.io.IOException;
 
@@ -33,6 +34,12 @@ public class ReviewComplaints {
     void goToMainMenu(ActionEvent event) throws IOException {
         App.setRoot("MainMenu");
     }
+    public ComplaintListData copmlientlist;
+    @Subscribe
+    public void onReceivedComplientEvent(ReceivedComplientEvent event) {
+        System.out.println("Received complient list\n");
+        copmlientlist = event.getComplients();
+    }
 
     void buildComplaints(){
         cleanComplaints();
@@ -42,8 +49,8 @@ public class ReviewComplaints {
         String description;
         HBox pane;
         int index = 0;
-        App.orderData.totalPrice = 0;
-        for (ComplaintData comp: App.compliantsData.complaints){
+
+        for (ComplaintData comp: copmlientlist.getComplaints()){
             user = comp.issuedBy;
             description = comp.complaintDescription;
 
