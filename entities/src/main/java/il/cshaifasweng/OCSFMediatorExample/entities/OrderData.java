@@ -16,4 +16,9 @@ public class OrderData implements Serializable {
         items = new ArrayList<BasketItemData>();
     }
 
+    public OrderData(List<BasketItemData> items, String bracha, UserData orderedBy) {
+        this.items = items;
+        this.bracha = bracha;
+        this.orderedBy = orderedBy;
+    }
 }

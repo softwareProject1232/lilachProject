@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
+import il.cshaifasweng.OCSFMediatorExample.entities.OrderListData;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -53,5 +54,17 @@ public class Orders {
                 orderList.remove(or);
             }
         }
+    }
+
+    //get order list data
+    public OrderListData GetOrderListData()
+    {
+        List <OrderData> list= new ArrayList<OrderData>();
+        for(Order or: orderList)
+        {
+            OrderData t=or.GetOrderData();
+            list.add(t);
+        }
+        return new OrderListData(list);
     }
 }

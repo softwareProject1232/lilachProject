@@ -89,4 +89,15 @@ public class Order {
     public void setOrderedBy(User orderedBy) {
         this.orderedBy = orderedBy;
     }
+
+    public OrderData GetOrderData()
+    {
+        List<BasketItemData> list= new ArrayList<BasketItemData>();
+        for(BasketItem or: items)
+        {
+            BasketItemData t=or.GetBasketItemData();
+            list.add(t);
+        }
+        return new OrderData(list,bracha,orderedBy.getUserData());
+    }
 }
