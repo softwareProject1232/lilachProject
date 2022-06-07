@@ -70,4 +70,8 @@ public class MainMenu {
         CustomerMenu.setVisible(!isManager);
 
     }
+
+    public void LoadOrderList(ActionEvent actionEvent) throws IOException {
+        App.setRoot("OrderList");
+    }
 }
