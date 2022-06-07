@@ -13,7 +13,9 @@ public class Branches {
 
     public Branches() {
         branchList = new ArrayList<Branch>();
-        loggedUserNames=new ArrayList<String>();
+        loggedUserNames = new ArrayList<String>();
+        complaints = new Complaints();
+        networkUsers = new Users();
     }
 
     public void GenerateValues(){
@@ -208,5 +210,15 @@ public class Branches {
             Branch branch = GetBranchByName(branchName);
             return branch.orders.getUserOrders(id);
         }
+    }
+
+    // search user by id
+    public User SearchUserById(int id) {
+        for(Branch branch : branchList) {
+            User user = branch.users.SearchUserById(id);
+            if(user.type != 0)
+                return user;
+        }
+        return networkUsers.SearchUserById(id);
     }
 }

@@ -41,6 +41,9 @@ public class OrderList {
     @FXML
     private ScrollPane scroll;
 
+    @FXML
+    private Label balance;
+
     public List<OrderData> currentList;
     @Subscribe
     public void onUserOrderDataRecievedEvent(ReceivedOrderListDataEvent event) {
