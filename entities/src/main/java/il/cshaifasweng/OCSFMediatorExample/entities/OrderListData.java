@@ -1,5 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderListData {
@@ -9,11 +10,20 @@ public class OrderListData {
         this.orders = orders;
     }
 
+    public OrderListData() {
+        this.orders = new ArrayList<OrderData>();
+    }
+
     public List<OrderData> getOrders() {
         return orders;
     }
 
     public void setOrders(List<OrderData> orders) {
         this.orders = orders;
+    }
+
+    public void addOrderListData(OrderListData orderListData)
+    {
+        this.orders.addAll(orderListData.getOrders());
     }
 }
