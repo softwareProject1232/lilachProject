@@ -2,9 +2,12 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.ComplaintData;
+import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
 import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
 import il.cshaifasweng.OCSFMediatorExample.server.Order;
 import javafx.event.ActionEvent;
@@ -15,6 +18,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 public class OrderList {
 
@@ -36,24 +41,30 @@ public class OrderList {
     @FXML
     private ScrollPane scroll;
 
+    public List<OrderData> currentList;
+    //@Subscribe
+    public void onUserOrderDataRecievedEvent(ReceivedOrderListDataEvent event) {
+        System.out.println("Received user order list\n");
+        currentList = event.getOrders().orders;
+        buildGrid();
+    }
     @FXML
     void goToMainMenu(ActionEvent event) throws IOException {
         App.setRoot("MainMenu");
     }
-    void buildComplaints(){
+    void buildGrid(){
         cleanOrders();
         int id;
-        UserData user;
+        LocalDate date;
         int price;
-        String description;
         HBox pane;
         int index = 0;
 
-        for (Order comp: orderlist){
-            user = comp.price;
-            description = comp.complaintDescription;
-
-            pane = generateItem(user,description);
+        //for (OrderData comp: currentList){
+        for (int i = 0; i < 10; i++) {
+            price = (int) (Math.random() * 100);
+            date = LocalDate.now();
+            pane = generateItem(date, price);
             index++;
             addItem(pane);
         }
@@ -62,13 +73,13 @@ public class OrderList {
         ItemList.getChildren().removeAll();
         ItemList.getChildren().clear();
     }
-    HBox generateItem(UserData user, String description){
+    HBox generateItem(LocalDate date, int price){
         HBox ret = new HBox();
-        Label l_name = new Label(user.getUsername()),l_desc = new Label(user.getBranchName()), l_price = new Label(description);
+        Label l_date = new Label(date.toString()), l_price = new Label(String.valueOf(price) + "$");
         Button refund = new Button();
         ret.setAlignment(Pos.CENTER);
 
-        l_name.setUnderline(true);
+        l_date.setUnderline(true);
         refund.setText("Resolve");
         refund.setOnMouseClicked(event ->  {;
             System.out.println("Clicked resolve " );
@@ -79,7 +90,7 @@ public class OrderList {
         ret.setBorder(new Border(new BorderStroke(Color.BLACK,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
-        ret.getChildren().addAll(l_name,l_desc, l_price,refund);
+        ret.getChildren().addAll(l_date,l_price, l_price,refund);
         return ret;
     }
     @FXML
@@ -88,11 +99,11 @@ public class OrderList {
     }
     @FXML
     void initialize() {
-        assert ItemList != null : "fx:id=\"ItemList\" was not injected: check your FXML file 'OrderList.fxml'.";
-        assert MainMenuButton != null : "fx:id=\"MainMenuButton\" was not injected: check your FXML file 'OrderList.fxml'.";
-        assert anchor != null : "fx:id=\"anchor\" was not injected: check your FXML file 'OrderList.fxml'.";
-        assert scroll != null : "fx:id=\"scroll\" was not injected: check your FXML file 'OrderList.fxml'.";
-
+        //EventBus.getDefault().register(this);
+        //System.out.println("Sending request\n");
+        //SimpleClient.getClient().requestOrdersByUser(App.userData.getDbId(), App.userData.getBranchName());
+        //System.out.println("Sent request\n");
+        buildGrid();
     }
 
 }
