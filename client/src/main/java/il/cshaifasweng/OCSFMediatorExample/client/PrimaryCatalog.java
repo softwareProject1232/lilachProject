@@ -162,13 +162,13 @@ public class PrimaryCatalog {
 				i++;
 			}
 			System.out.println("Clicked ID: " + (i));
-			if(App.userData.type == 4){
-				try {
-					App.setRoot("UpdateProduct");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+
+			try {
+				App.setRoot("UpdateProduct");
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
+
 		});
 		ret.getChildren().addAll(l_name, l_price, im);
 		return ret;
