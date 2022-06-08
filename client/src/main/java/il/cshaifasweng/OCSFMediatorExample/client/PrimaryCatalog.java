@@ -144,8 +144,15 @@ public class PrimaryCatalog {
 			Button addToCart = new Button("Add to cart");
 			addToCart.setOnMouseClicked(event -> {
 				//initialize an empty list of itemData and push it to App.data.cartList
+				int i = 0;
+				for (ItemData item: App.data.itemsdata){
+					if(item.getId() == id){
+						App.thisitem = i;
+					}
+					i++;
+				}
 				List<ItemData> temp = new ArrayList<ItemData>();
-				temp.add(App.data.itemsdata.get(id-1));
+				temp.add(App.data.itemsdata.get(i));
 				BasketItemData cartList = new BasketItemData(temp);
 				App.orderData.items.add(cartList);
 				System.out.println("Added to cart regular flower\n");
