@@ -1,11 +1,11 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
 
-import il.cshaifasweng.OCSFMediatorExample.entities.ComplaintListData;
-import il.cshaifasweng.OCSFMediatorExample.entities.HistogramData;
-import il.cshaifasweng.OCSFMediatorExample.entities.OrderListData;
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Report {
 
@@ -36,24 +36,59 @@ public class Report {
         }
 
     }
-    public static OrderListData getOrdersReport(String branchName)
+
+    public static ReportOrdersByItems getOrdersReport(String branchName,int days)
     {
+        java.time.LocalDate date = LocalDate.now();
+        date.minusDays(days);
         if(branchName.equals("network"))
         {
-            OrderListData o=new OrderListData();
-            for(Branch b:App.branches.branchList)
+            int i=0;
+
+            List<ReportItem> report=new ArrayList<ReportItem>();
+            for(Item item: App.catalog.items)
             {
-                o.addOrderListData(b.orders.GetOrderListData());
+                ReportItem tep=new ReportItem(item.GetItemData(),0);
+                for(Branch b:App.branches.branchList)
+                {
+                    for(Order o:b.orders.orderList)
+                    {
+                        for(BasketItem basket:o.items)
+                        {
+                            for(Item tempitem:basket.listItems)
+                            {
+                                if(tempitem.getName().equals(item.getName())&&date.isBefore(o.date))
+                                    tep.timesOrdered=tep.timesOrdered+1;
+                            }
+                        }
+                    }
+                }
+                report.add(tep);
             }
-            return o;
+            return new ReportOrdersByItems(report);
         }
         else {
             Branch b = App.branches.GetBranchByName(branchName);
             if(b!=null)
             {
-                return b.getOrders().GetOrderListData();
+                int i=0;
+                List<ReportItem> report=new ArrayList<ReportItem>();
+                for(Item item: App.catalog.items)
+                {
+                    ReportItem tep=new ReportItem(item.GetItemData(),0);
+                        for(Order o:b.orders.orderList) {
+                            for (BasketItem basket : o.items) {
+                                for (Item tempitem : basket.listItems) {
+                                    if (tempitem.getName().equals(item.getName())&&date.isBefore(o.date))
+                                        tep.timesOrdered = tep.timesOrdered + 1;
+                                }
+                            }
+                        }
+                    report.add(tep);
+                }
+                return new ReportOrdersByItems(report);
             }
-            return new Orders().GetOrderListData();
+            return new ReportOrdersByItems(null);//here we send back null in case of wrong branch
         }
     }
     public static HistogramData reportComplaints()
