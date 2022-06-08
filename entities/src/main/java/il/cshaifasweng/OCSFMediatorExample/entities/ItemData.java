@@ -21,7 +21,7 @@ public class ItemData implements Serializable{
         isZer=0;
         this.imageURL=imageURL;
     }
-    public ItemData(int i,String n,int p,String d, String imageURL, int isZerin)
+    public ItemData(int i,String n,int p,String d, String imageURL,int isZerin)
     {
         id=i;
         name=n;

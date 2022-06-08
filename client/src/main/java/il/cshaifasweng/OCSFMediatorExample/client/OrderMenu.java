@@ -12,6 +12,7 @@ import org.hibernate.criterion.Order;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class OrderMenu {
 
@@ -34,7 +35,7 @@ public class OrderMenu {
     void doConfirmOrder(ActionEvent event) {
         //ToggleGroup group = (ToggleGroup) event.getSource();
         //String selected = group.getSelectedToggle().toString();
-        OrderData order = new OrderData(App.orderData.items, "", App.userData, App.orderData.totalPrice, LocalDate.now(), App.userData.getBranchName());
+        OrderData order = new OrderData(App.orderData.items, "", App.userData, App.orderData.totalPrice, LocalDateTime.now(), App.userData.getBranchName());
         System.out.format("Sending Order: %s\n", order.toString());
         SimpleClient.getClient().MakeOrder(order);
         System.out.println("Order sent to server");

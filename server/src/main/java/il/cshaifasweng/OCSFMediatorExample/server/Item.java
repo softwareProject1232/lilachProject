@@ -21,6 +21,9 @@ public class Item {
     private List<BasketItem> BasketsInside;
 
     public Item(){}
+
+
+
     public Item(String name, int price, String description, String imageUrl) {
         this.name=name;
         this.price=price;

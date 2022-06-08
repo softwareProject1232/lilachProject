@@ -4,6 +4,7 @@ package il.cshaifasweng.OCSFMediatorExample.server;
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class Report {
 
     public static ReportOrdersByItems getOrdersReport(String branchName,int days)
     {
-        java.time.LocalDate date = LocalDate.now();
+        java.time.LocalDateTime date = LocalDateTime.now();
         date.minusDays(days);
         if(branchName.equals("network"))
         {
