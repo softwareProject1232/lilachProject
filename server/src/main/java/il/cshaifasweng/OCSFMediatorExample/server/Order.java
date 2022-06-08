@@ -39,7 +39,10 @@ public class Order {
         for(BasketItemData list : orderData.items){
             BasketItem basketItem = new BasketItem();
             for(ItemData itemData : list.listItems){
-                basketItem.listItems.add(App.catalog.SearchItemById(itemData.getId()));
+                Item item = App.catalog.SearchItemById(itemData.getId());
+                basketItem.listItems.add(item);
+                item.BasketsInside.add(basketItem);
+                App.session.saveOrUpdate(item);
             }
             items.add(basketItem);
             App.session.save(basketItem);

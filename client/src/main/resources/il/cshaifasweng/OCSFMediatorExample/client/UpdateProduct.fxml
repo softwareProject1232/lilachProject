@@ -13,11 +13,6 @@
     </padding>
    <children>
       <ImageView fx:id="flowerimage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-      <Label text="Item: ">
-         <font>
-            <Font size="48.0" />
-         </font>
-      </Label>
       <Label fx:id="NameLabel" text="Item name">
          <font>
             <Font size="48.0" />

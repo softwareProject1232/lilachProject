@@ -1,7 +1,9 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
+
 import il.cshaifasweng.OCSFMediatorExample.entities.ItemData;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,18 +12,18 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
-    private int price;
-    private String description;
-    private String imageUrl;
-    private int priceAfterDiscount;
+    public String name;
+    public int price;
+    public String description;
+    public String imageUrl;
+    public int priceAfterDiscount;
 
     @ManyToMany(mappedBy = "listItems",
             cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             targetEntity = BasketItem.class)
-    private List<BasketItem> BasketsInside;
+    public List<BasketItem> BasketsInside;
 
-    public Item(){}
+    public Item(){this.BasketsInside = new ArrayList<BasketItem>();}
 
 
 
@@ -31,6 +33,7 @@ public class Item {
         this.description=description;
         this.imageUrl=imageUrl;
         this.priceAfterDiscount=price;
+        this.BasketsInside = new ArrayList<BasketItem>();
     }
     public Item(ItemData itemData){
         name = itemData.getName();
@@ -38,6 +41,7 @@ public class Item {
         description = itemData.getDescription();
         imageUrl = itemData.getImageURL();
         this.priceAfterDiscount = price;
+        this.BasketsInside = new ArrayList<BasketItem>();
     }
 
     public int getId() {
