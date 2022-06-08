@@ -2,6 +2,7 @@ package il.cshaifasweng.OCSFMediatorExample.entities;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BranchNameData implements Serializable {
@@ -9,6 +10,10 @@ public class BranchNameData implements Serializable {
 
     public BranchNameData(List<String> bracnhList) {
         this.bracnhList = bracnhList;
+    }
+
+    public BranchNameData() {
+        this.bracnhList = new ArrayList<String>();
     }
 
     public List<String> getBranchList() {

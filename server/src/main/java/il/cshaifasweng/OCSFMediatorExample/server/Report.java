@@ -4,7 +4,6 @@ package il.cshaifasweng.OCSFMediatorExample.server;
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,14 +30,23 @@ public class Report {
 
     }
 
+    public static IncomeHistogramData getIncomeHistogramData()
+    {
+        IncomeHistogramData incomeHistogramData = new IncomeHistogramData();
+        for(Branch b: App.branches.branchList)
+        {
+            incomeHistogramData.addBranch(b.name,b.income);
+        }
+        return incomeHistogramData;
+    }
+
     public static ReportOrdersByItems getOrdersReport(String branchName,int days)
     {
-        java.time.LocalDateTime date = LocalDateTime.now();
-        date.minusDays(days);
+        java.time.LocalDate date = LocalDate.now();
+        date = date.minusDays(days + 1);
         if(branchName.equals("network"))
         {
             int i=0;
-
             List<ReportItem> report=new ArrayList<ReportItem>();
             for(Item item: App.catalog.items)
             {
@@ -51,7 +59,7 @@ public class Report {
                         {
                             for(Item tempitem:basket.listItems)
                             {
-                                if(tempitem.getName().equals(item.getName())&&date.isBefore(o.orderDate))
+                                if(tempitem.getName().equals(item.getName())&&date.isBefore(o.orderDate.toLocalDate()))
                                     tep.timesOrdered=tep.timesOrdered+1;
                             }
                         }
@@ -73,7 +81,7 @@ public class Report {
                         for(Order o:b.orders.orderList) {
                             for (BasketItem basket : o.items) {
                                 for (Item tempitem : basket.listItems) {
-                                    if (tempitem.getName().equals(item.getName())&&date.isBefore(o.orderDate))
+                                    if (tempitem.getName().equals(item.getName())&&date.isBefore(o.orderDate.toLocalDate()))
                                         tep.timesOrdered = tep.timesOrdered + 1;
                                 }
                             }
@@ -85,15 +93,16 @@ public class Report {
             return new ReportOrdersByItems(null);//here we send back null in case of wrong branch
         }
     }
-    public static HistogramData reportComplaints()
+    public static HistogramData reportComplaints(int days)
     {
+        days++; //to include the current day
         HistogramData hs= new HistogramData();
-        for(int i=0;i<8;i++)
+        for(int i=0;i<days;i++)
         {
             hs.complaintsNumber.add(0);
         }
         java.time.LocalDate date = LocalDate.now();
-        for(int i=0;i<=7;i++) {
+        for(int i=0;i<days;i++) {
             for (Complaint c : App.branches.complaints.complaints) {
                 if (date.minusDays(i).isEqual(c.getDate())) {
                     hs.complaintsNumber.set(i,hs.complaintsNumber.get(i)+1);
