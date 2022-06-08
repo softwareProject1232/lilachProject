@@ -25,9 +25,10 @@ public class NewItem {
     private Button addItemButton;
 
     @FXML
-    void addItemAction(ActionEvent event) {
+    void addItemAction(ActionEvent event) throws IOException {
         SimpleClient myclient=SimpleClient.getClient();
         myclient.addItem(NameTF.getText(),DescriptionTF.getText(),Integer.parseInt(PriceTF.getText()),ImageTF.getText(),App.data.itemsdata.get(App.thisitem));
+        App.setRoot("PrimaryCatalog");
     }
 
     @FXML
