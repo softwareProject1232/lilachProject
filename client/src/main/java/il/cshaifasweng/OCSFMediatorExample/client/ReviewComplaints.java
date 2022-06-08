@@ -109,10 +109,10 @@ public class ReviewComplaints {
 
     @FXML
     void initialize() {
-        assert ItemList != null : "fx:id=\"ItemList\" was not injected: check your FXML file 'ReviewComplaint.fxml'.";
-        assert MainMenuButton != null : "fx:id=\"MainMenuButton\" was not injected: check your FXML file 'ReviewComplaint.fxml'.";
-        assert anchor != null : "fx:id=\"anchor\" was not injected: check your FXML file 'ReviewComplaint.fxml'.";
-        assert scroll != null : "fx:id=\"scroll\" was not injected: check your FXML file 'ReviewComplaint.fxml'.";
+        assert ItemList != null : "fx:id=\"ItemList\" was not injected: check your FXML file 'ReviewComplaints.fxml'.";
+        assert MainMenuButton != null : "fx:id=\"MainMenuButton\" was not injected: check your FXML file 'ReviewComplaints.fxml'.";
+        assert anchor != null : "fx:id=\"anchor\" was not injected: check your FXML file 'ReviewComplaints.fxml'.";
+        assert scroll != null : "fx:id=\"scroll\" was not injected: check your FXML file 'ReviewComplaints.fxml'.";
         SimpleClient myclient=SimpleClient.getClient();
         EventBus.getDefault().register(this);
         myclient.requestComplaints(App.userData.branchName);
