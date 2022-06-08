@@ -30,6 +30,8 @@ public class PrimaryCatalog {
 	private ResourceBundle resources;
 
 	@FXML
+	private Button addItemButton;
+	@FXML
 	private URL location;
 
 	@FXML
@@ -186,6 +188,12 @@ public class PrimaryCatalog {
 		System.out.println("Sending request\n");
 		SimpleClient.getClient().requestCatalog();
 		System.out.println("Sent request\n");
+		if(App.userData.type!=4 && App.userData.type!=5){
+			addItemButton.setVisible(true);
+		}
+		else{
+			addItemButton.setVisible(false);
+		}
 	}
 
 	@FXML
