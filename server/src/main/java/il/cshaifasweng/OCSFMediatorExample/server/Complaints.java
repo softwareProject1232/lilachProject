@@ -46,4 +46,18 @@ public class Complaints {
         }
         return new ComplaintListData(list);
     }
+
+    public void removeComplaint(int id) {
+        for(Complaint c: complaints)
+        {
+            if(c.getId()==id)
+            {
+                App.SafeStartTransaction();
+                complaints.remove(c);
+                App.session.delete(c);
+                App.session.flush();
+                App.SafeCommit();
+            }
+        }
+    }
 }
