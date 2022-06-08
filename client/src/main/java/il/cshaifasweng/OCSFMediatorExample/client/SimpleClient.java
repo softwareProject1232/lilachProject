@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
+import il.cshaifasweng.OCSFMediatorExample.server.Report;
 import il.cshaifasweng.OCSFMediatorExample.server.User;
 import org.greenrobot.eventbus.EventBus;
 import javafx.application.Platform;
@@ -43,8 +44,8 @@ public class SimpleClient extends AbstractClient {
 		else if(msg.getClass().equals(HistogramData.class)){
 			Platform.runLater(() -> EventBus.getDefault().post(new ReceivedComplaintsReport((HistogramData) msg)));
 		}
-		else if(msg.getClass().equals(NewUserBalanceData.class)){
-			Platform.runLater(() -> EventBus.getDefault().post(new RecievedNewUserBalanceData((NewUserBalanceData) msg)));
+		else if(msg.getClass().equals((ReportOrdersByItems.class))){
+			Platform.runLater(() -> EventBus.getDefault().post(new ReceivedReportOrdersByItemsEvent((ReportOrdersByItems) msg)));
 		}
 	}
 
@@ -64,13 +65,6 @@ public class SimpleClient extends AbstractClient {
 		}
 	}
 
-	public void requestCancelOrder(int orderID){
-		try {
-			client.sendToServer("#update:cancelOrder," + orderID + "," +App.userData.branchName); //"update:price,<item id>,<new price>"
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
 	public void sendComplaint(ComplaintData complaint){
 		try {
@@ -200,9 +194,17 @@ public class SimpleClient extends AbstractClient {
 			e.printStackTrace();
 		}
 	}
+
+	public void requestOrdersReport(String branch, int days){
+		try {
+			client.sendToServer("#request:report,orders," + branch + "," + days); // request orders report #request:report,orders,branchName, int days to look in the past
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	public static SimpleClient getClient() {
 		if (client == null) {
-			client = new SimpleClient("192.168.1.34", 3024);
+			client = new SimpleClient("192.168.1.63", 3024);
 		}
 		return client;
 	}

@@ -3,12 +3,11 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.HistogramData;
-import javafx.collections.FXCollections;
+import il.cshaifasweng.OCSFMediatorExample.entities.ReportOrdersByItems;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -25,6 +24,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 public class ViewReports {
 
+    public GridPane grid;
     @FXML
     private ResourceBundle resources;
 
@@ -46,20 +46,45 @@ public class ViewReports {
     @FXML
     private VBox vbox_main;
 
-    HistogramData data;
+    private int daysBack = 10;
 
+    private BarChart<CategoryAxis, NumberAxis> bc_comp, bc_orders;
+    HistogramData data;
+    ReportOrdersByItems ordersData;
     @Subscribe
-    public void onUserListDataRecievedEvent(ReceivedComplaintsReport event) {
+    public void onReceivedReportOrdersByItemsEventEvent(ReceivedReportOrdersByItemsEvent event) {
+        System.out.println("Received complaints report\n");
+        ordersData = event.getOrders();
+        buildOrdersGraph();
+    }
+    @Subscribe
+    public void onReceivedComplaintsReportEvent(ReceivedComplaintsReport event) {
         System.out.println("Received complaints report\n");
         data = event.getData();
-        for(int x:data.complaintsNumber)
-        {
-            System.out.println(x);
-        }
-        buildHistogram();
+        buildComplaintsHistogram();
     }
+    private void buildOrdersGraph() {
 
-    private void buildHistogram() {
+        List<String> xAxis = new ArrayList<>();
+
+        for (int i = 0; i < ordersData.itemsReport.size(); i++) {
+            xAxis.add(ordersData.itemsReport.get(i).itemData.getName());
+        }
+        CategoryAxis x = new CategoryAxis();
+        x.setLabel("Items");
+        NumberAxis y = new NumberAxis();
+        y.setLabel("Count");
+        bc_orders = new BarChart(x, y);
+        bc_orders.setTitle("Complaints per day");
+        XYChart.Series series = new XYChart.Series();
+        series.setName("Complaints");
+        for (int i = data.complaintsNumber.size()-1 ; i >= 0; i--) {
+            series.getData().add(new XYChart.Data(xAxis.get(i), ordersData.itemsReport.get(i).timesOrdered));
+        }
+        bc_orders.getData().add(series);
+        grid.add(bc_orders, 1, 0);
+    }
+    private void buildComplaintsHistogram() {
 
         LocalDate today = LocalDate.now();
         List<String> xAxis = new ArrayList<>();
@@ -72,15 +97,15 @@ public class ViewReports {
         x.setLabel("Days");
         NumberAxis y = new NumberAxis();
         y.setLabel("Complaints Count");
-        BarChart bc = new BarChart(x, y);
-        bc.setTitle("Complaints per day");
+        bc_comp = new BarChart(x, y);
+        bc_comp.setTitle("Complaints per day");
         XYChart.Series series = new XYChart.Series();
         series.setName("Complaints");
         for (int i = data.complaintsNumber.size()-1 ; i >= 0; i--) {
             series.getData().add(new XYChart.Data(xAxis.get(i), data.complaintsNumber.get(i)));
         }
-        bc.getData().add(series);
-        anchor.getChildren().add(bc);
+        bc_comp.getData().add(series);
+        grid.add(bc_comp, 0, 0);
     }
 
     @FXML
@@ -94,6 +119,9 @@ public class ViewReports {
         System.out.println("Sending request to get complaints");
         SimpleClient.getClient().requestComplaintsReport();
         System.out.println("Sent request to get complaints");
+        System.out.println("Sending request to get orders");
+        SimpleClient.getClient().requestOrdersReport("network", daysBack);
+        System.out.println("Sent request to get orders");
     }
 
 }
