@@ -65,6 +65,13 @@ public class SimpleClient extends AbstractClient {
 		}
 	}
 
+	public void requestCancelOrder(int id){
+		try {
+			client.sendToServer("#update:cancelOrder," + id); //"update:price,<item id>,<new price>"
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void sendComplaint(ComplaintData complaint){
 		try {
