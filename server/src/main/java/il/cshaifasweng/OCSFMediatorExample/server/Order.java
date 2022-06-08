@@ -15,7 +15,8 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    public java.time.LocalDateTime date;
+    public java.time.LocalDateTime orderDate;
+    public java.time.LocalDateTime supplyDate;
     public int price;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "orderIn")
@@ -49,8 +50,9 @@ public class Order {
         this.bracha = orderData.bracha;
         this.orderedBy = App.branches.SearchUserById(orderData.orderedBy.dbId);
         this.orderGroup = orderGroup;
-        this.date = orderData.date;
+        this.orderDate = orderData.orderDate;
         this.price = orderData.totalPrice;
+        this.supplyDate = orderData.supplyDate;
     }
 
     public List<BasketItem> getItems() {
@@ -102,6 +104,6 @@ public class Order {
             BasketItemData t=or.GetBasketItemData();
             list.add(t);
         }
-        return new OrderData(list,bracha,orderedBy.getUserData(), price,date,orderGroup.branch.name);
+        return new OrderData(list,bracha,orderedBy.getUserData(), price, orderDate,orderGroup.branch.name, supplyDate);
     }
 }

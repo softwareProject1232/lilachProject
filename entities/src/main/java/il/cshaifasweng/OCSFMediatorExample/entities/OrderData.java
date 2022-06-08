@@ -1,7 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,8 @@ public class OrderData implements Serializable {
     public String bracha;
     public UserData orderedBy;
     public int totalPrice;
-    public java.time.LocalDateTime date;
+    public java.time.LocalDateTime orderDate;
+    public java.time.LocalDateTime supplyDate;
     public OrderData(){
         items = new ArrayList<BasketItemData>();
     }
@@ -24,13 +24,14 @@ public class OrderData implements Serializable {
         this.orderedBy = orderedBy;
     }
 
-    public OrderData(List<BasketItemData> items, String bracha, UserData orderedBy, int totalPrice, LocalDateTime date, String branchName) {
+    public OrderData(List<BasketItemData> items, String bracha, UserData orderedBy, int totalPrice, LocalDateTime orderDate, String branchName, LocalDateTime supplyDate) {
         this.items = items;
         this.BranchName = branchName;
         this.bracha = bracha;
         this.orderedBy = orderedBy;
         this.totalPrice = totalPrice;
-        this.date = date;
+        this.orderDate = orderDate;
+        this.supplyDate = supplyDate;
     }
 
     public String getBranchName() {
@@ -81,15 +82,23 @@ public class OrderData implements Serializable {
         this.totalPrice = totalPrice;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDateTime getOrderDate() {
+        return orderDate;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setOrderDate(LocalDateTime orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public LocalDateTime getSupplyDate() {
+        return supplyDate;
+    }
+
+    public void setSupplyDate(LocalDateTime supplyDate) {
+        this.supplyDate = supplyDate;
     }
 
     public String toString(){
-        return "OrderData [id=" + id + ", items=" + items + ", bracha=" + bracha + ", orderedBy=" + orderedBy + ", totalPrice=" + totalPrice + ", date=" + date + "]";
+        return "OrderData [id=" + id + ", items=" + items + ", bracha=" + bracha + ", orderedBy=" + orderedBy + ", totalPrice=" + totalPrice + ", date=" + orderDate + "]";
     }
 }

@@ -2,15 +2,11 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
-import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
-import il.cshaifasweng.OCSFMediatorExample.server.Order;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -67,7 +63,7 @@ public class OrderList {
         for (OrderData comp: currentList){
             System.out.format("Order: %s\n", comp.toString());
             price = comp.getTotalPrice();
-            date = comp.getDate();
+            date = comp.getOrderDate();
             pane = generateItem(date, price);
             index++;
             addItem(pane);

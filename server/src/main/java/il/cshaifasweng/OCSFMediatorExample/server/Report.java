@@ -58,7 +58,7 @@ public class Report {
                         {
                             for(Item tempitem:basket.listItems)
                             {
-                                if(tempitem.getName().equals(item.getName())&&date.isBefore(o.date))
+                                if(tempitem.getName().equals(item.getName())&&date.isBefore(o.orderDate))
                                     tep.timesOrdered=tep.timesOrdered+1;
                             }
                         }
@@ -80,7 +80,7 @@ public class Report {
                         for(Order o:b.orders.orderList) {
                             for (BasketItem basket : o.items) {
                                 for (Item tempitem : basket.listItems) {
-                                    if (tempitem.getName().equals(item.getName())&&date.isBefore(o.date))
+                                    if (tempitem.getName().equals(item.getName())&&date.isBefore(o.orderDate))
                                         tep.timesOrdered = tep.timesOrdered + 1;
                                 }
                             }
