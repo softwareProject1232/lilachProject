@@ -33,7 +33,7 @@ public class ChangePriceWindow {
     }
 
     @FXML
-    void changePriceAction(ActionEvent event) {
+    void updateValues(ActionEvent event) {
         SimpleClient myclient=SimpleClient.getClient();
         myclient.changePrice(Integer.parseInt(PriceTF.getText()),App.data.itemsdata.get(App.thisitem));
         myclient.changeDescription(descritionTF.getText(),App.data.itemsdata.get(App.thisitem));
