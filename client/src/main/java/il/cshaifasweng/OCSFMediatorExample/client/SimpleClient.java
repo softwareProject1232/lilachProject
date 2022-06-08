@@ -48,6 +48,13 @@ public class SimpleClient extends AbstractClient {
 			Platform.runLater(() -> EventBus.getDefault().post(new ReceivedReportOrdersByItemsEvent((ReportOrdersByItems) msg)));
 		}
 	}
+	public void requestComplaintsReport(int days){
+		try {
+			client.sendToServer("#request:report,complaints," + days);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void changePrice(int price, ItemData item){
 		try {

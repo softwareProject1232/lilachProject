@@ -1,5 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class ViewReports {
     @FXML
     private VBox vbox_main;
 
-    private int daysBack = 10;
+    private int daysBack = 30;
 
     private BarChart<CategoryAxis, NumberAxis> bc_comp, bc_orders;
     HistogramData data;
@@ -66,23 +67,25 @@ public class ViewReports {
     private void buildOrdersGraph() {
 
         List<String> xAxis = new ArrayList<>();
-
+        String name;
         for (int i = 0; i < ordersData.itemsReport.size(); i++) {
-            xAxis.add(ordersData.itemsReport.get(i).itemData.getName());
+            name = ordersData.itemsReport.get(i).itemData.getName();
+            xAxis.add(name);
         }
         CategoryAxis x = new CategoryAxis();
         x.setLabel("Items");
+        x.setTickLabelRotation(0);
         NumberAxis y = new NumberAxis();
         y.setLabel("Count");
         bc_orders = new BarChart(x, y);
-        bc_orders.setTitle("Complaints per day");
+        bc_orders.setTitle("Items orders");
         XYChart.Series series = new XYChart.Series();
-        series.setName("Complaints");
-        for (int i = data.complaintsNumber.size()-1 ; i >= 0; i--) {
+        series.setName("Items");
+        for (int i = ordersData.itemsReport.size()-1 ; i >= 0; i--) {
             series.getData().add(new XYChart.Data(xAxis.get(i), ordersData.itemsReport.get(i).timesOrdered));
         }
         bc_orders.getData().add(series);
-        grid.add(bc_orders, 1, 0);
+        grid.add(bc_orders, 0, 1);
     }
     private void buildComplaintsHistogram() {
 
@@ -95,10 +98,12 @@ public class ViewReports {
         }
         CategoryAxis x    = new CategoryAxis();
         x.setLabel("Days");
+        x.setTickLabelRotation(0);
         NumberAxis y = new NumberAxis();
         y.setLabel("Complaints Count");
         bc_comp = new BarChart(x, y);
         bc_comp.setTitle("Complaints per day");
+
         XYChart.Series series = new XYChart.Series();
         series.setName("Complaints");
         for (int i = data.complaintsNumber.size()-1 ; i >= 0; i--) {
@@ -109,15 +114,15 @@ public class ViewReports {
     }
 
     @FXML
-    void goTo(ActionEvent event) {
-
+    void goTo(ActionEvent event) throws IOException {
+        App.setRoot("MainMenu");
     }
 
     @FXML
     void initialize() {
         EventBus.getDefault().register(this);
         System.out.println("Sending request to get complaints");
-        SimpleClient.getClient().requestComplaintsReport();
+        SimpleClient.getClient().requestComplaintsReport(daysBack);
         System.out.println("Sent request to get complaints");
         System.out.println("Sending request to get orders");
         SimpleClient.getClient().requestOrdersReport("network", daysBack);
