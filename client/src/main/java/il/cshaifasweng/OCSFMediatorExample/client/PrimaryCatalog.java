@@ -90,7 +90,7 @@ public class PrimaryCatalog {
 			imageView.setFitWidth(60);
 			imageView.setPreserveRatio(false);
 			description = item.getDescription();
-			System.out.format("id: %s\nname: %s\nprice: %s\ndescription: %s\nprice after discount:%s\n", id, name, price, description);
+			System.out.format("id: %s\nname: %s\nprice: %s\ndescription: %s\nprice after discount:%s\n", id, name, price, description, priceAfterDiscount);
 			pane = generateItem(id, name, price, description, imageView,priceAfterDiscount);
 			addFlower(pane);
 		}

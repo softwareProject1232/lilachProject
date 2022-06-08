@@ -12,6 +12,11 @@
 	<artifactId>client</artifactId>
 	<dependencies>
 		<dependency>
+			<groupId>no.tornado</groupId>
+			<artifactId>tornadofx-controls</artifactId>
+			<version>1.0.3</version>
+		</dependency>
+		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-base</artifactId>
 			<version>${javafx.version}</version>

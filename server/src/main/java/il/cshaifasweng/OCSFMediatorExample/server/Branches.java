@@ -216,7 +216,7 @@ public class Branches {
     public User SearchUserById(int id) {
         for(Branch branch : branchList) {
             User user = branch.users.SearchUserById(id);
-            if(user.type != 0)
+            if(user != null)
                 return user;
         }
         return networkUsers.SearchUserById(id);

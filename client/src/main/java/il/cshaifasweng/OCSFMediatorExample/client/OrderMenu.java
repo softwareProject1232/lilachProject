@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import org.greenrobot.eventbus.EventBus;
 import org.hibernate.criterion.Order;
 import javafx.scene.control.DatePicker;
+import tornadofx.control.DateTimePicker;
 
 
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class OrderMenu {
     @FXML
     private Button ConfirmOrder;
     @FXML
-    private DatePicker datePrompt;
+    private DateTimePicker dateTimePrompt;
     @FXML
     private Button MainMenuButton;
 
@@ -38,7 +39,7 @@ public class OrderMenu {
     void doConfirmOrder(ActionEvent event) {
         //ToggleGroup group = (ToggleGroup) event.getSource();
         //String selected = group.getSelectedToggle().toString();
-        OrderData order = new OrderData(App.orderData.items, "", App.userData, App.orderData.totalPriceAfterDiscount, LocalDateTime.now(), App.userData.getBranchName(), App.orderData.getSupplyDate());
+        OrderData order = new OrderData(App.orderData.items, "", App.userData, App.orderData.totalPriceAfterDiscount, LocalDateTime.now(), App.userData.getBranchName(), dateTimePrompt.getDateTimeValue());
         System.out.format("Sending Order: %s\n", order.toString());
         SimpleClient.getClient().MakeOrder(order);
         System.out.println("Order sent to server");
