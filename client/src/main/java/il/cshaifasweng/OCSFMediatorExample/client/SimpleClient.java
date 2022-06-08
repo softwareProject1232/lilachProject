@@ -65,6 +65,13 @@ public class SimpleClient extends AbstractClient {
 		}
 	}
 
+	public void requestCancelOrder(int id){
+		try {
+			client.sendToServer("#update:cancelOrder," + id); //"update:price,<item id>,<new price>"
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void sendComplaint(ComplaintData complaint){
 		try {
@@ -187,9 +194,9 @@ public class SimpleClient extends AbstractClient {
 		}
 	}
 
-	public void requestComplaintsReport(int days){
+	public void requestComplaintsReport(){
 		try {
-			client.sendToServer("#request:report,complaints," + days);
+			client.sendToServer("#request:report,complaints");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -204,7 +211,19 @@ public class SimpleClient extends AbstractClient {
 	}
 	public static SimpleClient getClient() {
 		if (client == null) {
-			client = new SimpleClient("192.168.1.34", 3024);
+			client = new SimpleClient(ip_c, port_c);
+		}
+		return client;
+	}
+	public static String ip_c;
+	public static int port_c;
+
+	public static SimpleClient getClient(String ip,int port) {
+		if (client == null) {
+			client = new SimpleClient(ip, port);
+			ip_c= ip;
+			port_c=port;
+
 		}
 		return client;
 	}
