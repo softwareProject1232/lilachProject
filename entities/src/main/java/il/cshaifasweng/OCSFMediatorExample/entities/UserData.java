@@ -11,6 +11,7 @@ public class UserData implements Serializable {
     public String id;
     public String branchName;
     public int dbId;
+    public int balance;
 
     public UserData(){
         this.username = "";
@@ -21,8 +22,9 @@ public class UserData implements Serializable {
         this.id = "";
         this.dbId = 0;
         this.branchName = "";
+        this.balance = 0;
     }
-    public UserData(String username, String password, String email, int type, String creditCard, String id, int dbId, String branchName) {
+    public UserData(String username, String password, String email, int type, String creditCard, String id, int dbId, String branchName , int balance) {
         this.username = username;
         this.password = password;
         Email = email;
@@ -31,6 +33,7 @@ public class UserData implements Serializable {
         this.id = id;
         this.dbId = dbId;
         this.branchName = branchName;
+        this.balance = balance;
     }
 
     public String getUsername() {
@@ -95,6 +98,14 @@ public class UserData implements Serializable {
 
     public String getBranchName(){
     	return branchName;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
     }
 
     public String toString(){

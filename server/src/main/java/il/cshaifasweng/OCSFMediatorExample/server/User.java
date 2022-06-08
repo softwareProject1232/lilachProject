@@ -27,6 +27,8 @@ public class User {
     @ManyToOne(fetch = FetchType.LAZY)
     public Users userGroup;
 
+    public int balance;
+
     public User()
     {
         orders=new ArrayList<Order>();
@@ -36,8 +38,10 @@ public class User {
         type=-1;
         taz="";
         creditCard="";
+        balance=0;
     }
-    public User(String username, String password, String email, int type,String cred,String taz, Users userGroup) {
+    public User(String username, String password, String email, int type,String cred,String taz, Users userGroup, int balance)
+    {
         orders=new ArrayList<Order>();
         this.username = username;
         this.password = password;
@@ -46,6 +50,7 @@ public class User {
         this.creditCard=cred;
         this.taz=taz;
         this.userGroup = userGroup;
+        this.balance=balance;
     }
     public User(UserData userData){
         this.username = userData.username;
@@ -54,10 +59,11 @@ public class User {
         this.type = userData.type;
         this.creditCard=userData.getCreditCard();
         this.taz=userData.getId();
+        this.balance = userData.balance;
     }
 
     public UserData getUserData(){
-        return new UserData(username, password, Email, type,creditCard,taz,id,(userGroup!=null && userGroup.branch != null)?userGroup.branch.name:"network");
+        return new UserData(username, password, Email, type,creditCard,taz,id,(userGroup!=null && userGroup.branch != null)?userGroup.branch.name:"network", balance);
     }
 
     public String getUsername() {
@@ -138,5 +144,21 @@ public class User {
 
     public void setUserGroup(Users userGroup) {
         this.userGroup = userGroup;
+    }
+
+    public void MakePayment(int price) {
+        App.SafeStartTransaction();
+        balance = Math.max(0, balance-price);  // leftover is totally paid for by credit card (trust me bro, I know it, I'm the card)
+        App.session.saveOrUpdate(this);
+        App.session.flush();
+        App.SafeCommit();
+    }
+
+    public void GetRefund(int price) {
+        App.SafeStartTransaction();
+        balance += price;
+        App.session.saveOrUpdate(this);
+        App.session.flush();
+        App.SafeCommit();
     }
 }

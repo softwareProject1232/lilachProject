@@ -39,10 +39,13 @@ public class Orders {
     public void MakeOrder(OrderData orderData){
         App.SafeStartTransaction();
         Order order = new Order(orderData, this);
+        orderList.add(order);
+        User user = App.branches.SearchUserById(orderData.orderedBy.dbId);
+        user.MakePayment(order.price);
         App.session.save(order);
+        App.session.saveOrUpdate(this);
         App.session.flush();
         App.SafeCommit();
-        orderList.add(order);
     }
     public void CancelOrder(int id)
     {
@@ -53,6 +56,8 @@ public class Orders {
                 App.SafeStartTransaction();
                 orderList.remove(or);
                 App.session.delete(or);
+                User user = App.branches.SearchUserById(or.orderedBy.getId());
+                user.GetRefund(or.price);
                 App.session.flush();
                 App.SafeCommit();
             }

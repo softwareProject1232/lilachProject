@@ -55,6 +55,8 @@ public class SimpleServer extends AbstractServer {
 							App.branches.editUser(args[1], args[2], args[3], Integer.parseInt(args[4]), args[5], args[6], Integer.parseInt(args[7]), args[8]);
 					case "cancelOrder" -> // cancel order #update:cancelOrder,orderId,branchName
 							App.branches.CancelOrder(Integer.parseInt(args[1]), args[2]);
+					case "editBalance" -> // edit balance #update:editBalance,id,newBalance
+							App.branches.editUserBalance(Integer.parseInt(args[1]), Integer.parseInt(args[2]));
 				}
 			} else if (msgString.startsWith("#request")) {
 				String[] args = (msgString.split(":")[1]).split(",");

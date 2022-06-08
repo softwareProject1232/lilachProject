@@ -25,11 +25,11 @@ public class Branches {
         //generate branches
         //  generate users for branches
         Users users1 = new Users();
-        User user4 = new User("b1yaron123", "b1yaron123", "em@gmail.com", 1, "12345678", "123123123", users1);
+        User user4 = new User("b1yaron123", "b1yaron123", "em@gmail.com", 1, "12345678", "123123123", users1, 0);
         users1.users.add(user4);
 
         Users users2 = new Users();
-        User user24 = new User("b2yaron123", "b2yaron123", "em@gmail.com", 1, "12345678", "123123123", users2);
+        User user24 = new User("b2yaron123", "b2yaron123", "em@gmail.com", 1, "12345678", "123123123", users2, 0);
         users2.users.add(user24);
 
 
@@ -45,9 +45,9 @@ public class Branches {
         branchList.add(b2);
 
         Users usersg = new Users();
-        User userg1 = new User("gtom123", "gtom123", "em@gmail.com", 4, "12345678", "123123123", usersg);
-        User userg2 = new User("gamit123", "gamit123", "em@gmail.com", 3, "12345678", "123123123", usersg);
-        User userg3 = new User("gpeleg123", "gpeleg123", "em@gmail.com", 2, "12345678", "123123123", usersg);
+        User userg1 = new User("gtom123", "gtom123", "em@gmail.com", 4, "12345678", "123123123", usersg, 0);
+        User userg2 = new User("gamit123", "gamit123", "em@gmail.com", 3, "12345678", "123123123", usersg, 0);
+        User userg3 = new User("gpeleg123", "gpeleg123", "em@gmail.com", 2, "12345678", "123123123", usersg, 0);
         usersg.users.add(userg1);
         usersg.users.add(userg2);
         usersg.users.add(userg3);
@@ -125,7 +125,7 @@ public class Branches {
             System.out.format("names: "+s);
             if(s.equals(username))
             {
-                return new UserData("", "", "", 0, "", "", 0, "");
+                return new UserData("", "", "", 0, "", "", 0, "", 0);
             }
         }
         Branch branch = GetBranchByName(branchName);
@@ -220,5 +220,14 @@ public class Branches {
                 return user;
         }
         return networkUsers.SearchUserById(id);
+    }
+
+    public void editUserBalance(int id, int newBalance) {
+        User user = SearchUserById(id);
+        App.SafeStartTransaction();
+        user.balance = newBalance;
+        App.session.saveOrUpdate(user);
+        App.session.flush();
+        App.SafeCommit();
     }
 }

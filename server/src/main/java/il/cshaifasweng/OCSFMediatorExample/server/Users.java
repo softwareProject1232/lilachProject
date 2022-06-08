@@ -29,10 +29,10 @@ public class Users {
     public void generateUsers()
     {
         App.SafeStartTransaction();
-        User tom= new User("tom123", "tom123", "tom@gmail.com", 4,"123456789","1324567", this);
-        User gil= new User("gil123", "gil123", "gil@gmail.com", 1,"123456789","1324567", this);
-        User amit= new User("amit123", "amit123", "amit@gmail.com", 2,"123456789","1324567", this);
-        User peleg= new User("peleg123", "peleg123", "peleg@gmail.com", 3,"123456789","1324567", this);
+        User tom= new User("tom123", "tom123", "tom@gmail.com", 4,"123456789","1324567", this, 0);
+        User gil= new User("gil123", "gil123", "gil@gmail.com", 1,"123456789","1324567", this, 0);
+        User amit= new User("amit123", "amit123", "amit@gmail.com", 2,"123456789","1324567", this, 0);
+        User peleg= new User("peleg123", "peleg123", "peleg@gmail.com", 3,"123456789","1324567", this, 0);
         App.session.save(tom);
         App.session.save(gil);
         App.session.save(amit);
@@ -79,13 +79,14 @@ public class Users {
                 return true;
             }
         }
+        App.SafeCommit();
         return false;
     }
 
     public void addUser(UserData userData)
     {
         App.SafeStartTransaction();
-        User user = new User(userData.username, userData.password, userData.Email, userData.type, userData.getCreditCard(), userData.getId(), this);
+        User user = new User(userData.username, userData.password, userData.Email, userData.type, userData.getCreditCard(), userData.getId(), this, 0);
         App.session.save(user);
         App.session.flush();
         users.add(user);
@@ -105,7 +106,7 @@ public class Users {
             }
         }
 
-        return new UserData("", "", "", 0, "", "", 0, "");
+        return new UserData("", "", "", 0, "", "", 0, "", 0);
     }
 
     public List<User> getUsers() {

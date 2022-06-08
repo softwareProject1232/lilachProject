@@ -56,7 +56,8 @@ public class InspectUser {
                 curr.getCreditCard(),
                 curr.getId(),
                 curr.getDbId(),
-                curr.getBranchName()
+                curr.getBranchName(),
+                curr.getBalance()
         );
         boolean changed = false;
         if(!username_label.getText().equals(newUser.getUsername()) && !username_label.getText().isEmpty()) {
