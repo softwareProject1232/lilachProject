@@ -13,7 +13,7 @@
       <Text layoutX="289.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Items:" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="41.0" layoutX="3.0" stroke="BLACK" strokeType="INSIDE" width="619.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Button fx:id="MainMenuButton" layoutX="17.0" layoutY="8.0" mnemonicParsing="false" onAction="#goToMainMenu" text="Main Menu" />
-      <ScrollPane fx:id="scroll" hbarPolicy="NEVER" layoutX="143.0" layoutY="100.0" prefHeight="200.0" prefWidth="354.0">
+      <ScrollPane fx:id="scroll" layoutX="143.0" layoutY="100.0" prefHeight="200.0" prefWidth="354.0">
         <content>
           <AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="353.0">
                <children>

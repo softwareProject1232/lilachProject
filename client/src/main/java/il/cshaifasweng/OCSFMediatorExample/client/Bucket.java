@@ -119,6 +119,10 @@ public class Bucket {
         ret.setAlignment(Pos.CENTER);
 
         l_name.setUnderline(true);
+        l_name.setWrapText(true);
+        l_desc.setWrapText(true);
+        l_price.setWrapText(true);
+
         b_remove.setText("Remove");
         b_remove.setOnMouseClicked(event ->  {;
             System.out.println("Clicked ID: " + (id-1));
@@ -126,7 +130,6 @@ public class Bucket {
             buildBucket();
         });
 
-        ret.setPrefSize(350, 50);
         ret.setBorder(new Border(new BorderStroke(Color.BLACK,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
