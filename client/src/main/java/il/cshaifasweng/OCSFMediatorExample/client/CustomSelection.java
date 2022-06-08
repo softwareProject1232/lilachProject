@@ -56,6 +56,7 @@ public class CustomSelection {
         int id;
         String name;
         int price;
+        int priceAfterDiscount;
         String description;
         VBox pane;
         for (ItemData item: App.data.itemsdata){
@@ -63,6 +64,7 @@ public class CustomSelection {
             name = item.getName();
             price = item.getPrice();
             String path = item.getImageURL();
+            priceAfterDiscount = item.getPriceAfterDiscount();
 
             Image image = new Image(path, true);
             ImageView imageView = new ImageView(image);
@@ -71,7 +73,7 @@ public class CustomSelection {
             imageView.setPreserveRatio(false);
             description = item.getDescription();
             System.out.format("id: %s\nname: %s\nprice: %s\ndescription: %s\n", id, name, price, description);
-            pane = generateItem(id, name, price, description,imageView);
+            pane = generateItem(id, name, price, description,imageView,priceAfterDiscount);
             addFlower(pane);
         }
     }
@@ -91,10 +93,14 @@ public class CustomSelection {
         anchor.getChildren().clear();
         anchor.getChildren().add(gridCatalog);
     }
-    VBox generateItem(int id, String name, int price, String description, ImageView im){
+    VBox generateItem(int id, String name, int price, String description, ImageView im,int priceAfterDiscount){
         //TODO: use description
         VBox ret = new VBox();
         Label l_name = new Label(name), l_price = new Label("Price: " + price + "$");
+        if(priceAfterDiscount < price)
+        {
+            l_price.setText("Price: " + price +"$ -> " + priceAfterDiscount + "$");
+        }
         ret.setAlignment(Pos.CENTER);
         Button addToCart = new Button("Add to zer");
         addToCart.setOnMouseClicked(event -> {

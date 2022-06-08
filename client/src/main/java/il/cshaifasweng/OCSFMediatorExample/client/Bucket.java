@@ -94,6 +94,7 @@ public class Bucket {
             pane = generateItem(id, name, price, description,index,priceAfterDiscount);
             index++;
             App.orderData.totalPrice += price;
+            App.orderData.totalPriceAfterDiscount += priceAfterDiscount;
             addItem(pane);
         }
         if(App.orderData.totalPriceAfterDiscount >= 50 && App.userData.type != 1)
@@ -110,15 +111,19 @@ public class Bucket {
     }
     HBox generateItem(int id, String name, int price, String description,int index,int priceAfterDiscount){
         HBox ret = new HBox();
-        Label l_name = new Label(name),l_desc = new Label(description), l_price = new Label("Price: " + price + "$");
+        Label l_name = new Label(name+": "),l_desc = new Label(description), l_price = new Label("Price: " + price + "$");
         if(price>priceAfterDiscount)
         {
             l_price.setText("Price: " + price +"$ -> " + priceAfterDiscount +"$");
         }
         Button b_remove = new Button();
         ret.setAlignment(Pos.CENTER);
-
+        l_name.minWidth(10000);
         l_name.setUnderline(true);
+        l_name.setWrapText(true);
+        l_desc.setWrapText(true);
+        l_price.setWrapText(true);
+
         b_remove.setText("Remove");
         b_remove.setOnMouseClicked(event ->  {;
             System.out.println("Clicked ID: " + (id-1));
@@ -126,7 +131,6 @@ public class Bucket {
             buildBucket();
         });
 
-        ret.setPrefSize(350, 50);
         ret.setBorder(new Border(new BorderStroke(Color.BLACK,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
