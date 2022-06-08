@@ -81,7 +81,7 @@ public class SimpleServer extends AbstractServer {
 					}
 					case "report" -> {
 						if(args[1].equals("orders")) {
-							SafeSendToClient(Report.getOrdersReport(args[2]), client); // request orders report #request:report,orders,branchName
+							SafeSendToClient(Report.getOrdersReport(args[2],Integer.parseInt(args[3])), client); // request orders report #request:report,orders,branchName, int days to look in the past
 						} else if(args[1].equals("complaints")) {
 							SafeSendToClient(Report.reportComplaints(), client); // request complaints report #request:report,complaints
 						} else if(args[1].equals("income")) {
