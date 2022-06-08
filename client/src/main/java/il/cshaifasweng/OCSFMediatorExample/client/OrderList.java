@@ -3,6 +3,7 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -58,7 +59,7 @@ public class OrderList {
     void buildGrid(){
         cleanOrders();
         int id;
-        LocalDate date;
+        LocalDateTime date;
         int price;
         HBox pane;
         int index = 0;
@@ -76,7 +77,7 @@ public class OrderList {
         ItemList.getChildren().removeAll();
         ItemList.getChildren().clear();
     }
-    HBox generateItem(LocalDate date, int price){
+    HBox generateItem(LocalDateTime date, int price){
         HBox ret = new HBox();
         Label l_date = new Label(date.toString()), l_price = new Label(String.valueOf(price) + "$");
         Button refund = new Button();

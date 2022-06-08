@@ -2,6 +2,7 @@ package il.cshaifasweng.OCSFMediatorExample.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class OrderData implements Serializable {
     public String bracha;
     public UserData orderedBy;
     public int totalPrice;
-    public java.time.LocalDate date;
+    public java.time.LocalDateTime date;
     public OrderData(){
         items = new ArrayList<BasketItemData>();
     }
@@ -23,7 +24,7 @@ public class OrderData implements Serializable {
         this.orderedBy = orderedBy;
     }
 
-    public OrderData(List<BasketItemData> items, String bracha, UserData orderedBy, int totalPrice, LocalDate date, String branchName) {
+    public OrderData(List<BasketItemData> items, String bracha, UserData orderedBy, int totalPrice, LocalDateTime date, String branchName) {
         this.items = items;
         this.BranchName = branchName;
         this.bracha = bracha;
@@ -80,11 +81,11 @@ public class OrderData implements Serializable {
         this.totalPrice = totalPrice;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
