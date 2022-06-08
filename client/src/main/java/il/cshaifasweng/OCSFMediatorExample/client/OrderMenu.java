@@ -8,6 +8,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
 import javafx.scene.control.Label;
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 import org.hibernate.criterion.Order;
 import javafx.scene.control.DatePicker;
 import tornadofx.control.DateTimePicker;
@@ -34,6 +35,11 @@ public class OrderMenu {
 
     @FXML
     private Label total;
+
+    @Subscribe
+    void onRecievedNewUserBalanceData(RecievedNewUserBalanceData recievedNewUserBalanceData){
+        App.userData.balance = recievedNewUserBalanceData.newUserBalanceData.balance;
+    }
 
     @FXML
     void doConfirmOrder(ActionEvent event) {

@@ -43,6 +43,9 @@ public class SimpleClient extends AbstractClient {
 		else if(msg.getClass().equals(HistogramData.class)){
 			Platform.runLater(() -> EventBus.getDefault().post(new ReceivedComplaintsReport((HistogramData) msg)));
 		}
+		else if(msg.getClass().equals(NewUserBalanceData.class)){
+			Platform.runLater(() -> EventBus.getDefault().post(new RecievedNewUserBalanceData((NewUserBalanceData) msg)));
+		}
 	}
 
 	public void changePrice(int price, ItemData item){
@@ -61,6 +64,13 @@ public class SimpleClient extends AbstractClient {
 		}
 	}
 
+	public void requestCancelOrder(int orderID){
+		try {
+			client.sendToServer("#update:cancelOrder," + orderID + "," +App.userData.branchName); //"update:price,<item id>,<new price>"
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void sendComplaint(ComplaintData complaint){
 		try {
@@ -192,7 +202,7 @@ public class SimpleClient extends AbstractClient {
 	}
 	public static SimpleClient getClient() {
 		if (client == null) {
-			client = new SimpleClient("192.168.1.63", 3024);
+			client = new SimpleClient("192.168.1.34", 3024);
 		}
 		return client;
 	}

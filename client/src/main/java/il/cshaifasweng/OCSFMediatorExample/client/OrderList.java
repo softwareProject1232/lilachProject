@@ -64,25 +64,35 @@ public class OrderList {
             System.out.format("Order: %s\n", comp.toString());
             price = comp.getTotalPrice();
             date = comp.getOrderDate();
-            pane = generateItem(date, price);
+            id = comp.getId();
+            pane = generateItem(date, price,id);
             index++;
             addItem(pane);
         }
     }
+
+    @Subscribe
+    void onRecievedNewUserBalanceData(RecievedNewUserBalanceData recievedNewUserBalanceData){
+        App.userData.balance = recievedNewUserBalanceData.newUserBalanceData.balance;
+        balance.setText("Balance: " + App.userData.balance + "$");
+    }
+
     void cleanOrders(){
         ItemList.getChildren().removeAll();
         ItemList.getChildren().clear();
     }
-    HBox generateItem(LocalDateTime date, int price){
+    HBox generateItem(LocalDateTime date, int price,int id){
         HBox ret = new HBox();
         Label l_date = new Label(date.toString()), l_price = new Label(String.valueOf(price) + "$");
         Button refund = new Button();
         ret.setAlignment(Pos.CENTER);
+        SimpleClient myclient=SimpleClient.getClient();
 
         l_date.setUnderline(true);
         refund.setText("Resolve");
         refund.setOnMouseClicked(event ->  {;
             System.out.println("Clicked resolve " );
+            myclient.requestCancelOrder(id);
 
         });
 
@@ -103,6 +113,7 @@ public class OrderList {
         System.out.println("Sending request\n");
         SimpleClient.getClient().requestOrdersByUser(App.userData.getDbId(), App.userData.getBranchName());
         System.out.println("Sent request\n");
+        balance.setText("Balance: " + App.userData.balance + "$");
     }
 
 }
