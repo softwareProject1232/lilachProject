@@ -26,10 +26,6 @@
                <font>
                   <Font size="36.0" />
                </font></Button>
-            <Button mnemonicParsing="false" onAction="#LoadSettings" prefHeight="26.0" prefWidth="400.0" text="Settings">
-               <font>
-                  <Font size="36.0" />
-               </font></Button>
           <Button mnemonicParsing="false" onAction="#LoadLogin" prefHeight="26.0" prefWidth="400.0" text="Log out">
                <font>
                   <Font size="36.0" />
@@ -60,10 +56,6 @@
                   <Font size="36.0" />
                </font></Button>
             <Button mnemonicParsing="false" onAction="#LoadReports" prefHeight="26.0" prefWidth="400.0" text="View Reports">
-               <font>
-                  <Font size="36.0" />
-               </font></Button>
-            <Button mnemonicParsing="false" onAction="#LoadSettingsManager" prefHeight="26.0" prefWidth="400.0" text="Settings">
                <font>
                   <Font size="36.0" />
                </font></Button>
