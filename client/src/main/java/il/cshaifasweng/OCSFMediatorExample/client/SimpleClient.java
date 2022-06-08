@@ -47,6 +47,9 @@ public class SimpleClient extends AbstractClient {
 		else if(msg.getClass().equals((ReportOrdersByItems.class))){
 			Platform.runLater(() -> EventBus.getDefault().post(new ReceivedReportOrdersByItemsEvent((ReportOrdersByItems) msg)));
 		}
+		else if(msg.getClass().equals(IncomeHistogramData.class)){
+			Platform.runLater(() -> EventBus.getDefault().post(new ReceivedIncomeReport((IncomeHistogramData) msg)));
+		}
 	}
 	public void requestComplaintsReport(int days){
 		try {
@@ -215,6 +218,13 @@ public class SimpleClient extends AbstractClient {
 	public void requestOrdersReport(String branch, int days){
 		try {
 			client.sendToServer("#request:report,orders," + branch + "," + days); // request orders report #request:report,orders,branchName, int days to look in the past
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void requestIncomeReport(){
+		try {
+			client.sendToServer("#request:report,income"); // request orders report #request:report,orders,branchName, int days to look in the past
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

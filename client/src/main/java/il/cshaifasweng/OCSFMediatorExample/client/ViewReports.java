@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.HistogramData;
+import il.cshaifasweng.OCSFMediatorExample.entities.IncomeHistogramData;
 import il.cshaifasweng.OCSFMediatorExample.entities.ReportOrdersByItems;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -52,11 +53,19 @@ public class ViewReports {
     private int daysBack = 30;
     private List<String> branches;
 
-    private BarChart<CategoryAxis, NumberAxis> bc_comp, bc_orders;
+    private BarChart<CategoryAxis, NumberAxis> bc_comp, bc_orders, bc_income;
     HistogramData data;
     ReportOrdersByItems ordersData;
+
+    IncomeHistogramData incomeData;
     @Subscribe
-    public void onReceivedReportOrdersByItemsEventEvent(ReceivedReportOrdersByItemsEvent event) {
+    public void onReceivedIncomeReport(ReceivedIncomeReport event) {
+        System.out.println("Received income report\n");
+        incomeData = event.getData();
+        buildOrdersGraph();
+    }
+    @Subscribe
+    public void onReceivedReportOrdersByItemsEvent(ReceivedReportOrdersByItemsEvent event) {
         System.out.println("Received complaints report\n");
         ordersData = event.getOrders();
         buildOrdersGraph();
@@ -67,13 +76,11 @@ public class ViewReports {
         data = event.getData();
         buildComplaintsHistogram();
     }
-    private void buildOrdersGraph() {
-
+    private void buildIncomeGraph() {
         List<String> xAxis = new ArrayList<>();
         String name;
-        for (int i = 0; i < ordersData.itemsReport.size(); i++) {
-            name = ordersData.itemsReport.get(i).itemData.getName();
-            xAxis.add(name);
+        for (int i = 0; i < incomeData.incomeList.size(); i++) {
+            xAxis.add(incomeData.branchNameList.getBranchList().get(i));
         }
         CategoryAxis x = new CategoryAxis();
         x.setLabel("Items");
@@ -86,10 +93,33 @@ public class ViewReports {
         XYChart.Series series = new XYChart.Series();
         series.setName("Items");
         for (int i = ordersData.itemsReport.size()-1 ; i >= 0; i--) {
-            series.getData().add(new XYChart.Data(xAxis.get(i), ordersData.itemsReport.get(i).timesOrdered));
+            series.getData().add(new XYChart.Data(xAxis.get(i), incomeData.incomeList.get(i)));
         }
         bc_orders.getData().add(series);
         grid.add(bc_orders, 0, 1);
+    }
+    private void buildOrdersGraph() {
+        List<String> xAxis = new ArrayList<>();
+        String name;
+        for (int i = 0; i < ordersData.itemsReport.size(); i++) {
+            name = ordersData.itemsReport.get(i).itemData.getName();
+            xAxis.add(name);
+        }
+        CategoryAxis x = new CategoryAxis();
+        x.setLabel("Items");
+        x.setTickLabelRotation(0);
+        NumberAxis y = new NumberAxis();
+        y.setLabel("Count");
+        grid.getChildren().remove(bc_income);
+        bc_income = new BarChart(x, y);
+        bc_income.setTitle("Items orders");
+        XYChart.Series series = new XYChart.Series();
+        series.setName("Items");
+        for (int i = ordersData.itemsReport.size()-1 ; i >= 0; i--) {
+            series.getData().add(new XYChart.Data(xAxis.get(i), ordersData.itemsReport.get(i).timesOrdered));
+        }
+        bc_comp.getData().add(series);
+        grid.add(bc_comp, 0, 1);
     }
     private void buildComplaintsHistogram() {
 
@@ -146,6 +176,9 @@ public class ViewReports {
         System.out.println("Sending request to get orders");
         SimpleClient.getClient().requestOrdersReport(branchesSelect.getSelectionModel().getSelectedItem().toString(), daysBack);
         System.out.println("Sent request to get orders");
+        System.out.println("Sending request to get incomes");
+        SimpleClient.getClient().requestIncomeReport();
+        System.out.println("Sent request to get incomes");
     }
 
     public void refreshOrders(ActionEvent actionEvent) {
