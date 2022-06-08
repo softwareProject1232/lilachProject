@@ -22,7 +22,7 @@ public class UpdateProduct {
     private Label priceText;
 
     @FXML
-    private Button updateButton;
+    private Button updatePrice;
 
     @FXML
     void changeToPriceWindow(ActionEvent event) throws IOException {

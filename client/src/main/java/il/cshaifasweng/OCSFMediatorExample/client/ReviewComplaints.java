@@ -74,12 +74,24 @@ public class ReviewComplaints {
         HBox ret = new HBox();
         Label l_name = new Label(user.getUsername()),l_desc = new Label(user.getBranchName()), l_price = new Label(description);
         Button refund = new Button();
+        Button delete = new Button();
         ret.setAlignment(Pos.CENTER);
 
         l_name.setUnderline(true);
         refund.setText("Resolve");
         refund.setOnMouseClicked(event ->  {;
             System.out.println("Clicked resolve " );
+            try {
+                App.setRoot("RefundForComplaint");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        });
+        delete.setText("Delete");
+        delete.setOnMouseClicked(event ->  {;
+            //delete complaint function
 
         });
 

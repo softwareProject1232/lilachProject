@@ -16,10 +16,7 @@ public class Report {
             int sum = 0;
             for(Branch b: App.branches.branchList)
             {
-                for(Order o: b.orders.orderList)
-                {
-                    sum+= o.price;
-                }
+                sum += b.income;
             }
             return sum;
         }
@@ -27,11 +24,7 @@ public class Report {
         {
             Branch b=App.branches.GetBranchByName(branchName);
             if(b!=null) {
-                int s = 0;
-                for (Order o : b.orders.orderList) {
-                    s += o.price;
-                }
-                return s;
+                return b.income;
             }
             return 0;
         }

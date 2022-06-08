@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.RefundForComplaint">
+   <children>
+      <Button fx:id="backButton" layoutX="182.0" layoutY="260.0" mnemonicParsing="false" onAction="#goBackAction" text="Go back" />
+      <Button fx:id="refundButton" layoutX="359.0" layoutY="260.0" mnemonicParsing="false" onAction="#refundAction" text="Refund" />
+      <TextField fx:id="refundTF" layoutX="268.0" layoutY="138.0" />
+      <Text layoutX="176.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Refund amount:" />
+   </children>
+</AnchorPane>

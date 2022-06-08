@@ -86,6 +86,14 @@ public class SimpleClient extends AbstractClient {
 		}
 	}
 
+	public void changeBalance(String bal, UserData item){
+		try {
+			client.sendToServer("#update:editBalance,"+item.getId()+"," + bal); //"update:price,<item id>,<new price>"
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void addItem(String name, String description,int imagePrice,String imageURL, ItemData item){
 		try {
 			client.sendToServer("#update:ItemCreate," + name + "," + description+","+Integer.toString(imagePrice)+","+imageURL); //"update:price,<item id>,<new price>"
