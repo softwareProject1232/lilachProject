@@ -18,6 +18,8 @@ public class Branch {
 
     public String name;
 
+    public int income;
+
 
     public Branch() {
     }
@@ -28,6 +30,7 @@ public class Branch {
         this.orders = orders;
         this.orders.branch = this;
         this.name = name;
+        this.income = 0;
     }
 
 

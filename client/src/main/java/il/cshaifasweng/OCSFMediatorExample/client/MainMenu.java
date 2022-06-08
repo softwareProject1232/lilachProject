@@ -36,6 +36,7 @@ public class MainMenu {
 
     @FXML
     void LoadLogin(ActionEvent event) throws IOException {
+        SimpleClient.getClient().requestLogout();
         App.setRoot("LoginAndRegister");
     }
 

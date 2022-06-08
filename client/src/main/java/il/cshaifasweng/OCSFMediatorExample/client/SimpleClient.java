@@ -155,6 +155,13 @@ public class SimpleClient extends AbstractClient {
 			e.printStackTrace();
 		}
 	}
+	public void requestLogout(){
+		try {
+			client.sendToServer("#request:Logout,"+App.userData.dbId);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public static SimpleClient getClient() {
 		if (client == null) {

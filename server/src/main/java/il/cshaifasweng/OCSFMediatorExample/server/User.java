@@ -146,7 +146,7 @@ public class User {
         this.userGroup = userGroup;
     }
 
-    public void MakePayment(int price) {
+    public void DeductPayment(int price) {
         App.SafeStartTransaction();
         balance = Math.max(0, balance-price);  // leftover is totally paid for by credit card (trust me bro, I know it, I'm the card)
         App.session.saveOrUpdate(this);

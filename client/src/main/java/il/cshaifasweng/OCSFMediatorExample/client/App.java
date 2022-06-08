@@ -60,7 +60,8 @@ public class App extends Application {
 	public void stop() throws Exception {
 		// TODO Auto-generated method stub
     	EventBus.getDefault().unregister(this);
-		super.stop();
+        SimpleClient.getClient().requestLogout();
+        super.stop();
 	}
     
     @Subscribe
@@ -73,12 +74,9 @@ public class App extends Application {
         	);
         	alert.show();
     	});
-    	
     }
 
 	public static void main(String[] args) {
         launch();
     }
-
-
 }

@@ -94,10 +94,12 @@ public class SimpleServer extends AbstractServer {
 							SafeSendToClient(Report.getIncome(args[2]), client); // request income report #request:report,income,branchName
 						}
 					}
-					//make a case for requesting all a user's orders
 					case "userOrders" -> { // request userOrders #request:userOrders,dbId,branchName | use "network" branchName to get all orders
 						OrderListData orderListData = App.branches.getUserOrders(Integer.parseInt(args[1]), args[2]);
 						SafeSendToClient(orderListData, client);
+					}
+					case "Logout" -> { // request logout #request:Logout,id
+						App.branches.Logout(Integer.parseInt(args[1]));
 					}
 				}
 			}
