@@ -88,6 +88,15 @@ public class ViewReports {
         //System.out.println("Sending request to get complaints");
         //SimpleClient.getClient().requestComplaintsReport();
         //System.out.println("Sent request to get complaints");
+        data = new HistogramData();
+        data.complaintsNumber.add(1);
+        data.complaintsNumber.add(2);
+        data.complaintsNumber.add(3);
+        data.complaintsNumber.add(4);
+        data.complaintsNumber.add(5);
+        data.complaintsNumber.add(6);
+        data.complaintsNumber.add(7);
+        buildHistogram();
     }
 
 }
