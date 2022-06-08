@@ -148,6 +148,7 @@ public class PrimaryCatalog {
 				for (ItemData item: App.data.itemsdata){
 					if(item.getId() == id){
 						App.thisitem = i;
+						break;
 					}
 					i++;
 				}
