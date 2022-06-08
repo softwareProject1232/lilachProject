@@ -51,7 +51,7 @@ public class Order {
         this.orderedBy = App.branches.SearchUserById(orderData.orderedBy.dbId);
         this.orderGroup = orderGroup;
         this.orderDate = orderData.orderDate;
-        this.price = orderData.totalPrice;
+        this.price = orderData.totalPriceAfterDiscount;
         this.supplyDate = orderData.supplyDate;
     }
 
