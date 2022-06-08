@@ -38,18 +38,19 @@ public class ChangePriceWindow {
     }
 
     @FXML
-    void updateValues(ActionEvent event) {
+    void updateValues(ActionEvent event) throws IOException {
         SimpleClient myclient=SimpleClient.getClient();
         myclient.changePrice(Integer.parseInt(PriceTF.getText()),App.data.itemsdata.get(App.thisitem));
         myclient.changeDescription(descritionTF.getText(),App.data.itemsdata.get(App.thisitem));
         myclient.changeName(nameTF.getText(),App.data.itemsdata.get(App.thisitem));
                                                                            myclient.changePriceAfterDiscount(Integer.parseInt(discountTF.getText()),App.data.itemsdata.get(App.thisitem));
-
+        App.setRoot("PrimaryCatalog");
     }
     @FXML
-    void removefromCatalog(ActionEvent event) {
+    void removefromCatalog(ActionEvent event) throws IOException {
         SimpleClient myclient=SimpleClient.getClient();
         myclient.removeItem(App.data.itemsdata.get(App.thisitem));
+        App.setRoot("PrimaryCatalog");
     }
     @FXML
     void initialize() {
