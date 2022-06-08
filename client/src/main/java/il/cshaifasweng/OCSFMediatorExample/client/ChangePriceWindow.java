@@ -2,39 +2,65 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.OverrunStyle;
 import javafx.scene.control.TextField;
-import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 
 public class ChangePriceWindow {
-    @FXML
-    public TextField priceText;
 
     @FXML
-    public Label itemName;
-
+    private TextField PriceTF;
 
     @FXML
-    void changePriceAction(ActionEvent event) throws IOException {
-        SimpleClient.getClient().changePrice(Integer.parseInt(priceText.getText()),App.data.itemsdata.get(App.thisitem));
+    private TextField descritionTF;
+
+    @FXML
+    private TextField nameTF;
+
+    @FXML
+    private Button showCatalogButton;
+
+    @FXML
+    private Button updateButton;
+
+    @FXML
+    private TextField discountTF;
+
+    @FXML
+    void showCatalolgWindow(ActionEvent event) throws IOException {
         App.setRoot("PrimaryCatalog");
-
     }
 
     @FXML
-    void showCatalogWindow(ActionEvent event) throws IOException {
-        App.setRoot("PrimaryCatalog");
-    }
+    void updateValues(ActionEvent event) {
+        SimpleClient myclient=SimpleClient.getClient();
+        myclient.changePrice(Integer.parseInt(PriceTF.getText()),App.data.itemsdata.get(App.thisitem));
+        myclient.changeDescription(descritionTF.getText(),App.data.itemsdata.get(App.thisitem));
+        myclient.changeName(nameTF.getText(),App.data.itemsdata.get(App.thisitem));
+                                                                           myclient.changePriceAfterDiscount(Integer.parseInt(discountTF.getText()),App.data.itemsdata.get(App.thisitem));
 
+    }
+    @FXML
+    void removefromCatalog(ActionEvent event) {
+        SimpleClient myclient=SimpleClient.getClient();
+        myclient.removeItem(App.data.itemsdata.get(App.thisitem));
+    }
     @FXML
     void initialize() {
-        itemName.setAlignment(Pos.CENTER);
-        itemName.setText("Item: " + App.data.itemsdata.get(App.thisitem).getName());
+        PriceTF.setText(String.valueOf(App.data.itemsdata.get(App.thisitem).getPrice()));
+        descritionTF.setText(App.data.itemsdata.get(App.thisitem).getDescription());
+        nameTF.setText(App.data.itemsdata.get(App.thisitem).getName());
+        discountTF.setText(String.valueOf(App.data.itemsdata.get(App.thisitem).getPriceAfterDiscount()));
+
     }
 
 }
+
+
+
+
+
+
+
+

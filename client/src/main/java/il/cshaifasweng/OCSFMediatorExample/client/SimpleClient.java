@@ -53,6 +53,15 @@ public class SimpleClient extends AbstractClient {
 		}
 	}
 
+	public void changePriceAfterDiscount(int priceAfterDiscount, ItemData item){
+		try {
+			client.sendToServer("#update:ItemDiscount," + item.getId() + "," + Integer.toString(priceAfterDiscount)); //"update:price,<item id>,<new price>"
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+
 	public void sendComplaint(ComplaintData complaint){
 		try {
 			client.sendToServer(complaint); //"update:price,<item id>,<new price>"
@@ -154,6 +163,13 @@ public class SimpleClient extends AbstractClient {
 	public void requestOrdersByUser(int dbid, String branch){
 		try {
 			client.sendToServer("#request:userOrders,"+dbid+","+branch);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void requestLogout(){
+		try {
+			client.sendToServer("#request:Logout,"+App.userData.dbId);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

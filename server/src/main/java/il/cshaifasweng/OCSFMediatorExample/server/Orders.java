@@ -6,6 +6,7 @@ import il.cshaifasweng.OCSFMediatorExample.entities.OrderListData;
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +42,8 @@ public class Orders {
         Order order = new Order(orderData, this);
         orderList.add(order);
         User user = App.branches.SearchUserById(orderData.orderedBy.dbId);
-        user.MakePayment(order.price);
+        user.DeductPayment(order.price);
+        branch.income += order.price;
         App.session.save(order);
         App.session.saveOrUpdate(this);
         App.session.flush();
@@ -57,7 +59,17 @@ public class Orders {
                 orderList.remove(or);
                 App.session.delete(or);
                 User user = App.branches.SearchUserById(or.orderedBy.getId());
-                user.GetRefund(or.price);
+                if(LocalDateTime.now().isBefore(or.supplyDate.minusHours(3)))
+                {
+                    user.GetRefund(or.price);
+                    branch.income -= or.price;
+                }
+                else if(LocalDateTime.now().isBefore(or.supplyDate.minusHours(1)))
+                {
+                    user.GetRefund(or.price/2);
+                    branch.income -= or.price/2;
+                }
+                App.session.saveOrUpdate(branch);
                 App.session.flush();
                 App.SafeCommit();
             }

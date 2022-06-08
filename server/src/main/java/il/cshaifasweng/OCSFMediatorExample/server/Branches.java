@@ -9,11 +9,11 @@ public class Branches {
     public List<Branch> branchList;
     public Users networkUsers;
     public Complaints complaints;
-    public List<String> loggedUserNames;
+    public List<Integer> loggedUsers;
 
     public Branches() {
         branchList = new ArrayList<Branch>();
-        loggedUserNames = new ArrayList<String>();
+        loggedUsers = new ArrayList<Integer>();
         complaints = new Complaints();
         networkUsers = new Users();
     }
@@ -119,15 +119,6 @@ public class Branches {
 
     public UserData Login(String username, String password, String branchName)
     {
-        System.out.format(username);
-        for(String s:loggedUserNames)
-        {
-            System.out.format("names: "+s);
-            if(s.equals(username))
-            {
-                return new UserData("", "", "", 0, "", "", 0, "", 0);
-            }
-        }
         Branch branch = GetBranchByName(branchName);
         UserData user;
         if(branch != null){
@@ -135,20 +126,22 @@ public class Branches {
             if(user.getUsername().length() > 0 && user.getPassword().length() > 0 && user.getEmail().length() > 0 && user.getCreditCard().length() > 0 && user.getId().length() > 0 && user.getType() > 0)
             {
                 user.branchName = branchName;
-                if(user.type!=0) {
-                    System.out.format("added : "+username);
-                    loggedUserNames.add(username);
+                if(loggedUsers.contains(user.dbId))
+                {
+                    return new UserData("", "", "", 0, "", "", 0, "", 0);
                 }
+                loggedUsers.add(user.dbId);
                 return user;
             }
         }
 
         user = networkUsers.Login(username, password);
         user.branchName = branchName;
-        if(user.type!=0) {
-            System.out.format("added : "+username);
-            loggedUserNames.add(username);
+        if(loggedUsers.contains(user.dbId))
+        {
+            return new UserData("", "", "", 0, "", "", 0, "", 0);
         }
+        loggedUsers.add(user.dbId);
         return user;
     }
 
@@ -233,5 +226,9 @@ public class Branches {
 
     public void removeComplaint(int id) {
         complaints.removeComplaint(id);
+    }
+
+    public void Logout(Integer id) {
+        loggedUsers.remove(id);
     }
 }
