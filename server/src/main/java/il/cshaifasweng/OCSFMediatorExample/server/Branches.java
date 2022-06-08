@@ -230,4 +230,8 @@ public class Branches {
         App.session.flush();
         App.SafeCommit();
     }
+
+    public void removeComplaint(int id) {
+        complaints.removeComplaint(id);
+    }
 }
