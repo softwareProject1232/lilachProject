@@ -25,7 +25,7 @@ public class OrderData implements Serializable {
         this.orderedBy = orderedBy;
     }
 
-    public OrderData(List<BasketItemData> items, String bracha, UserData orderedBy, int totalPrice, LocalDateTime orderDate, String branchName, LocalDateTime supplyDate) {
+    public OrderData(List<BasketItemData> items, String bracha, UserData orderedBy, int totalPrice, LocalDateTime orderDate, String branchName, LocalDateTime supplyDate, int totalPriceAfterDiscount) {
         this.items = items;
         this.BranchName = branchName;
         this.bracha = bracha;
@@ -33,6 +33,7 @@ public class OrderData implements Serializable {
         this.totalPrice = totalPrice;
         this.orderDate = orderDate;
         this.supplyDate = supplyDate;
+        this.totalPriceAfterDiscount = totalPriceAfterDiscount;
     }
 
     public String getBranchName() {
