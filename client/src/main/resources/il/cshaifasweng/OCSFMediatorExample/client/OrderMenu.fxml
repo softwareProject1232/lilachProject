@@ -43,7 +43,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <DatePicker />
+            <DatePicker fx:id="datePrompt" />
             <Label text="Message:">
                <font>
                   <Font size="18.0" />

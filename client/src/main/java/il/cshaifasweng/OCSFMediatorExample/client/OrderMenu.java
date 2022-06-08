@@ -9,6 +9,8 @@ import javafx.scene.text.Text;
 import javafx.scene.control.Label;
 import org.greenrobot.eventbus.EventBus;
 import org.hibernate.criterion.Order;
+import javafx.scene.control.DatePicker;
+
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -18,7 +20,8 @@ public class OrderMenu {
 
     @FXML
     private Button ConfirmOrder;
-
+    @FXML
+    private DatePicker datePrompt;
     @FXML
     private Button MainMenuButton;
 
