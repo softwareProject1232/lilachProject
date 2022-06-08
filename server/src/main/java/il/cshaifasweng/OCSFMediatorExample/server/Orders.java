@@ -1,5 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.NewUserBalanceData;
 import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
 import il.cshaifasweng.OCSFMediatorExample.entities.OrderListData;
 
@@ -37,7 +38,7 @@ public class Orders {
         orderList.addAll(data);
     }
 
-    public void MakeOrder(OrderData orderData){
+    public NewUserBalanceData MakeOrder(OrderData orderData){
         App.SafeStartTransaction();
         Order order = new Order(orderData, this);
         orderList.add(order);
@@ -48,9 +49,11 @@ public class Orders {
         App.session.saveOrUpdate(this);
         App.session.flush();
         App.SafeCommit();
+        return new NewUserBalanceData(user.balance);
     }
-    public void CancelOrder(int id)
+    public int CancelOrder(int id)
     {
+        int ret = 0;
         for(Order or: orderList)
         {
             if(or.getId()==id)
@@ -63,17 +66,21 @@ public class Orders {
                 {
                     user.GetRefund(or.price);
                     branch.income -= or.price;
+                    ret = user.balance;
                 }
                 else if(LocalDateTime.now().isBefore(or.supplyDate.minusHours(1)))
                 {
                     user.GetRefund(or.price/2);
                     branch.income -= or.price/2;
+                    ret = user.balance;
                 }
+                ret = user.balance;
                 App.session.saveOrUpdate(branch);
                 App.session.flush();
                 App.SafeCommit();
             }
         }
+        return ret;
     }
 
     //get order list data

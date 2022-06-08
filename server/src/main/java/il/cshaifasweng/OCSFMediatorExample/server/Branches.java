@@ -145,9 +145,9 @@ public class Branches {
         return user;
     }
 
-    public void MakeOrder(OrderData data) {
+    public NewUserBalanceData MakeOrder(OrderData data) {
         Branch branch = GetBranchByName(data.BranchName);
-        branch.orders.MakeOrder(data);
+        return branch.orders.MakeOrder(data);
     }
 
     public void editUser(String username, String password, String email, int type,String cred,String taz, int id, String branchName) {
@@ -166,9 +166,9 @@ public class Branches {
         }
     }
 
-    public void CancelOrder(int id, String branchName) {
+    public int CancelOrder(int id, String branchName) {
         Branch branch = GetBranchByName(branchName);
-        branch.orders.CancelOrder(id);
+        return branch.orders.CancelOrder(id);
     }
 
     public void addComplaint(ComplaintData complaintData) {
