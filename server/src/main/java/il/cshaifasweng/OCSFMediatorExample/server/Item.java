@@ -14,6 +14,7 @@ public class Item {
     private int price;
     private String description;
     private String imageUrl;
+    private int priceAfterDiscount;
 
     @ManyToMany(mappedBy = "listItems",
             cascade = {CascadeType.PERSIST, CascadeType.MERGE},
@@ -26,12 +27,14 @@ public class Item {
         this.price=price;
         this.description=description;
         this.imageUrl=imageUrl;
+        this.priceAfterDiscount=price;
     }
     public Item(ItemData itemData){
         name = itemData.getName();
         price = itemData.getPrice();
         description = itemData.getDescription();
         imageUrl = itemData.getImageURL();
+        this.priceAfterDiscount = price;
     }
 
     public int getId() {
@@ -87,6 +90,14 @@ public class Item {
     }
 
     public ItemData GetItemData() {
-        return new ItemData(id, name, price, description, imageUrl);
+        return new ItemData(id, name, price, description, imageUrl, priceAfterDiscount);
+    }
+
+    public int getPriceAfterDiscount() {
+        return priceAfterDiscount;
+    }
+
+    public void setPriceAfterDiscount(int priceAfterDiscount) {
+        this.priceAfterDiscount = priceAfterDiscount;
     }
 }

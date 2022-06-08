@@ -143,4 +143,13 @@ public class Catalog {
          }
       }
    }
+
+    public void changeDiscount(int id, int newDiscountedPrice) {
+       Item item = SearchItemById(id);
+       App.SafeStartTransaction();
+       item.setPriceAfterDiscount(newDiscountedPrice);
+       App.session.saveOrUpdate(this);
+       App.session.flush();
+       App.SafeCommit();
+    }
 }

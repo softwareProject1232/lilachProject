@@ -11,6 +11,7 @@ public class ItemData implements Serializable{
     private String imageURL;
     public List<ItemData> zerList;
     public int isZer;
+    public int priceAfterDiscount;
 
     public ItemData(int i,String n,int p,String d, String imageURL)
     {
@@ -20,15 +21,17 @@ public class ItemData implements Serializable{
         description=d;
         isZer=0;
         this.imageURL=imageURL;
+        priceAfterDiscount=p;
     }
-    public ItemData(int i,String n,int p,String d, String imageURL, int isZerin)
+    public ItemData(int i,String n,int p,String d, String imageURL, int priceAfterDiscount)
     {
         id=i;
         name=n;
         price=p;
         description=d;
-        isZer=isZerin;
+        isZer=0;
         this.imageURL=imageURL;
+        this.priceAfterDiscount = priceAfterDiscount;
     }
 
     public int getId() {
