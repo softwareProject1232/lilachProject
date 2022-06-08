@@ -15,6 +15,9 @@ public class UpdateProduct {
     private Label DescriptionLabel;
 
     @FXML
+    private ImageView flowerimage;
+
+    @FXML
     private Button GoBackButton;
 
     @FXML
@@ -55,12 +58,8 @@ public class UpdateProduct {
         }
         String path=App.data.itemsdata.get(App.thisitem).getImageURL();
         Image image = new Image(path, true);
-        ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(120);
-        imageView.setFitWidth(120);
-        imageView.setX(200);
-        imageView.setY(200);
-        imageView.setPreserveRatio(false);
+        flowerimage.setImage(image);
+
 
         if(App.userData.type!=4){
             updatePrice.setVisible(false);
