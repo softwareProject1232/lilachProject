@@ -139,8 +139,16 @@ public class Catalog {
       {
          if(item.getId()==id)
          {
+            App.SafeStartTransaction();
             App.session.delete(item);
+            for (BasketItem basketItem : item.getBasketsInside()){
+               basketItem.getListItems().remove(item);
+               App.session.saveOrUpdate(basketItem);
+            }
             items.remove(item);
+            App.session.flush();
+            App.SafeCommit();
+            return;
          }
       }
    }

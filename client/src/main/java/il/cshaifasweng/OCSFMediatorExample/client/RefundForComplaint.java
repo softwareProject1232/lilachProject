@@ -33,7 +33,8 @@ public class RefundForComplaint {
     @FXML
     void refundAction(ActionEvent event) throws IOException {
         SimpleClient myclient=SimpleClient.getClient();
-        myclient.changeBalance(App.userData.CreditCard,App.userData);
+        myclient.changeBalance(String.valueOf(App.compuser.balance+Integer.parseInt(refundTF.getText())),App.compuser);
+        App.userData.balance=App.userData.balance+Integer.parseInt(refundTF.getText());
     }
 
     @FXML

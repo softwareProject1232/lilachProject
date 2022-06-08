@@ -47,6 +47,19 @@ public class SimpleClient extends AbstractClient {
 		else if(msg.getClass().equals((ReportOrdersByItems.class))){
 			Platform.runLater(() -> EventBus.getDefault().post(new ReceivedReportOrdersByItemsEvent((ReportOrdersByItems) msg)));
 		}
+		else if(msg.getClass().equals(IncomeHistogramData.class)){
+			Platform.runLater(() -> EventBus.getDefault().post(new ReceivedIncomeReport((IncomeHistogramData) msg)));
+		}
+		else if(msg.getClass().equals(NewUserBalanceData.class)){
+			Platform.runLater(() -> EventBus.getDefault().post(new RecievedNewUserBalanceData((NewUserBalanceData) msg)));
+		}
+	}
+	public void requestComplaintsReport(int days){
+		try {
+			client.sendToServer("#request:report,complaints," + days);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void changePrice(int price, ItemData item){
@@ -97,9 +110,9 @@ public class SimpleClient extends AbstractClient {
 		}
 	}
 
-	public void changeBalance(String bal, UserData item){
+	public void changeBalance(String bal, UserData usr){
 		try {
-			client.sendToServer("#update:editBalance,"+item.getId()+"," + bal); //"update:price,<item id>,<new price>"
+			client.sendToServer("#update:editBalance,"+usr.getDbId()+"," + bal); //"update:price,<item id>,<new price>"
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -188,7 +201,10 @@ public class SimpleClient extends AbstractClient {
 	}
 	public void requestLogout(){
 		try {
-			client.sendToServer("#request:Logout,"+App.userData.dbId);
+			if(App.userData != null) {
+				client.sendToServer("#request:Logout," + App.userData.dbId);
+				App.userData = null;
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -209,9 +225,28 @@ public class SimpleClient extends AbstractClient {
 			e.printStackTrace();
 		}
 	}
+	public void requestIncomeReport(){
+		try {
+			client.sendToServer("#request:report,income"); // request orders report #request:report,orders,branchName, int days to look in the past
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	public static SimpleClient getClient() {
 		if (client == null) {
-			client = new SimpleClient("192.168.1.34", 3024);
+			client = new SimpleClient(ip_c, port_c);
+		}
+		return client;
+	}
+	public static String ip_c;
+	public static int port_c;
+
+	public static SimpleClient getClient(String ip,int port) {
+		if (client == null) {
+			client = new SimpleClient(ip, port);
+			ip_c= ip;
+			port_c=port;
+
 		}
 		return client;
 	}

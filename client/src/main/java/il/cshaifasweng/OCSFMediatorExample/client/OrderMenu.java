@@ -37,15 +37,16 @@ public class OrderMenu {
     private Label total;
 
     @Subscribe
-    void onRecievedNewUserBalanceData(RecievedNewUserBalanceData recievedNewUserBalanceData){
+    public void onRecievedNewUserBalanceData(RecievedNewUserBalanceData recievedNewUserBalanceData){
         App.userData.balance = recievedNewUserBalanceData.newUserBalanceData.balance;
+        System.out.println("Recieved new balance: " + App.userData.balance);
     }
 
     @FXML
     void doConfirmOrder(ActionEvent event) {
         //ToggleGroup group = (ToggleGroup) event.getSource();
         //String selected = group.getSelectedToggle().toString();
-        OrderData order = new OrderData(App.orderData.items, "", App.userData, App.orderData.totalPriceAfterDiscount, LocalDateTime.now(), App.userData.getBranchName(), dateTimePrompt.getDateTimeValue());
+        OrderData order = new OrderData(App.orderData.items, "", App.userData, App.orderData.totalPrice, LocalDateTime.now(), App.userData.getBranchName(), dateTimePrompt.getDateTimeValue(), App.orderData.totalPriceAfterDiscount);
         System.out.format("Sending Order: %s\n", order.toString());
         SimpleClient.getClient().MakeOrder(order);
         System.out.println("Order sent to server");
@@ -61,6 +62,7 @@ public class OrderMenu {
     }
     @FXML
     void initialize() {
+        EventBus.getDefault().register(this);
         assert ConfirmOrder != null : "fx:id=\"ConfirmOrder\" was not injected: check your FXML file 'OrderMenu.fxml'.";
         assert MainMenuButton != null : "fx:id=\"MainMenuButton\" was not injected: check your FXML file 'OrderMenu.fxml'.";
         assert OutputText != null : "fx:id=\"OutputText\" was not injected: check your FXML file 'OrderMenu.fxml'.";

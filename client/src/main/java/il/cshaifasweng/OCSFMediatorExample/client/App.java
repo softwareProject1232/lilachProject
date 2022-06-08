@@ -34,12 +34,15 @@ public class App extends Application {
 
     public static ComplaintListData compliantsData;
 
+    public static UserData compuser;
+
     @Override
     public void start(Stage stage) throws IOException {
         EventBus.getDefault().register(this);
-        SimpleClient client = SimpleClient.getClient();
-    	client.openConnection();
-        scene = new Scene(loadFXML("LoginAndRegister"), 1200, 800);
+        scene = new Scene(loadFXML("Settings"), 1200, 800);
+
+
+
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

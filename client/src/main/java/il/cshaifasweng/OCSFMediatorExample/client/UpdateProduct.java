@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 
@@ -44,7 +46,28 @@ public class UpdateProduct {
     void initialize() {
         NameLabel.setText(App.data.itemsdata.get(App.thisitem).getName());//insert name from data base
         DescriptionLabel.setText(App.data.itemsdata.get(App.thisitem).getDescription());//insert descriptioon from data base
-        priceText.setText(Integer.toString(App.data.itemsdata.get(App.thisitem).getPrice()));//insert price
+        priceText.setText("Price: "+String.valueOf(App.data.itemsdata.get(App.thisitem).getPrice()));//insert price
+        int price=App.data.itemsdata.get(App.thisitem).getPrice();
+        int priceAfterDiscount=App.data.itemsdata.get(App.thisitem).getPriceAfterDiscount();
+        if(priceAfterDiscount < price)
+        {
+            priceText.setText("Price: " + price +"$ -> " + priceAfterDiscount + "$");
+        }
+        String path=App.data.itemsdata.get(App.thisitem).getImageURL();
+        Image image = new Image(path, true);
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(120);
+        imageView.setFitWidth(120);
+        imageView.setX(200);
+        imageView.setY(200);
+        imageView.setPreserveRatio(false);
+
+        if(App.userData.type!=4){
+            updatePrice.setVisible(false);
+        }
+        else{
+            updatePrice.setVisible(true);
+        }
     }
 
 

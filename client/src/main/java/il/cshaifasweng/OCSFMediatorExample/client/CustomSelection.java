@@ -113,8 +113,14 @@ public class CustomSelection {
         ret.setBorder(new Border(new BorderStroke(Color.BLACK,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         ret.setOnMouseClicked(event ->  {
-            App.thisitem = id-1;
-            System.out.println("Clicked ID: " + (id-1));
+            int i = 0;
+            for (ItemData item: App.data.itemsdata){
+                if(item.getId() == id){
+                    App.thisitem = i;
+                }
+                i++;
+            }
+            System.out.println("Clicked ID: " + (i));
             if(App.userData.type == 4){
                 try {
                     App.setRoot("UpdateProduct");

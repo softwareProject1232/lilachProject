@@ -83,7 +83,7 @@ public class PrimaryCatalog {
 			price = item.getPrice();
 			String path = item.getImageURL();
 			priceAfterDiscount = item.getPriceAfterDiscount();
-
+			System.out.println("PATH " + path);
 			Image image = new Image(path, true);
 			ImageView imageView = new ImageView(image);
 			imageView.setFitHeight(60);
@@ -154,15 +154,21 @@ public class PrimaryCatalog {
 		ret.setBorder(new Border(new BorderStroke(Color.BLACK,
 				BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		ret.setOnMouseClicked(event ->  {
-			App.thisitem = id-1;
-			System.out.println("Clicked ID: " + (id-1));
-			if(App.userData.type == 4){
-				try {
-					App.setRoot("UpdateProduct");
-				} catch (IOException e) {
-					e.printStackTrace();
+			int i = 0;
+			for (ItemData item: App.data.itemsdata){
+				if(item.getId() == id){
+					App.thisitem = i;
 				}
+				i++;
 			}
+			System.out.println("Clicked ID: " + (i));
+
+			try {
+				App.setRoot("UpdateProduct");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
 		});
 		ret.getChildren().addAll(l_name, l_price, im);
 		return ret;

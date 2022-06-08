@@ -50,13 +50,14 @@ public class ReviewComplaints {
         int price;
         String description;
         HBox pane;
+        UserData temp;
         int index = 0;
         if(copmlientlist!=null) {
             for (ComplaintData comp : copmlientlist.getComplaints()) {
                 user = comp.issuedBy;
                 description = comp.complaintDescription;
-
-                pane = generateItem(user, description);
+                temp = comp.issuedBy;
+                pane = generateItem(user, description,temp);
                 index++;
                 addItem(pane);
             }
@@ -70,7 +71,7 @@ public class ReviewComplaints {
         ItemList.getChildren().removeAll();
         ItemList.getChildren().clear();
     }
-    HBox generateItem(UserData user, String description){
+    HBox generateItem(UserData user, String description,UserData temp){
         HBox ret = new HBox();
         Label l_name = new Label(user.getUsername()),l_desc = new Label(user.getBranchName()), l_price = new Label(description);
         Button refund = new Button();
@@ -82,6 +83,7 @@ public class ReviewComplaints {
         refund.setOnMouseClicked(event ->  {;
             System.out.println("Clicked resolve " );
             try {
+                App.compuser=temp;
                 App.setRoot("RefundForComplaint");
             } catch (IOException e) {
                 e.printStackTrace();
@@ -109,10 +111,10 @@ public class ReviewComplaints {
 
     @FXML
     void initialize() {
-        assert ItemList != null : "fx:id=\"ItemList\" was not injected: check your FXML file 'ReviewComplaint.fxml'.";
-        assert MainMenuButton != null : "fx:id=\"MainMenuButton\" was not injected: check your FXML file 'ReviewComplaint.fxml'.";
-        assert anchor != null : "fx:id=\"anchor\" was not injected: check your FXML file 'ReviewComplaint.fxml'.";
-        assert scroll != null : "fx:id=\"scroll\" was not injected: check your FXML file 'ReviewComplaint.fxml'.";
+        assert ItemList != null : "fx:id=\"ItemList\" was not injected: check your FXML file 'ReviewComplaints.fxml'.";
+        assert MainMenuButton != null : "fx:id=\"MainMenuButton\" was not injected: check your FXML file 'ReviewComplaints.fxml'.";
+        assert anchor != null : "fx:id=\"anchor\" was not injected: check your FXML file 'ReviewComplaints.fxml'.";
+        assert scroll != null : "fx:id=\"scroll\" was not injected: check your FXML file 'ReviewComplaints.fxml'.";
         SimpleClient myclient=SimpleClient.getClient();
         EventBus.getDefault().register(this);
         myclient.requestComplaints(App.userData.branchName);

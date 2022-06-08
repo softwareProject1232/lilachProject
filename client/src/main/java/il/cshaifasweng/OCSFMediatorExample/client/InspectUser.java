@@ -44,7 +44,7 @@ public class InspectUser {
     }
 
     public void SwapToMainMenu(ActionEvent actionEvent) throws IOException {
-        App.setRoot("MainMenu");
+        App.setRoot("EditUsers");
     }
 
     public void updateUser(ActionEvent actionEvent) throws IOException {

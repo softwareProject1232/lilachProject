@@ -72,9 +72,11 @@ public class OrderList {
     }
 
     @Subscribe
-    void onRecievedNewUserBalanceData(RecievedNewUserBalanceData recievedNewUserBalanceData){
+    public void onRecievedNewUserBalanceData(RecievedNewUserBalanceData recievedNewUserBalanceData){
         App.userData.balance = recievedNewUserBalanceData.newUserBalanceData.balance;
         balance.setText("Balance: " + App.userData.balance + "$");
+        System.out.println("Recieved new balance: " + App.userData.balance);
+        SimpleClient.getClient().requestOrdersByUser(App.userData.getDbId(), App.userData.getBranchName());
     }
 
     void cleanOrders(){
@@ -112,7 +114,7 @@ public class OrderList {
         System.out.println("Sending request\n");
         SimpleClient.getClient().requestOrdersByUser(App.userData.getDbId(), App.userData.getBranchName());
         System.out.println("Sent request\n");
-        balance.setText("Balance: " + App.userData.balance + "$");
+        balance.setText("Balance: " + String.valueOf(App.userData.balance) + "$");
     }
 
 }
