@@ -211,7 +211,19 @@ public class SimpleClient extends AbstractClient {
 	}
 	public static SimpleClient getClient() {
 		if (client == null) {
-			client = new SimpleClient("192.168.1.34", 3024);
+			client = new SimpleClient(ip_c, port_c);
+		}
+		return client;
+	}
+	public static String ip_c;
+	public static int port_c;
+
+	public static SimpleClient getClient(String ip,int port) {
+		if (client == null) {
+			client = new SimpleClient(ip, port);
+			ip_c= ip;
+			port_c=port;
+
 		}
 		return client;
 	}
