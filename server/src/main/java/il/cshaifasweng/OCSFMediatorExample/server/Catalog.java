@@ -34,6 +34,7 @@ public class Catalog {
       greenFlower = new Item("navy flower",random.nextInt(100)+100,"navy flowers which can be found only in usa", "https://cdn11.bigcommerce.com/s-0d1a4/images/stencil/1280x1280/products/191/5919/NavyStem__01879.1636709297.jpg?c=2");
       yellowSunflower =new Item("sakura sunflower",random.nextInt(100)+100,"unique sakura which can can be harvested only in japan", "https://jw-webmagazine.com/wp-content/uploads/2019/06/jw-5d15f032182f45.92816921.jpeg");
       blackAndWhite = new Item("orange flower",random.nextInt(100)+100,"orange flowers from the sun", "https://www.thespruce.com/thmb/9wSFip9fQEtqRa0A05x6zOvW2FY=/2848x2848/smart/filters:no_upscale()/pictures-of-orange-flowers-4061768-hero-af9e809318964fbcae6e922aa3cc8182.JPG");
+      blackAndWhite.setPriceAfterDiscount(65);
       App.session.save(roses);
       App.session.save(purpleFlower);
       App.session.save(greenFlower);
@@ -67,7 +68,7 @@ public class Catalog {
       CatalogData cat=new CatalogData();
       for (Item item: items)
       {
-         ItemData temp=new ItemData(item.getId(),item.getName(),item.getPrice(),item.getDescription(),item.getImageUrl());
+         ItemData temp=new ItemData(item.getId(),item.getName(),item.getPrice(),item.getDescription(),item.getImageUrl(),item.getPriceAfterDiscount());
          cat.itemsdata.add(temp);
       }
       return cat;

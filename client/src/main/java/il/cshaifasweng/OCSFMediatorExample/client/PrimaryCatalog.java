@@ -195,10 +195,10 @@ public class PrimaryCatalog {
 		SimpleClient.getClient().requestCatalog();
 		System.out.println("Sent request\n");
 		if(App.userData.type!=4 && App.userData.type!=5){
-			addItemButton.setVisible(true);
+			addItemButton.setVisible(false);
 		}
 		else{
-			addItemButton.setVisible(false);
+			addItemButton.setVisible(true);
 		}
 	}
 
