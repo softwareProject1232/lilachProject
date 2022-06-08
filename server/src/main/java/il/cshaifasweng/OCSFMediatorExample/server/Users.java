@@ -88,8 +88,10 @@ public class Users {
         User user = new User(userData.username, userData.password, userData.Email, userData.type, userData.getCreditCard(), userData.getId(), this);
         App.session.save(user);
         App.session.flush();
-        App.SafeCommit();
         users.add(user);
+        App.session.saveOrUpdate(this);
+        App.session.flush();
+        App.SafeCommit();
     }
 
     public UserData Login(String username, String password)
