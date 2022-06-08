@@ -22,11 +22,12 @@ public class UpdateProduct {
     private Label priceText;
 
     @FXML
-    private Button updatePrice;
+    private Button updateButton;
 
     @FXML
     void changeToPriceWindow(ActionEvent event) throws IOException {
         try {
+            System.out.println("changing root to changepricewindow");
             App.setRoot("ChangePriceWindow");
         } catch (IOException e) {
             e.printStackTrace();

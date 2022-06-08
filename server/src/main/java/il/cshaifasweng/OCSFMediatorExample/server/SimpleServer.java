@@ -67,6 +67,11 @@ public class SimpleServer extends AbstractServer {
 				switch (args[0]) {
 					case "Catalog" -> { // request catalog #request:Catalog
 						App.catalog.pullItemsFromCatalog();
+						CatalogData t=App.catalog.getCatalogData();
+						for(ItemData pop:t.itemsdata)
+						{
+							System.out.println(pop.getName());
+						}
 						SafeSendToClient(App.catalog.getCatalogData(), client);
 					}
 					case "Login" -> { // request login #request:Login,username,password,branchName
