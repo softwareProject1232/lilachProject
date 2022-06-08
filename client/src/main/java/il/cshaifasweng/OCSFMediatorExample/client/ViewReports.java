@@ -80,6 +80,7 @@ public class ViewReports {
         x.setTickLabelRotation(0);
         NumberAxis y = new NumberAxis();
         y.setLabel("Count");
+        grid.getChildren().remove(bc_orders);
         bc_orders = new BarChart(x, y);
         bc_orders.setTitle("Items orders");
         XYChart.Series series = new XYChart.Series();
@@ -104,6 +105,7 @@ public class ViewReports {
         x.setTickLabelRotation(0);
         NumberAxis y = new NumberAxis();
         y.setLabel("Complaints Count");
+        grid.getChildren().remove(bc_comp);
         bc_comp = new BarChart(x, y);
         bc_comp.setTitle("Complaints per day");
 
@@ -146,4 +148,9 @@ public class ViewReports {
         System.out.println("Sent request to get orders");
     }
 
+    public void refreshOrders(ActionEvent actionEvent) {
+        System.out.println("Sending request to get orders");
+        SimpleClient.getClient().requestOrdersReport(branchesSelect.getSelectionModel().getSelectedItem().toString(), daysBack);
+        System.out.println("Sent request to get orders");
+    }
 }

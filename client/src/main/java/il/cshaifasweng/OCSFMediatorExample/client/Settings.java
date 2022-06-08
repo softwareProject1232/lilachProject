@@ -37,9 +37,9 @@ public class Settings {
 
     @FXML
     void initialize() {
-        assert ipTF != null : "fx:id=\"ipTF\" was not injected: check your FXML file 'settings.fxml'.";
-        assert portTF != null : "fx:id=\"portTF\" was not injected: check your FXML file 'settings.fxml'.";
-        assert updateButton != null : "fx:id=\"updateButton\" was not injected: check your FXML file 'settings.fxml'.";
+        assert ipTF != null : "fx:id=\"ipTF\" was not injected: check your FXML file 'Settings.fxml'.";
+        assert portTF != null : "fx:id=\"portTF\" was not injected: check your FXML file 'Settings.fxml'.";
+        assert updateButton != null : "fx:id=\"updateButton\" was not injected: check your FXML file 'Settings.fxml'.";
 
         portTF.setText("3024");
         ipTF.setText("192.168.63.1");
