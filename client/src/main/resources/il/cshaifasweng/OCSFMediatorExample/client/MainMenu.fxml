@@ -14,6 +14,7 @@
             <Button mnemonicParsing="false" onAction="#LoadBasket" prefHeight="26.0" prefWidth="245.0" text="Basket" />
             <Button mnemonicParsing="false" onAction="#LoadOrderList" prefHeight="26.0" prefWidth="245.0" text="Account" />
             <Button mnemonicParsing="false" onAction="#LoadComplaints" prefHeight="26.0" prefWidth="245.0" text="Complaints" />
+            <Button mnemonicParsing="false" onAction="#LoadReports" prefHeight="26.0" prefWidth="245.0" text="View Reports" />
             <Button mnemonicParsing="false" onAction="#LoadSettings" prefHeight="26.0" prefWidth="245.0" text="Settings" />
           <Button mnemonicParsing="false" onAction="#LoadLogin" prefHeight="26.0" prefWidth="245.0" text="Log out" />
          </children>

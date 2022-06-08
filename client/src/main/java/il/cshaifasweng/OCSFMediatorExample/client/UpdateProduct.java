@@ -26,7 +26,12 @@ public class UpdateProduct {
 
     @FXML
     void changeToPriceWindow(ActionEvent event) throws IOException {
-        App.setRoot("ChangePriceWindow");
+        try {
+            System.out.println("changing root to changepricewindow");
+            App.setRoot("ChangePriceWindow");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

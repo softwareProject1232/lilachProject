@@ -42,7 +42,7 @@ public class MainMenu {
 
     @FXML
     void LoadReports(ActionEvent event) throws IOException {
-        App.setRoot("ReportsScreen");
+        App.setRoot("ViewReports");
     }
 
     @FXML
