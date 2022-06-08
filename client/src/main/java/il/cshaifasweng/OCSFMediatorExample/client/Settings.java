@@ -42,7 +42,7 @@ public class Settings {
         assert updateButton != null : "fx:id=\"updateButton\" was not injected: check your FXML file 'Settings.fxml'.";
 
         portTF.setText("3024");
-        ipTF.setText("192.168.63.1");
+        ipTF.setText("127.0.0.1");
     }
 
 

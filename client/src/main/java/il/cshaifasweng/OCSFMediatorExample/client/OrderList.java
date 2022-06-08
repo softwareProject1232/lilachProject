@@ -113,7 +113,7 @@ public class OrderList {
         System.out.println("Sending request\n");
         SimpleClient.getClient().requestOrdersByUser(App.userData.getDbId(), App.userData.getBranchName());
         System.out.println("Sent request\n");
-        balance.setText("Balance: " + App.userData.balance + "$");
+        balance.setText("Balance: " + String.valueOf(App.userData.balance) + "$");
     }
 
 }
