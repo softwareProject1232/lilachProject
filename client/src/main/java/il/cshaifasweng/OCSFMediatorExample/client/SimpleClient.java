@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
+import il.cshaifasweng.OCSFMediatorExample.server.Report;
 import il.cshaifasweng.OCSFMediatorExample.server.User;
 import org.greenrobot.eventbus.EventBus;
 import javafx.application.Platform;
@@ -42,6 +43,9 @@ public class SimpleClient extends AbstractClient {
 		}
 		else if(msg.getClass().equals(HistogramData.class)){
 			Platform.runLater(() -> EventBus.getDefault().post(new ReceivedComplaintsReport((HistogramData) msg)));
+		}
+		else if(msg.getClass().equals((ReportOrdersByItems.class))){
+			Platform.runLater(() -> EventBus.getDefault().post(new ReceivedReportOrdersByItemsEvent((ReportOrdersByItems) msg)));
 		}
 	}
 
@@ -186,6 +190,14 @@ public class SimpleClient extends AbstractClient {
 	public void requestComplaintsReport(){
 		try {
 			client.sendToServer("#request:report,complaints");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void requestOrdersReport(String branch, int days){
+		try {
+			client.sendToServer("#request:report,orders," + branch + "," + days); // request orders report #request:report,orders,branchName, int days to look in the past
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
