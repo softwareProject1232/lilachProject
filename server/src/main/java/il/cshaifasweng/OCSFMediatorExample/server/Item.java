@@ -103,4 +103,14 @@ public class Item {
     public void setPriceAfterDiscount(int priceAfterDiscount) {
         this.priceAfterDiscount = priceAfterDiscount;
     }
+
+    public Item(int id, String name, int price, String description, String imageUrl, int priceAfterDiscount, List<BasketItem> basketsInside) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.priceAfterDiscount = priceAfterDiscount;
+        BasketsInside = basketsInside;
+    }
 }
