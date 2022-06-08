@@ -50,6 +50,9 @@ public class SimpleClient extends AbstractClient {
 		else if(msg.getClass().equals(IncomeHistogramData.class)){
 			Platform.runLater(() -> EventBus.getDefault().post(new ReceivedIncomeReport((IncomeHistogramData) msg)));
 		}
+		else if(msg.getClass().equals(NewUserBalanceData.class)){
+			Platform.runLater(() -> EventBus.getDefault().post(new RecievedNewUserBalanceData((NewUserBalanceData) msg)));
+		}
 	}
 	public void requestComplaintsReport(int days){
 		try {
@@ -109,7 +112,7 @@ public class SimpleClient extends AbstractClient {
 
 	public void changeBalance(String bal, UserData usr){
 		try {
-			client.sendToServer("#update:editBalance,"+usr.getId()+"," + bal); //"update:price,<item id>,<new price>"
+			client.sendToServer("#update:editBalance,"+usr.getDbId()+"," + bal); //"update:price,<item id>,<new price>"
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
