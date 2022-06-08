@@ -53,7 +53,7 @@ public class Orders {
     }
     public int CancelOrder(int id)
     {
-        int ret = 0;
+        int ret = -1;
         for(Order or: orderList)
         {
             if(or.getId()==id)

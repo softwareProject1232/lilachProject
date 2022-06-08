@@ -166,9 +166,14 @@ public class Branches {
         }
     }
 
-    public int CancelOrder(int id, String branchName) {
-        Branch branch = GetBranchByName(branchName);
-        return branch.orders.CancelOrder(id);
+    public int CancelOrder(int id) {
+        int ret = -1;
+        for(Branch branch : branchList){
+            ret = branch.orders.CancelOrder(id);
+            if(ret != -1)
+                return ret;
+        }
+        return ret;
     }
 
     public void addComplaint(ComplaintData complaintData) {
