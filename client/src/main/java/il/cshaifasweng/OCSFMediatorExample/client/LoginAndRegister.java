@@ -27,6 +27,7 @@ public class LoginAndRegister {
     public ComboBox branch_list_login;
     public ComboBox branch_list_register;
     public TextField textfield_id_register;
+    public Label error;
     @FXML
     private ResourceBundle resources;
 
@@ -89,6 +90,7 @@ public class LoginAndRegister {
     @Subscribe
     public void onLoginRecievedEvent(LoginReceivedEvent event) {
         System.out.println("Received login\n");
+        error.setText("");
         if (event.didSuccessfullyLogin()){
             App.userData = event.getUser();
             App.orderData = new OrderData();
@@ -101,6 +103,7 @@ public class LoginAndRegister {
             }
         }
         else{
+            error.setText("ERROR: User already logged in or wrong username/password/branch");
             System.out.println("Failed to login\n");
         }
 
@@ -140,6 +143,7 @@ public class LoginAndRegister {
                 "Network",
                 "Subscription"
         );
+        error.setStyle("-fx-text-fill: red;");
         System.out.println("Sending Branches Request");
         SimpleClient.getClient().requestBranches();
         System.out.println("Sent Branches Request");
@@ -149,6 +153,7 @@ public class LoginAndRegister {
         //check that all fields are filled out and that branches are selected
         if (textfield_username_login.getText().isEmpty() || textfield_password_login.getText().isEmpty() || branch_list_login.getSelectionModel().isEmpty()) {
             System.out.println("Missing fields\n");
+            error.setText("ERROR: Missing fields");
             return;
         }
         System.out.println("Sending request\n");
