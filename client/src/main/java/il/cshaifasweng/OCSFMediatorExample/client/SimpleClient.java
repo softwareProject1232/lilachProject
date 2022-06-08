@@ -109,7 +109,7 @@ public class SimpleClient extends AbstractClient {
 
 	public void changeBalance(String bal, UserData usr){
 		try {
-			client.sendToServer("#update:editBalance,"+usr.getId()+"," + bal); //"update:price,<item id>,<new price>"
+			client.sendToServer("#update:editBalance,"+usr.getDbId()+"," + bal); //"update:price,<item id>,<new price>"
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

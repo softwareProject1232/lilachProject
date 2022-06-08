@@ -34,6 +34,8 @@ public class App extends Application {
 
     public static ComplaintListData compliantsData;
 
+    public static UserData compuser;
+
     @Override
     public void start(Stage stage) throws IOException {
         EventBus.getDefault().register(this);
