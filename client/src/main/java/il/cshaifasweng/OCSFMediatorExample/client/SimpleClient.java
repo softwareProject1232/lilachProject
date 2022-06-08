@@ -50,6 +50,9 @@ public class SimpleClient extends AbstractClient {
 		else if(msg.getClass().equals(IncomeHistogramData.class)){
 			Platform.runLater(() -> EventBus.getDefault().post(new ReceivedIncomeReport((IncomeHistogramData) msg)));
 		}
+		else if(msg.getClass().equals(NewUserBalanceData.class)){
+			Platform.runLater(() -> EventBus.getDefault().post(new RecievedNewUserBalanceData((NewUserBalanceData) msg)));
+		}
 	}
 	public void requestComplaintsReport(int days){
 		try {

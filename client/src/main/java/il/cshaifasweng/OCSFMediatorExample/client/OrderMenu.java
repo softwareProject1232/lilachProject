@@ -37,8 +37,9 @@ public class OrderMenu {
     private Label total;
 
     @Subscribe
-    void onRecievedNewUserBalanceData(RecievedNewUserBalanceData recievedNewUserBalanceData){
+    public void onRecievedNewUserBalanceData(RecievedNewUserBalanceData recievedNewUserBalanceData){
         App.userData.balance = recievedNewUserBalanceData.newUserBalanceData.balance;
+        System.out.println("Recieved new balance: " + App.userData.balance);
     }
 
     @FXML
@@ -61,6 +62,7 @@ public class OrderMenu {
     }
     @FXML
     void initialize() {
+        EventBus.getDefault().register(this);
         assert ConfirmOrder != null : "fx:id=\"ConfirmOrder\" was not injected: check your FXML file 'OrderMenu.fxml'.";
         assert MainMenuButton != null : "fx:id=\"MainMenuButton\" was not injected: check your FXML file 'OrderMenu.fxml'.";
         assert OutputText != null : "fx:id=\"OutputText\" was not injected: check your FXML file 'OrderMenu.fxml'.";

@@ -64,13 +64,11 @@ public class Orders {
                 {
                     user.GetRefund(or, 1);
                     branch.income -= or.price;
-                    ret = user.balance;
                 }
                 else if(LocalDateTime.now().isBefore(or.supplyDate.minusHours(1)))
                 {
                     user.GetRefund(or, 0.5);
                     branch.income -= or.price/2;
-                    ret = user.balance;
                 }
                 ret = user.balance;
                 orderList.remove(or);
@@ -78,6 +76,7 @@ public class Orders {
                 App.session.saveOrUpdate(branch);
                 App.session.flush();
                 App.SafeCommit();
+                return ret;
             }
         }
         return ret;
