@@ -14,6 +14,7 @@ public class OrderData implements Serializable {
     public int totalPrice;
     public java.time.LocalDateTime orderDate;
     public java.time.LocalDateTime supplyDate;
+    public int totalPriceAfterDiscount;
     public OrderData(){
         items = new ArrayList<BasketItemData>();
     }

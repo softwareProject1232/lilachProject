@@ -89,4 +89,6 @@ public class ItemData implements Serializable{
     public void setIsZer(int isZer) {
         this.isZer = isZer;
     }
+
+    public int getPriceAfterDiscount() {return priceAfterDiscount;}
 }
