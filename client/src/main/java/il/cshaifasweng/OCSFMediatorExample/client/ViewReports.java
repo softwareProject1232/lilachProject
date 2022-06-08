@@ -10,15 +10,14 @@ import java.util.ResourceBundle;
 import il.cshaifasweng.OCSFMediatorExample.entities.HistogramData;
 import il.cshaifasweng.OCSFMediatorExample.entities.IncomeHistogramData;
 import il.cshaifasweng.OCSFMediatorExample.entities.ReportOrdersByItems;
+import javafx.beans.InvalidationListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -28,7 +27,10 @@ import org.greenrobot.eventbus.Subscribe;
 public class ViewReports {
 
     public GridPane grid;
-    public ComboBox branchesSelect;
+    public ComboBox branchesSelectLeft, branchesSelectRight;
+    public GridPane innerGrid;
+    public Spinner daysOrders;
+    public Spinner daysComplaints;
     @FXML
     private ResourceBundle resources;
 
@@ -50,10 +52,11 @@ public class ViewReports {
     @FXML
     private VBox vbox_main;
 
-    private int daysBack = 30;
     private List<String> branches;
 
-    private BarChart<CategoryAxis, NumberAxis> bc_comp, bc_orders, bc_income;
+    private BarChart bc_comp,  bc_orders_left, bc_orders_right, bc_income;
+
+    int whatToExpect = 0;
     HistogramData data;
     ReportOrdersByItems ordersData;
 
@@ -62,13 +65,14 @@ public class ViewReports {
     public void onReceivedIncomeReport(ReceivedIncomeReport event) {
         System.out.println("Received income report\n");
         incomeData = event.getData();
-        buildOrdersGraph();
+        buildIncomeGraph();
     }
     @Subscribe
     public void onReceivedReportOrdersByItemsEvent(ReceivedReportOrdersByItemsEvent event) {
-        System.out.println("Received complaints report\n");
+        System.out.println("Received orders report\n");
         ordersData = event.getOrders();
         buildOrdersGraph();
+        whatToExpect = 1 - whatToExpect;
     }
     @Subscribe
     public void onReceivedComplaintsReportEvent(ReceivedComplaintsReport event) {
@@ -83,20 +87,21 @@ public class ViewReports {
             xAxis.add(incomeData.branchNameList.getBranchList().get(i));
         }
         CategoryAxis x = new CategoryAxis();
-        x.setLabel("Items");
+        x.setLabel("Branches");
         x.setTickLabelRotation(0);
         NumberAxis y = new NumberAxis();
-        y.setLabel("Count");
-        grid.getChildren().remove(bc_orders);
-        bc_orders = new BarChart(x, y);
-        bc_orders.setTitle("Items orders");
+        y.setLabel("Income");
+        grid.getChildren().remove(bc_income);
+        bc_income = new BarChart<>(x, y);
+        bc_income.setTitle("Income per branch");
+
         XYChart.Series series = new XYChart.Series();
         series.setName("Items");
-        for (int i = ordersData.itemsReport.size()-1 ; i >= 0; i--) {
+        for (int i = incomeData.incomeList.size()-1 ; i >= 0; i--) {
             series.getData().add(new XYChart.Data(xAxis.get(i), incomeData.incomeList.get(i)));
         }
-        bc_orders.getData().add(series);
-        grid.add(bc_orders, 0, 1);
+        bc_income.getData().add(series);
+        grid.add(bc_income, 0, 2);
     }
     private void buildOrdersGraph() {
         List<String> xAxis = new ArrayList<>();
@@ -110,16 +115,27 @@ public class ViewReports {
         x.setTickLabelRotation(0);
         NumberAxis y = new NumberAxis();
         y.setLabel("Count");
-        grid.getChildren().remove(bc_income);
-        bc_income = new BarChart(x, y);
-        bc_income.setTitle("Items orders");
+        innerGrid.getChildren().remove((whatToExpect == 1) ? bc_orders_right : bc_orders_left);
+        if (whatToExpect == 1) {
+            bc_orders_right = new BarChart<>(x, y);
+            bc_orders_right.setTitle("Orders per item");
+        }
+        else {
+            bc_orders_left = new BarChart<>(x, y);
+            bc_orders_left.setTitle("Orders per item");
+        }
         XYChart.Series series = new XYChart.Series();
         series.setName("Items");
         for (int i = ordersData.itemsReport.size()-1 ; i >= 0; i--) {
             series.getData().add(new XYChart.Data(xAxis.get(i), ordersData.itemsReport.get(i).timesOrdered));
         }
-        bc_comp.getData().add(series);
-        grid.add(bc_comp, 0, 1);
+        if (whatToExpect == 1) {
+            bc_orders_right.getData().add(series);
+        }
+        else {
+            bc_orders_left.getData().add(series);
+        }
+        innerGrid.add((whatToExpect == 1) ? bc_orders_right : bc_orders_left, whatToExpect, 0);
     }
     private void buildComplaintsHistogram() {
 
@@ -156,9 +172,33 @@ public class ViewReports {
     @FXML
     void initialize() {
         EventBus.getDefault().register(this);
+        daysComplaints.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, 30));
+        daysOrders.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, 30));
+        daysComplaints.valueProperty().addListener(refreshComplaints());
+        daysOrders.valueProperty().addListener(refreshOrders());
         System.out.println("Sending Branches Request");
         SimpleClient.getClient().requestBranches();
         System.out.println("Sent Branches Request");
+    }
+
+    private InvalidationListener refreshOrders() {
+        return (observable) -> {
+            whatToExpect = 0;
+            System.out.println("Sending request to get orders left");
+            SimpleClient.getClient().requestOrdersReport(branchesSelectLeft.getSelectionModel().getSelectedItem().toString(), Integer.parseInt(daysOrders.getValue().toString()));
+            System.out.println("Sent request to get orders");
+            System.out.println("Sending request to get orders right");
+            SimpleClient.getClient().requestOrdersReport(branchesSelectRight.getSelectionModel().getSelectedItem().toString(), Integer.parseInt(daysOrders.getValue().toString()));
+            System.out.println("Sent request to get orders");
+        };
+    }
+
+    private InvalidationListener refreshComplaints() {
+        return (observable) -> {
+            System.out.println("Sending Complaints Request");
+            SimpleClient.getClient().requestComplaintsReport(Integer.parseInt(daysComplaints.getValue().toString()));
+            System.out.println("Sent Complaints Request");
+        };
     }
     @Subscribe
     public void onBranchRecievedEvent(BranchesReceivedEvent event) {
@@ -166,24 +206,32 @@ public class ViewReports {
         branches = event.getBranches().getBranchList();
         vbox_main.setVisible(true);
         for (String branch : branches) {
-            branchesSelect.getItems().add(branch);
+            branchesSelectLeft.getItems().add(branch);
+            branchesSelectRight.getItems().add(branch);
         }
-        branchesSelect.getItems().add("network");
-        branchesSelect.getSelectionModel().select(branches.size());
+        branchesSelectLeft.getItems().add("network");
+        branchesSelectLeft.getSelectionModel().select(branches.size());
+        branchesSelectRight.getItems().add("network");
+        branchesSelectRight.getSelectionModel().select(branches.size());
         System.out.println("Sending request to get complaints");
-        SimpleClient.getClient().requestComplaintsReport(daysBack);
+        SimpleClient.getClient().requestComplaintsReport(Integer.parseInt(daysComplaints.getValue().toString()));
         System.out.println("Sent request to get complaints");
-        System.out.println("Sending request to get orders");
-        SimpleClient.getClient().requestOrdersReport(branchesSelect.getSelectionModel().getSelectedItem().toString(), daysBack);
-        System.out.println("Sent request to get orders");
         System.out.println("Sending request to get incomes");
         SimpleClient.getClient().requestIncomeReport();
         System.out.println("Sent request to get incomes");
     }
 
-    public void refreshOrders(ActionEvent actionEvent) {
-        System.out.println("Sending request to get orders");
-        SimpleClient.getClient().requestOrdersReport(branchesSelect.getSelectionModel().getSelectedItem().toString(), daysBack);
+    public void refreshOrdersLeft(ActionEvent actionEvent) {
+        whatToExpect = 0;
+        System.out.println("Sending request to get orders left");
+        SimpleClient.getClient().requestOrdersReport(branchesSelectLeft.getSelectionModel().getSelectedItem().toString(), Integer.parseInt(daysOrders.getValue().toString()));
+        System.out.println("Sent request to get orders");
+    }
+
+    public void refreshOrdersRight(ActionEvent actionEvent) {
+        whatToExpect = 1;
+        System.out.println("Sending request to get orders right");
+        SimpleClient.getClient().requestOrdersReport(branchesSelectRight.getSelectionModel().getSelectedItem().toString(), Integer.parseInt(daysOrders.getValue().toString()));
         System.out.println("Sent request to get orders");
     }
 }

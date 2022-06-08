@@ -83,7 +83,7 @@ public class PrimaryCatalog {
 			price = item.getPrice();
 			String path = item.getImageURL();
 			priceAfterDiscount = item.getPriceAfterDiscount();
-
+			System.out.println("PATH " + path);
 			Image image = new Image(path, true);
 			ImageView imageView = new ImageView(image);
 			imageView.setFitHeight(60);
