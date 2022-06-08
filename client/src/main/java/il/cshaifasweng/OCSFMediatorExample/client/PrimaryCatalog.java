@@ -70,6 +70,7 @@ public class PrimaryCatalog {
 		int id;
 		String name;
 		int price;
+		int priceAfterDiscount;
 		String description;
 		VBox pane;
 		if (App.userData.type != 4 && App.userData.type != 0) {
@@ -81,6 +82,7 @@ public class PrimaryCatalog {
 			name = item.getName();
 			price = item.getPrice();
 			String path = item.getImageURL();
+			priceAfterDiscount = item.getPriceAfterDiscount();
 
 			Image image = new Image(path, true);
 			ImageView imageView = new ImageView(image);
@@ -88,8 +90,8 @@ public class PrimaryCatalog {
 			imageView.setFitWidth(60);
 			imageView.setPreserveRatio(false);
 			description = item.getDescription();
-			System.out.format("id: %s\nname: %s\nprice: %s\ndescription: %s\n", id, name, price, description);
-			pane = generateItem(id, name, price, description, imageView);
+			System.out.format("id: %s\nname: %s\nprice: %s\ndescription: %s\nprice after discount:%s\n", id, name, price, description);
+			pane = generateItem(id, name, price, description, imageView,priceAfterDiscount);
 			addFlower(pane);
 		}
 	}
@@ -127,10 +129,14 @@ public class PrimaryCatalog {
 		ret.getChildren().addAll(l_name);
 		return ret;
 	}
-	VBox generateItem(int id, String name, int price, String description, ImageView im){
+	VBox generateItem(int id, String name, int price, String description, ImageView im,int priceAfterDiscount){
 		//TODO: use description
 		VBox ret = new VBox();
 		Label l_name = new Label(name), l_price = new Label("Price: " + price + "$");
+		if(priceAfterDiscount < price)
+		{
+			l_price.setText("Price: " + price +"$ -> " + priceAfterDiscount + "$");
+		}
 		ret.setAlignment(Pos.CENTER);
 		if(App.userData.type != 4 && App.userData.type != 0){
 			Button addToCart = new Button("Add to cart");

@@ -59,11 +59,13 @@ public class Bucket {
         int id;
         String name;
         int price;
+        int priceAfterDiscount;
         String description;
         HBox pane;
         int index = 0;
         int zer_count = 0;
         App.orderData.totalPrice = 0;
+        App.orderData.totalPriceAfterDiscount = 0;
         for (BasketItemData item: App.orderData.items){
             if(item.listItems.size() == 1)
             {
@@ -71,6 +73,7 @@ public class Bucket {
                 name = item.listItems.get(0).getName();
                 price = item.listItems.get(0).getPrice();
                 description = item.listItems.get(0).getDescription();
+                priceAfterDiscount = item.listItems.get(0).getPriceAfterDiscount();
             }
             else
             {
@@ -78,34 +81,40 @@ public class Bucket {
                 id = 0;
                 name = "Zer " + zer_count;
                 price = 0;
+                priceAfterDiscount = 0;
                 description = "";
                 for(ItemData it:item.listItems){
                     price += it.getPrice();
+                    priceAfterDiscount += it.getPriceAfterDiscount();
                     description += it.getName() + ", ";
                 }
                 description.substring(0, description.length() - 2);
             }
             System.out.format("id: %s\nname: %s\nprice: %s\ndescription: %s\n", id, name, price, description);
-            pane = generateItem(id, name, price, description,index);
+            pane = generateItem(id, name, price, description,index,priceAfterDiscount);
             index++;
             App.orderData.totalPrice += price;
             addItem(pane);
         }
-        if(App.orderData.totalPrice >= 50 && App.userData.type != 1)
+        if(App.orderData.totalPriceAfterDiscount >= 50 && App.userData.type != 1)
         {
-            total.setText("Discount for buying over 50$\nTotal: " + App.orderData.totalPrice +"$ -> " + (int)(App.orderData.totalPrice*0.9) +"$");
-            App.orderData.totalPrice = (int)(App.orderData.totalPrice*0.9);
+            total.setText("Discount for buying over 50$\nTotal: " + App.orderData.totalPriceAfterDiscount +"$ -> " + (int)(App.orderData.totalPriceAfterDiscount*0.9) +"$");
+            App.orderData.totalPrice = (int)(App.orderData.totalPriceAfterDiscount*0.9);
         }
         else
-            total.setText("Total: " + App.orderData.totalPrice + "$");
+            total.setText("Total: " + App.orderData.totalPriceAfterDiscount + "$");
     }
     void cleanBucket(){
         ItemList.getChildren().removeAll();
         ItemList.getChildren().clear();
     }
-    HBox generateItem(int id, String name, int price, String description,int index){
+    HBox generateItem(int id, String name, int price, String description,int index,int priceAfterDiscount){
         HBox ret = new HBox();
         Label l_name = new Label(name),l_desc = new Label(description), l_price = new Label("Price: " + price + "$");
+        if(price>priceAfterDiscount)
+        {
+            l_price.setText("Price: " + price +"$ -> " + priceAfterDiscount +"$");
+        }
         Button b_remove = new Button();
         ret.setAlignment(Pos.CENTER);
 
