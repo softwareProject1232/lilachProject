@@ -95,7 +95,7 @@ public class Report {
         java.time.LocalDate date = LocalDate.now();
         for(int i=0;i<=7;i++) {
             for (Complaint c : App.branches.complaints.complaints) {
-                if (date.minusDays(i).isAfter(c.getDate())) {
+                if (date.minusDays(i).isEqual(c.getDate())) {
                     hs.complaintsNumber.set(i,hs.complaintsNumber.get(i)+1);
                 }
             }
