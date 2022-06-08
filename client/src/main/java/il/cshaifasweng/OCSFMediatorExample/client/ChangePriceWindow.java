@@ -33,6 +33,11 @@ public class ChangePriceWindow {
     }
 
     @FXML
+    void goToMainMenu(ActionEvent event) throws IOException {
+        App.setRoot("MainMenu");
+    }
+
+    @FXML
     void updateValues(ActionEvent event) {
         SimpleClient myclient=SimpleClient.getClient();
         myclient.changePrice(Integer.parseInt(PriceTF.getText()),App.data.itemsdata.get(App.thisitem));

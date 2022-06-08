@@ -136,6 +136,7 @@ public class PrimaryCatalog {
 		if(priceAfterDiscount < price)
 		{
 			l_price.setText("Price: " + price +"$ -> " + priceAfterDiscount + "$");
+			l_price.setWrapText(true);
 		}
 		ret.setAlignment(Pos.CENTER);
 		if(App.userData.type != 4 && App.userData.type != 0){
@@ -150,7 +151,6 @@ public class PrimaryCatalog {
 			});
 			ret.getChildren().add(addToCart);
 		}
-		ret.setPrefSize(100, 50);
 		ret.setBorder(new Border(new BorderStroke(Color.BLACK,
 				BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		ret.setOnMouseClicked(event ->  {

@@ -56,7 +56,7 @@ public class SimpleServer extends AbstractServer {
 					case "user" -> // update user #update:user,username,password,email,type,creditCard,taz,id,branchName
 							App.branches.editUser(args[1], args[2], args[3], Integer.parseInt(args[4]), args[5], args[6], Integer.parseInt(args[7]), args[8]);
 					case "cancelOrder" -> // cancel order #update:cancelOrder,orderId,branchName
-							App.branches.CancelOrder(Integer.parseInt(args[1]), args[2]);
+							SafeSendToClient(new NewUserBalanceData(App.branches.CancelOrder(Integer.parseInt(args[1]), args[2])), client);
 					case "editBalance" -> // edit balance #update:editBalance,id,newBalance
 							App.branches.editUserBalance(Integer.parseInt(args[1]), Integer.parseInt(args[2]));
 					case "removeComplaint" -> // remove complaint #update:removeComplaint,complaintId
@@ -92,11 +92,11 @@ public class SimpleServer extends AbstractServer {
 					}
 					case "report" -> {
 						if(args[1].equals("orders")) {
-							SafeSendToClient(Report.getOrdersReport(args[2],Integer.parseInt(args[3])), client); // request orders report #request:report,orders,branchName, int days to look in the past
+							SafeSendToClient(Report.getOrdersReport(args[2],Integer.parseInt(args[3])), client); // request orders report #request:report,orders,branchName,<int days to look in the past>
 						} else if(args[1].equals("complaints")) {
-							SafeSendToClient(Report.reportComplaints(), client); // request complaints report #request:report,complaints
+							SafeSendToClient(Report.reportComplaints(Integer.parseInt(args[2])), client); // request complaints report #request:report,complaints,<int days to look in the past>
 						} else if(args[1].equals("income")) {
-							SafeSendToClient(Report.getIncome(args[2]), client); // request income report #request:report,income,branchName
+							SafeSendToClient(Report.getIncomeHistogramData(), client); // request income report #request:report,income
 						}
 					}
 					case "userOrders" -> { // request userOrders #request:userOrders,dbId,branchName | use "network" branchName to get all orders
@@ -109,7 +109,7 @@ public class SimpleServer extends AbstractServer {
 				}
 			}
 		} else if (OrderData.class.equals(msg.getClass())) { // Make an order | <OrderData>
-			App.branches.MakeOrder((OrderData) msg);
+			SafeSendToClient(App.branches.MakeOrder((OrderData) msg), client);
 		}
 		else if (msg.getClass().equals(ComplaintData.class)) { // Make a complaint | <ComplaintData>
 			App.branches.addComplaint((ComplaintData) msg);
