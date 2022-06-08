@@ -55,8 +55,8 @@ public class SimpleServer extends AbstractServer {
 							App.catalog.changeDiscount(Integer.parseInt(args[1]), Integer.parseInt(args[2]));
 					case "user" -> // update user #update:user,username,password,email,type,creditCard,taz,id,branchName
 							App.branches.editUser(args[1], args[2], args[3], Integer.parseInt(args[4]), args[5], args[6], Integer.parseInt(args[7]), args[8]);
-					case "cancelOrder" -> // cancel order #update:cancelOrder,orderId,branchName
-							SafeSendToClient(new NewUserBalanceData(App.branches.CancelOrder(Integer.parseInt(args[1]), args[2])), client);
+					case "cancelOrder" -> // cancel order #update:cancelOrder,orderId
+							SafeSendToClient(new NewUserBalanceData(App.branches.CancelOrder(Integer.parseInt(args[1]))), client);
 					case "editBalance" -> // edit balance #update:editBalance,id,newBalance
 							App.branches.editUserBalance(Integer.parseInt(args[1]), Integer.parseInt(args[2]));
 					case "removeComplaint" -> // remove complaint #update:removeComplaint,complaintId
