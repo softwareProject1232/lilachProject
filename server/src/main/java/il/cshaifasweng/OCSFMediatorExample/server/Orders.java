@@ -59,22 +59,22 @@ public class Orders {
             if(or.getId()==id)
             {
                 App.SafeStartTransaction();
-                orderList.remove(or);
-                App.session.delete(or);
                 User user = App.branches.SearchUserById(or.orderedBy.getId());
                 if(LocalDateTime.now().isBefore(or.supplyDate.minusHours(3)))
                 {
-                    user.GetRefund(or.price);
+                    user.GetRefund(or, 1);
                     branch.income -= or.price;
                     ret = user.balance;
                 }
                 else if(LocalDateTime.now().isBefore(or.supplyDate.minusHours(1)))
                 {
-                    user.GetRefund(or.price/2);
+                    user.GetRefund(or, 0.5);
                     branch.income -= or.price/2;
                     ret = user.balance;
                 }
                 ret = user.balance;
+                orderList.remove(or);
+                App.session.delete(or);
                 App.session.saveOrUpdate(branch);
                 App.session.flush();
                 App.SafeCommit();

@@ -16,6 +16,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -26,6 +27,7 @@ import org.greenrobot.eventbus.Subscribe;
 public class ViewReports {
 
     public GridPane grid;
+    public ComboBox branchesSelect;
     @FXML
     private ResourceBundle resources;
 
@@ -48,6 +50,7 @@ public class ViewReports {
     private VBox vbox_main;
 
     private int daysBack = 30;
+    private List<String> branches;
 
     private BarChart<CategoryAxis, NumberAxis> bc_comp, bc_orders;
     HistogramData data;
@@ -121,11 +124,25 @@ public class ViewReports {
     @FXML
     void initialize() {
         EventBus.getDefault().register(this);
+        System.out.println("Sending Branches Request");
+        SimpleClient.getClient().requestBranches();
+        System.out.println("Sent Branches Request");
+    }
+    @Subscribe
+    public void onBranchRecievedEvent(BranchesReceivedEvent event) {
+        System.out.println("Received branch\n");
+        branches = event.getBranches().getBranchList();
+        vbox_main.setVisible(true);
+        for (String branch : branches) {
+            branchesSelect.getItems().add(branch);
+        }
+        branchesSelect.getItems().add("network");
+        branchesSelect.getSelectionModel().select(branches.size());
         System.out.println("Sending request to get complaints");
         SimpleClient.getClient().requestComplaintsReport(daysBack);
         System.out.println("Sent request to get complaints");
         System.out.println("Sending request to get orders");
-        SimpleClient.getClient().requestOrdersReport("network", daysBack);
+        SimpleClient.getClient().requestOrdersReport(branchesSelect.getSelectionModel().getSelectedItem().toString(), daysBack);
         System.out.println("Sent request to get orders");
     }
 

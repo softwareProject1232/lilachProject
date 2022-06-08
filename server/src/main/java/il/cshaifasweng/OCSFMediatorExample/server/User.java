@@ -154,9 +154,10 @@ public class User {
         App.SafeCommit();
     }
 
-    public void GetRefund(int price) {
+    public void GetRefund(Order order, double refundMultiplier) {
         App.SafeStartTransaction();
-        balance += price;
+        balance += order.price * refundMultiplier;
+        orders.remove(order);
         App.session.saveOrUpdate(this);
         App.session.flush();
         App.SafeCommit();

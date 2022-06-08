@@ -195,7 +195,10 @@ public class SimpleClient extends AbstractClient {
 	}
 	public void requestLogout(){
 		try {
-			client.sendToServer("#request:Logout,"+App.userData.dbId);
+			if(App.userData != null) {
+				client.sendToServer("#request:Logout," + App.userData.dbId);
+				App.userData = null;
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
