@@ -3,14 +3,26 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.RefundForComplaint">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.RefundForComplaint">
    <children>
-      <Button fx:id="backButton" layoutX="182.0" layoutY="260.0" mnemonicParsing="false" onAction="#goBackAction" text="Go back" />
-      <Button fx:id="refundButton" layoutX="359.0" layoutY="260.0" mnemonicParsing="false" onAction="#refundAction" text="Refund" />
-      <TextField fx:id="refundTF" layoutX="268.0" layoutY="138.0" />
-      <Text layoutX="176.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Refund amount:" />
+      <Button fx:id="backButton" layoutX="187.0" layoutY="494.0" mnemonicParsing="false" onAction="#goBackAction" text="Go back">
+         <font>
+            <Font size="64.0" />
+         </font></Button>
+      <Button fx:id="refundButton" layoutX="722.0" layoutY="494.0" mnemonicParsing="false" onAction="#refundAction" text="Refund">
+         <font>
+            <Font size="64.0" />
+         </font></Button>
+      <TextField fx:id="refundTF" layoutX="622.0" layoutY="164.0" prefHeight="282.0" prefWidth="486.0">
+         <font>
+            <Font size="64.0" />
+         </font></TextField>
+      <Text layoutX="119.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Refund amount:">
+         <font>
+            <Font size="64.0" />
+         </font></Text>
    </children>
 </AnchorPane>

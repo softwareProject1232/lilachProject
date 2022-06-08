@@ -4,17 +4,32 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.Settings">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.Settings">
    <children>
-      <TextField fx:id="ipTF" layoutX="247.0" layoutY="140.0" />
-      <Text layoutX="182.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter IP" />
-      <TextField fx:id="portTF" layoutX="247.0" layoutY="209.0" />
-      <Text layoutX="176.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Port" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="41.0" stroke="BLACK" strokeType="INSIDE" width="624.0" />
+      <TextField fx:id="ipTF" layoutX="503.0" layoutY="104.0">
+         <font>
+            <Font size="48.0" />
+         </font></TextField>
+      <Text layoutX="192.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter IP">
+         <font>
+            <Font size="48.0" />
+         </font></Text>
+      <TextField fx:id="portTF" layoutX="503.0" layoutY="221.0">
+         <font>
+            <Font size="48.0" />
+         </font></TextField>
+      <Text layoutX="180.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Port">
+         <font>
+            <Font size="48.0" />
+         </font></Text>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="41.0" stroke="BLACK" strokeType="INSIDE" width="1200.0" />
       <Button fx:id="MainMenuButton" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#goToMainMenu" text="Main Menu" />
-      <Button fx:id="updateButton" layoutX="285.0" layoutY="319.0" mnemonicParsing="false" onAction="#updateSettings" text="Update" />
+      <Button fx:id="updateButton" layoutX="454.0" layoutY="493.0" mnemonicParsing="false" onAction="#updateSettings" text="Update">
+         <font>
+            <Font size="64.0" />
+         </font></Button>
    </children>
 </AnchorPane>

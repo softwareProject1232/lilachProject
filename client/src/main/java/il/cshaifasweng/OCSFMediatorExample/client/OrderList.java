@@ -93,7 +93,6 @@ public class OrderList {
         refund.setOnMouseClicked(event ->  {;
             System.out.println("Clicked resolve " );
             myclient.requestCancelOrder(id);
-
         });
 
         ret.setPrefSize(350, 50);

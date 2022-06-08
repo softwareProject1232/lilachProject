@@ -6,32 +6,71 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.MainMenu">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.MainMenu">
    <children>
-      <VBox fx:id="CustomerMenu" alignment="CENTER" layoutX="220.0" layoutY="100.0" prefHeight="261.0" prefWidth="160.0">
+      <VBox fx:id="CustomerMenu" alignment="CENTER" layoutX="349.0" layoutY="132.0" prefHeight="600.0" prefWidth="500.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#LoadCatalog" prefHeight="26.0" prefWidth="245.0" text="Catalog" />
-            <Button mnemonicParsing="false" onAction="#LoadBasket" prefHeight="26.0" prefWidth="245.0" text="Basket" />
-            <Button mnemonicParsing="false" onAction="#LoadOrderList" prefHeight="26.0" prefWidth="245.0" text="Account" />
-            <Button mnemonicParsing="false" onAction="#LoadComplaints" prefHeight="26.0" prefWidth="245.0" text="Complaints" />
-            <Button mnemonicParsing="false" onAction="#LoadSettings" prefHeight="26.0" prefWidth="245.0" text="Settings" />
-          <Button mnemonicParsing="false" onAction="#LoadLogin" prefHeight="26.0" prefWidth="245.0" text="Log out" />
+            <Button mnemonicParsing="false" onAction="#LoadCatalog" prefHeight="26.0" prefWidth="400.0" text="Catalog">
+               <font>
+                  <Font size="36.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#LoadBasket" prefHeight="26.0" prefWidth="400.0" text="Basket">
+               <font>
+                  <Font size="36.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#LoadOrderList" prefHeight="26.0" prefWidth="400.0" text="Account">
+               <font>
+                  <Font size="36.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#LoadComplaints" prefHeight="26.0" prefWidth="400.0" text="Complaints">
+               <font>
+                  <Font size="36.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#LoadSettings" prefHeight="26.0" prefWidth="400.0" text="Settings">
+               <font>
+                  <Font size="36.0" />
+               </font></Button>
+          <Button mnemonicParsing="false" onAction="#LoadLogin" prefHeight="26.0" prefWidth="400.0" text="Log out">
+               <font>
+                  <Font size="36.0" />
+               </font></Button>
          </children>
       </VBox>
-      <Text layoutX="225.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Menu" textAlignment="CENTER" wrappingWidth="150.8980712890625">
+      <Text layoutX="441.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Menu" textAlignment="CENTER" wrappingWidth="316.49810791015625">
          <font>
-            <Font name="Javanese Text" size="26.0" />
+            <Font name="Calibri Bold" size="64.0" />
          </font>
       </Text>
-      <VBox fx:id="ManagerMenu" alignment="CENTER" disable="true" layoutX="220.0" layoutY="100.0" prefHeight="261.0" prefWidth="160.0" visible="false">
+      <VBox fx:id="ManagerMenu" alignment="CENTER" disable="true" layoutX="349.0" layoutY="135.0" prefHeight="600.0" prefWidth="500.0" visible="false">
          <children>
-            <Button mnemonicParsing="false" onAction="#SwitchToEdit" prefHeight="24.0" prefWidth="165.0" text="Edit Users Info" />
-            <Button mnemonicParsing="false" onAction="#LoadCatalog" prefHeight="26.0" prefWidth="245.0" text="Catalog" />
-            <Button mnemonicParsing="false" onAction="#LoadReports" prefHeight="26.0" prefWidth="245.0" text="Reports" />
-            <Button mnemonicParsing="false" onAction="#LoadReviewComplients" prefHeight="26.0" prefWidth="245.0" text="Review Complaints" />
-            <Button mnemonicParsing="false" onAction="#LoadReports" prefHeight="26.0" prefWidth="245.0" text="View Reports" />
-            <Button mnemonicParsing="false" onAction="#LoadSettingsManager" prefHeight="26.0" prefWidth="245.0" text="Settings" />
-            <Button mnemonicParsing="false" onAction="#LoadLogin" prefHeight="26.0" prefWidth="245.0" text="Log out" />
+            <Button mnemonicParsing="false" onAction="#SwitchToEdit" prefHeight="78.0" prefWidth="400.0" text="Edit Users Info">
+               <font>
+                  <Font size="36.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#LoadCatalog" prefHeight="26.0" prefWidth="400.0" text="Catalog">
+               <font>
+                  <Font size="36.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#LoadReports" prefHeight="26.0" prefWidth="400.0" text="Reports">
+               <font>
+                  <Font size="36.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#LoadReviewComplients" prefHeight="26.0" prefWidth="400.0" text="Review Complaints">
+               <font>
+                  <Font size="36.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#LoadReports" prefHeight="26.0" prefWidth="400.0" text="View Reports">
+               <font>
+                  <Font size="36.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#LoadSettingsManager" prefHeight="26.0" prefWidth="400.0" text="Settings">
+               <font>
+                  <Font size="36.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#LoadLogin" prefHeight="26.0" prefWidth="400.0" text="Log out">
+               <font>
+                  <Font size="36.0" />
+               </font></Button>
          </children>
       </VBox>
    </children>

@@ -10,36 +10,51 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ChangePriceWindow">
    <children>
-      <Button fx:id="RemoveButton" layoutX="844.0" layoutY="500.0" mnemonicParsing="false" onAction="#removefromCatalog" prefHeight="92.0" prefWidth="205.0" text="Remove Item">
+      <Button fx:id="RemoveButton" layoutX="858.0" layoutY="519.0" mnemonicParsing="false" onAction="#removefromCatalog" prefHeight="54.0" prefWidth="201.0" text="Remove Item">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Button fx:id="updateButton" layoutX="512.0" layoutY="500.0" mnemonicParsing="false" onAction="#updateValues" prefHeight="92.0" prefWidth="224.0" text="update">
+      <Button fx:id="updateButton" layoutX="488.0" layoutY="495.0" mnemonicParsing="false" onAction="#updateValues" prefHeight="92.0" prefWidth="224.0" text="update">
          <font>
-            <Font size="24.0" />
+            <Font size="48.0" />
          </font>
       </Button>
-      <TextField fx:id="PriceTF" layoutX="581.0" layoutY="129.0" prefHeight="69.0" prefWidth="358.0" promptText="price text" />
-      <Label layoutX="116.0" layoutY="52.0" prefHeight="69.0" prefWidth="507.0" text="Change Item name:" textAlignment="JUSTIFY">
+      <TextField fx:id="PriceTF" layoutX="579.0" layoutY="139.0" prefHeight="69.0" prefWidth="358.0" promptText="price text">
+         <font>
+            <Font size="36.0" />
+         </font></TextField>
+      <Label layoutX="116.0" layoutY="52.0" prefHeight="70.0" prefWidth="417.0" text="Change Item name:" textAlignment="JUSTIFY">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Label layoutX="117.0" layoutY="121.0" prefHeight="86.0" prefWidth="452.0" text="Enter New Price:">
+      <Label layoutX="116.0" layoutY="134.0" prefHeight="86.0" prefWidth="452.0" text="Enter New Price:">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <TextField fx:id="nameTF" layoutX="581.0" layoutY="40.0" prefHeight="69.0" prefWidth="358.0" promptText="name text" />
-      <Text layoutX="124.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Description:" wrappingWidth="235.93292236328125" />
-      <TextField fx:id="descritionTF" layoutX="579.0" layoutY="233.0" prefHeight="69.0" prefWidth="358.0" promptText="descrition text" />
+      <TextField fx:id="nameTF" layoutX="579.0" layoutY="48.0" prefHeight="69.0" prefWidth="358.0" promptText="name text">
+         <font>
+            <Font size="36.0" />
+         </font></TextField>
+      <Text layoutX="117.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Description:" wrappingWidth="349.532958984375">
+         <font>
+            <Font size="36.0" />
+         </font></Text>
+      <TextField fx:id="descritionTF" layoutX="579.0" layoutY="237.0" prefHeight="69.0" prefWidth="358.0" promptText="description text">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
       <Label layoutX="123.0" layoutY="339.0" text="Apply discount:">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <TextField fx:id="discountTF" layoutX="581.0" layoutY="331.0" prefHeight="69.0" prefWidth="358.0" promptText="discount" />
+      <TextField fx:id="discountTF" layoutX="579.0" layoutY="327.0" prefHeight="69.0" prefWidth="358.0" promptText="discount">
+         <font>
+            <Font size="36.0" />
+         </font></TextField>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="36.0" stroke="BLACK" strokeType="INSIDE" width="1200.0" />
       <Button fx:id="MainMenuButton" layoutX="14.0" layoutY="5.0" mnemonicParsing="false" onAction="#goToMainMenu" text="Main Menu" />
    </children>

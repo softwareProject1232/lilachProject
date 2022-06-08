@@ -4,20 +4,41 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.NewItem">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.NewItem">
    <children>
-      <Text layoutX="150.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
-      <TextField fx:id="NameTF" layoutX="209.0" layoutY="60.0" />
-      <Text layoutX="137.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
-      <TextField fx:id="DescriptionTF" layoutX="209.0" layoutY="104.0" />
-      <Text layoutX="154.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" />
-      <TextField fx:id="PriceTF" layoutX="209.0" layoutY="158.0" />
-      <Text layoutX="140.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ImageURL" />
-      <TextField fx:id="ImageTF" layoutX="209.0" layoutY="225.0" />
-      <Button fx:id="addItemButton" layoutX="258.0" layoutY="306.0" mnemonicParsing="false" onAction="#addItemAction" text="Add item" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="42.0" layoutX="-2.0" layoutY="-4.0" stroke="BLACK" strokeType="INSIDE" width="609.0" />
+      <Text layoutX="391.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
+         <font>
+            <Font size="36.0" />
+         </font></Text>
+      <TextField fx:id="NameTF" layoutX="566.0" layoutY="195.0" prefHeight="48.0" prefWidth="282.0" />
+      <Text layoutX="348.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:">
+         <font>
+            <Font size="36.0" />
+         </font></Text>
+      <TextField fx:id="DescriptionTF" layoutX="566.0" layoutY="258.0" prefHeight="48.0" prefWidth="282.0" />
+      <Text layoutX="400.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price:">
+         <font>
+            <Font size="36.0" />
+         </font></Text>
+      <TextField fx:id="PriceTF" layoutX="565.0" layoutY="320.0" prefHeight="48.0" prefWidth="282.0" />
+      <Text layoutX="357.0" layoutY="421.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ImageURL:">
+         <font>
+            <Font size="36.0" />
+         </font></Text>
+      <TextField fx:id="ImageTF" layoutX="565.0" layoutY="382.0" prefHeight="48.0" prefWidth="282.0" />
+      <Button fx:id="addItemButton" layoutX="475.0" layoutY="501.0" mnemonicParsing="false" onAction="#addItemAction" text="Add item">
+         <font>
+            <Font size="48.0" />
+         </font></Button>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="42.0" layoutX="-2.0" layoutY="-4.0" stroke="BLACK" strokeType="INSIDE" width="1200.0" />
       <Button fx:id="MainMenuButton" layoutX="24.0" layoutY="4.0" mnemonicParsing="false" onAction="#goTo" prefHeight="26.0" prefWidth="82.0" text="Main Menu" />
+      <Text layoutX="495.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Item">
+         <font>
+            <Font name="System Bold" size="48.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
