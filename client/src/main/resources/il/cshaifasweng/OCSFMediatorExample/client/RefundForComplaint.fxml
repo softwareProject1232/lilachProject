@@ -20,7 +20,7 @@
          <font>
             <Font size="64.0" />
          </font></TextField>
-      <Text layoutX="119.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Refund amount:">
+      <Text layoutX="83.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Refund amount:">
          <font>
             <Font size="64.0" />
          </font></Text>

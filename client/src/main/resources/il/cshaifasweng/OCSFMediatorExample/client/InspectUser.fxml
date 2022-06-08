@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.InspectUser">
    <children>
-      <Button fx:id="FreezeButton" layoutX="447.0" layoutY="500.0" mnemonicParsing="false" onAction="#Freeze" prefHeight="92.0" prefWidth="205.0" text="Freeze">
+      <Button fx:id="FreezeButton" layoutX="456.0" layoutY="500.0" mnemonicParsing="false" onAction="#Freeze" prefHeight="92.0" prefWidth="205.0" text="Freeze">
          <font>
             <Font size="24.0" />
          </font>

@@ -130,10 +130,11 @@ public class Bucket {
             App.orderData.items.remove(App.orderData.items.get(index));
             buildBucket();
         });
-
+        b_remove.setLayoutX(839);
         ret.setBorder(new Border(new BorderStroke(Color.BLACK,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-
+        ret.setPrefWidth(580);
+        ret.setAlignment(Pos.CENTER);
         ret.getChildren().addAll(l_name,l_desc, l_price,b_remove);
         return ret;
     }

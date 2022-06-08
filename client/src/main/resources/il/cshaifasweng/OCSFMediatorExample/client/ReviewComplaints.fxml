@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ReviewComplaints">
     <children>
-        <Text layoutX="325.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Review Complaints:" wrappingWidth="550.6698608398438">
+        <Text layoutX="253.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Review Complaints:" wrappingWidth="550.6698608398438">
          <font>
             <Font size="64.0" />
          </font></Text>
