@@ -48,10 +48,14 @@ public class ViewReports {
 
     HistogramData data;
 
-    //@Subscribe
+    @Subscribe
     public void onUserListDataRecievedEvent(ReceivedComplaintsReport event) {
         System.out.println("Received complaints report\n");
         data = event.getData();
+        for(int x:data.complaintsNumber)
+        {
+            System.out.println(x);
+        }
         buildHistogram();
     }
 
@@ -69,12 +73,14 @@ public class ViewReports {
         NumberAxis y = new NumberAxis();
         y.setLabel("Complaints Count");
         BarChart bc = new BarChart(x, y);
-        bc.getData().add(new XYChart.Data("Samsung", 33));
-        bc.getData().add(new XYChart.Data("Xiaomi"  , 25));
-        bc.getData().add(new XYChart.Data("Honor"  , 10));
-        //for (int i = 0; i < data.complaintsNumber.size(); i++) {
-        //    bc.getData().add(new XYChart.Data(xAxis.get(i), data.complaintsNumber.get(i)));
-        //}
+        bc.setTitle("Complaints per day");
+        XYChart.Series series = new XYChart.Series();
+        series.setName("Complaints");
+        for (int i = data.complaintsNumber.size()-1 ; i >= 0; i--) {
+            series.getData().add(new XYChart.Data(xAxis.get(i), data.complaintsNumber.get(i)));
+        }
+        bc.getData().add(series);
+        anchor.getChildren().add(bc);
     }
 
     @FXML
@@ -84,10 +90,10 @@ public class ViewReports {
 
     @FXML
     void initialize() {
-        //EventBus.getDefault().register(this);
-        //System.out.println("Sending request to get complaints");
-        //SimpleClient.getClient().requestComplaintsReport();
-        //System.out.println("Sent request to get complaints");
+        EventBus.getDefault().register(this);
+        System.out.println("Sending request to get complaints");
+        SimpleClient.getClient().requestComplaintsReport();
+        System.out.println("Sent request to get complaints");
     }
 
 }

@@ -16,6 +16,7 @@ public class HistogramData implements Serializable {
     }
 
     public HistogramData() {
+        String g = "gagag";
         this.complaintsNumber = new ArrayList<Integer>();
     }
 }
