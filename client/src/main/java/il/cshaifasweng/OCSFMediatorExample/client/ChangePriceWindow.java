@@ -42,13 +42,13 @@ public class ChangePriceWindow {
         try {
             int num=Integer.parseInt(PriceTF.getText());
         } catch (NumberFormatException e) {
-            PriceTF.setText("Illegal input");
+            PriceTF.setText("Illegal Input");
             return;
         }
         try {
             int num=Integer.parseInt(descritionTF.getText());
         } catch (NumberFormatException e) {
-            descritionTF.setText("Illegal input");
+            descritionTF.setText("Illegal Input");
             return;
         }
 
