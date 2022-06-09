@@ -121,7 +121,9 @@ public class LoginAndRegister {
     }
     @Subscribe
     public void onUserListDataRecievedEvent(ReceivedUserListEvent event) {
-        System.out.println("Received user list\n");
+        System.out.println("Received user list, size: " + event.getUsers().users.size());
+        takenUsernames = new java.util.ArrayList<>();
+        takenEmails = new java.util.ArrayList<>();
         for (UserData user : event.getUsers().users) {
             takenUsernames.add(user.getUsername());
             takenEmails.add(user.getEmail());
@@ -153,9 +155,13 @@ public class LoginAndRegister {
                 "Subscription"
         );
         errorLogin.setStyle("-fx-text-fill: red;");
+        errorRegister.setStyle("-fx-text-fill: red;");
         System.out.println("Sending Branches Request");
         SimpleClient.getClient().requestBranches();
         System.out.println("Sent Branches Request");
+        System.out.println("Sending users request");
+        SimpleClient.getClient().requestUsers("network");
+        System.out.println("Sent users request");
     }
 
     public void login(ActionEvent actionEvent) {
@@ -168,9 +174,6 @@ public class LoginAndRegister {
         System.out.println("Sending request");
         SimpleClient.getClient().requestLogin(textfield_username_login.getText(), textfield_password_login.getText(), branch_list_login.getSelectionModel().getSelectedItem().toString());
         System.out.println("Sent request");
-        System.out.println("Sending users request");
-        SimpleClient.getClient().requestUsers("network");
-        System.out.println("Sent users request");
     }
 
     public void login_as_guest(ActionEvent actionEvent) {
