@@ -41,7 +41,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         EventBus.getDefault().register(this);
         scene = new Scene(loadFXML("Settings"), 1200, 800);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/il/cshaifasweng/OCSFMediatorExample/client/styles/button.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/il/cshaifasweng/OCSFMediatorExample/client/styles/main_style.css")).toExternalForm());
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

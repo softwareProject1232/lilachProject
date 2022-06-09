@@ -1,0 +1,35 @@
+/* css file to make buttons look like material design with javafx properties */
+
+Button {
+    -fx-background-color: #00bcd4;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 0px;
+}
+
+/* Button hover */
+Button:hover {
+    -fx-background-color: #00acc1;
+}
+
+/* ComboBox should look nice with javafx properties, text should be white and font size should be 14px */
+ComboBox {
+    -fx-background-color: #00bcd4;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 0px;
+}
+/* ComboBox hover */
+ComboBox:hover {
+    -fx-background-color: #00acc1;
+}
+
+/*TextField need to to be similar to material design, javafx properties */
+TextField {
+    /* very light blue background */
+    -fx-background-color: #b3e5fc;
+    -fx-text-fill: black;
+    -fx-border-radius: 0px;
+}

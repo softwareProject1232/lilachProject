@@ -48,7 +48,7 @@
                         <Line endX="1110.0" layoutX="84.0" layoutY="763.0" startX="-74.0" />
                         <ComboBox fx:id="branchesSelectRight" layoutX="800.0" layoutY="340.0" onAction="#refreshOrdersRight" prefWidth="150.0" />
                         <Spinner fx:id="daysOrders" layoutX="500.0" layoutY="340.0" />
-                        <Spinner fx:id="daysComplaints" layoutX="500.0" layoutY="5.0" />
+                        <Spinner fx:id="daysComplaints" layoutX="500.0" />
                      </children></AnchorPane>
               </content>
             </ScrollPane>
