@@ -39,7 +39,7 @@
       </Text>
       <VBox fx:id="ManagerMenu" alignment="CENTER" disable="true" layoutX="349.0" layoutY="135.0" prefHeight="600.0" prefWidth="500.0" spacing="20.0" visible="false">
          <children>
-            <Button mnemonicParsing="false" onAction="#SwitchToEdit" prefHeight="78.0" prefWidth="400.0" text="Edit Users Info">
+            <Button mnemonicParsing="false" onAction="#SwitchToEdit" prefHeight="26.0" prefWidth="400.0" text="Edit Users Info">
                <font>
                   <Font size="36.0" />
                </font></Button>

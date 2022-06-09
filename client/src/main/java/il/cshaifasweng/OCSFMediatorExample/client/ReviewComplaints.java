@@ -94,7 +94,6 @@ public class ReviewComplaints {
         delete.setText("Delete");
         delete.setOnMouseClicked(event ->  {;
             //delete complaint function
-
         });
 
         ret.setPrefSize(350, 50);

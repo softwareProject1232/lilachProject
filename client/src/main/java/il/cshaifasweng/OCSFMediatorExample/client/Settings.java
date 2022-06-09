@@ -22,11 +22,6 @@ public class Settings {
     private Button updateButton;
 
     @FXML
-    void goToMainMenu(ActionEvent event) throws IOException {
-        //App.setRoot("MainMenu");
-    }
-
-    @FXML
     void updateSettings(ActionEvent event) throws IOException {
         SimpleClient client = SimpleClient.getClient(ipTF.getText(),Integer.parseInt(portTF.getText()));
 
