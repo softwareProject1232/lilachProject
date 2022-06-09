@@ -46,9 +46,9 @@ public class ChangePriceWindow {
             return;
         }
         try {
-            int num=Integer.parseInt(descritionTF.getText());
+            int num=Integer.parseInt(discountTF.getText());
         } catch (NumberFormatException e) {
-            descritionTF.setText("Illegal Input");
+            discountTF.setText("Illegal Input");
             return;
         }
 
