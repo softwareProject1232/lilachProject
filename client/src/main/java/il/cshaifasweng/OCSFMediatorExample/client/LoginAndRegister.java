@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
 import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
-import il.cshaifasweng.OCSFMediatorExample.server.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -27,6 +26,8 @@ public class LoginAndRegister {
     public ComboBox branch_list_login;
     public ComboBox branch_list_register;
     public TextField textfield_id_register;
+    public Label errorLogin;
+    public Label errorRegister;
     @FXML
     private ResourceBundle resources;
 
@@ -86,9 +87,11 @@ public class LoginAndRegister {
 
     private List<String> branches;
 
+    private List<String> takenUsernames, takenEmails;
     @Subscribe
     public void onLoginRecievedEvent(LoginReceivedEvent event) {
         System.out.println("Received login\n");
+        errorLogin.setText("");
         if (event.didSuccessfullyLogin()){
             App.userData = event.getUser();
             App.orderData = new OrderData();
@@ -101,6 +104,7 @@ public class LoginAndRegister {
             }
         }
         else{
+            errorLogin.setText("ERROR: User already logged in or wrong username/password/branch");
             System.out.println("Failed to login\n");
         }
 
@@ -115,45 +119,45 @@ public class LoginAndRegister {
             branch_list_register.getItems().add(branch);
         }
     }
+    @Subscribe
+    public void onUserListDataRecievedEvent(ReceivedUserListEvent event) {
+        System.out.println("Received user list, size: " + event.getUsers().users.size());
+        takenUsernames = new java.util.ArrayList<>();
+        takenEmails = new java.util.ArrayList<>();
+        for (UserData user : event.getUsers().users) {
+            takenUsernames.add(user.getUsername());
+            takenEmails.add(user.getEmail());
+        }
+    }
     @FXML
     void initialize() {
         EventBus.getDefault().register(this);
-        assert button_login != null : "fx:id=\"button_login\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert label_credit_card_register != null : "fx:id=\"label_credit_card_register\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert label_email_register != null : "fx:id=\"label_email_register\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert label_password != null : "fx:id=\"label_password\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert label_password_register != null : "fx:id=\"label_password_register\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert label_type_register != null : "fx:id=\"label_type_register\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert label_username != null : "fx:id=\"label_username\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert label_username_register != null : "fx:id=\"label_username_register\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert register_login != null : "fx:id=\"register_login\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert textfield_credit_card_register != null : "fx:id=\"textfield_credit_card_register\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert textfield_email_register != null : "fx:id=\"textfield_email_register\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert textfield_password_login != null : "fx:id=\"textfield_password_login\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert textfield_password_register != null : "fx:id=\"textfield_password_register\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert textfield_username_login != null : "fx:id=\"textfield_username_login\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert textfield_username_register != null : "fx:id=\"textfield_username_register\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert type_dropdown != null : "fx:id=\"type_dropdown\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert vbox_main != null : "fx:id=\"vbox_main\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
+
         type_dropdown.getItems().addAll(
                 "Branch",
                 "Network",
                 "Subscription"
         );
+        errorLogin.setStyle("-fx-text-fill: red;");
+        errorRegister.setStyle("-fx-text-fill: red;");
         System.out.println("Sending Branches Request");
         SimpleClient.getClient().requestBranches();
         System.out.println("Sent Branches Request");
+        System.out.println("Sending users request");
+        SimpleClient.getClient().requestUsers("network");
+        System.out.println("Sent users request");
     }
 
     public void login(ActionEvent actionEvent) {
         //check that all fields are filled out and that branches are selected
         if (textfield_username_login.getText().isEmpty() || textfield_password_login.getText().isEmpty() || branch_list_login.getSelectionModel().isEmpty()) {
             System.out.println("Missing fields\n");
+            errorLogin.setText("ERROR: Missing fields");
             return;
         }
-        System.out.println("Sending request\n");
+        System.out.println("Sending request");
         SimpleClient.getClient().requestLogin(textfield_username_login.getText(), textfield_password_login.getText(), branch_list_login.getSelectionModel().getSelectedItem().toString());
-        System.out.println("Sent request\n");
+        System.out.println("Sent request");
     }
 
     public void login_as_guest(ActionEvent actionEvent) {
@@ -173,7 +177,55 @@ public class LoginAndRegister {
                 || textfield_credit_card_register.getText().isEmpty() || branch_list_register.getSelectionModel().isEmpty()
                 || type_dropdown.getSelectionModel().isEmpty() || textfield_id_register.getText().isEmpty()) {
             System.out.println("Missing fields\n");
+            errorRegister.setText("ERROR: Missing fields");
             return;
+        }
+        //check all field validity
+        //username conataints only letters and numbers
+        if (!textfield_username_register.getText().matches("[a-zA-Z0-9]+")) {
+            System.out.println("Username contains illegal characters\n");
+            errorRegister.setText("ERROR: Username contains illegal characters");
+            return;
+        }
+        //password contains only letters and numbers and special characters
+        if (!textfield_password_register.getText().matches("[a-zA-Z0-9!@#$%^&*()_+-=]+")) {
+            System.out.println("Password contains illegal characters\n");
+            errorRegister.setText("ERROR: Password contains illegal characters");
+            return;
+        }
+        //email is valid
+        if (!textfield_email_register.getText().matches("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")) {
+            System.out.println("Email is invalid\n");
+            errorRegister.setText("ERROR: Email is invalid");
+            return;
+        }
+        //credit card is valid
+        if (!textfield_credit_card_register.getText().matches("^[0-9]{16}$")) {
+            System.out.println("Credit card is invalid\n");
+            errorRegister.setText("ERROR: Credit card is invalid");
+            return;
+        }
+        //id is valid
+        if (!textfield_id_register.getText().matches("^[0-9]{9}$")) {
+            System.out.println("ID is invalid\n");
+            errorRegister.setText("ERROR: ID is invalid");
+            return;
+        }
+        //check that username is not taken
+        for (String un : takenUsernames) {
+            if (un.equals(textfield_username_register.getText())) {
+                System.out.println("Username is taken\n");
+                errorRegister.setText("ERROR: Username is taken");
+                return;
+            }
+        }
+        //check that email is not taken
+        for (String em : takenEmails) {
+            if (em.equals(textfield_email_register.getText())) {
+                System.out.println("Email is taken\n");
+                errorRegister.setText("ERROR: Email is taken");
+                return;
+            }
         }
         SimpleClient.getClient().requestRegister(new UserData(textfield_username_register.getText(), textfield_password_register.getText(), textfield_email_register.getText(),
                 type_dropdown.getSelectionModel().getSelectedIndex() + 1, textfield_credit_card_register.getText(), textfield_id_register.getText(), -1, branch_list_register.getSelectionModel().getSelectedItem().toString(), -1));

@@ -39,6 +39,19 @@ public class ChangePriceWindow {
 
     @FXML
     void updateValues(ActionEvent event) throws IOException {
+        try {
+            int num=Integer.parseInt(PriceTF.getText());
+        } catch (NumberFormatException e) {
+            PriceTF.setText("Illegal Input");
+            return;
+        }
+        try {
+            int num=Integer.parseInt(descritionTF.getText());
+        } catch (NumberFormatException e) {
+            descritionTF.setText("Illegal Input");
+            return;
+        }
+
         SimpleClient myclient=SimpleClient.getClient();
         myclient.changePrice(Integer.parseInt(PriceTF.getText()),App.data.itemsdata.get(App.thisitem));
         myclient.changeDescription(descritionTF.getText(),App.data.itemsdata.get(App.thisitem));
