@@ -42,6 +42,8 @@ public class RefundForComplaint {
         SimpleClient myclient=SimpleClient.getClient();
         myclient.changeBalance(String.valueOf(App.compuser.balance+Integer.parseInt(refundTF.getText())),App.compuser);
         App.userData.balance=App.userData.balance+Integer.parseInt(refundTF.getText());
+
+        myclient.requestreomvecmplaint(App.thiscomp.id);
     }
 
     @FXML

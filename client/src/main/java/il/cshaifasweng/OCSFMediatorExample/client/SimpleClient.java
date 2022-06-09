@@ -210,6 +210,14 @@ public class SimpleClient extends AbstractClient {
 		}
 	}
 
+	public void requestreomvecmplaint(int id){
+		try {
+			client.sendToServer("#update:removeComplaint,"+id);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void requestComplaintsReport(){
 		try {
 			client.sendToServer("#request:report,complaints");
