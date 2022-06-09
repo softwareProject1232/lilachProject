@@ -43,7 +43,7 @@ public class Complaint {
     }
     public ComplaintData getComplaintData()
     {
-        ComplaintData com = new ComplaintData(complaintDescription,issuedBy.getUserData());
+        ComplaintData com = new ComplaintData(complaintDescription,issuedBy.getUserData(),id);
         return com;
     }
     public String getComplaintDescription() {
