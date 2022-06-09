@@ -3,14 +3,11 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
-import javafx.scene.control.Label;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.hibernate.criterion.Order;
-import javafx.scene.control.DatePicker;
 import tornadofx.control.DateTimePicker;
 
 
@@ -20,6 +17,9 @@ import java.time.LocalDateTime;
 
 public class OrderMenu {
 
+    public RadioButton delivery;
+    public RadioButton pickup;
+    public Label error;
     @FXML
     private Button ConfirmOrder;
     @FXML
@@ -44,13 +44,17 @@ public class OrderMenu {
 
     @FXML
     void doConfirmOrder(ActionEvent event) {
-        //ToggleGroup group = (ToggleGroup) event.getSource();
-        //String selected = group.getSelectedToggle().toString();
+        //if neither pickup nor delivery is selected
+        if(!delivery.isSelected() && !pickup.isSelected()){
+            error.setText("Please select delivery or pickup");
+            return;
+        }
         OrderData order = new OrderData(App.orderData.items, "", App.userData, App.orderData.totalPrice, LocalDateTime.now(), App.userData.getBranchName(), dateTimePrompt.getDateTimeValue(), App.orderData.totalPriceAfterDiscount);
         System.out.format("Sending Order: %s\n", order.toString());
         SimpleClient.getClient().MakeOrder(order);
         System.out.println("Order sent to server");
         OutputText.setText("Order Confirmed!, Thank you!");
+        error.setVisible(false);
         ConfirmOrder.setVisible(false);
         ConfirmOrder.setDisable(true);
         App.orderData.items.clear();
@@ -68,7 +72,8 @@ public class OrderMenu {
         assert OutputText != null : "fx:id=\"OutputText\" was not injected: check your FXML file 'OrderMenu.fxml'.";
         assert group1 != null : "fx:id=\"group1\" was not injected: check your FXML file 'OrderMenu.fxml'.";
         assert total != null : "fx:id=\"total\" was not injected: check your FXML file 'OrderMenu.fxml'.";
-
+        //error color red
+        error.setStyle("-fx-text-fill: red;");
         total.setText("Total: " + App.orderData.totalPrice + "$");
     }
 }
