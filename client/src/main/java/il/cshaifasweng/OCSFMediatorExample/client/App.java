@@ -14,6 +14,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -40,9 +41,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         EventBus.getDefault().register(this);
         scene = new Scene(loadFXML("Settings"), 1200, 800);
-
-
-
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/il/cshaifasweng/OCSFMediatorExample/client/styles/button.css")).toExternalForm());
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

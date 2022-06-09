@@ -92,7 +92,4 @@ public class InspectUser {
             App.setRoot("EditUsers");
         }
     }
-
-    public void Freeze(ActionEvent actionEvent) {
-    }
 }

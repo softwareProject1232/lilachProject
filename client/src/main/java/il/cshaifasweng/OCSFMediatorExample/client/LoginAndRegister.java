@@ -132,23 +132,7 @@ public class LoginAndRegister {
     @FXML
     void initialize() {
         EventBus.getDefault().register(this);
-        assert button_login != null : "fx:id=\"button_login\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert label_credit_card_register != null : "fx:id=\"label_credit_card_register\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert label_email_register != null : "fx:id=\"label_email_register\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert label_password != null : "fx:id=\"label_password\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert label_password_register != null : "fx:id=\"label_password_register\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert label_type_register != null : "fx:id=\"label_type_register\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert label_username != null : "fx:id=\"label_username\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert label_username_register != null : "fx:id=\"label_username_register\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert register_login != null : "fx:id=\"register_login\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert textfield_credit_card_register != null : "fx:id=\"textfield_credit_card_register\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert textfield_email_register != null : "fx:id=\"textfield_email_register\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert textfield_password_login != null : "fx:id=\"textfield_password_login\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert textfield_password_register != null : "fx:id=\"textfield_password_register\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert textfield_username_login != null : "fx:id=\"textfield_username_login\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert textfield_username_register != null : "fx:id=\"textfield_username_register\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert type_dropdown != null : "fx:id=\"type_dropdown\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
-        assert vbox_main != null : "fx:id=\"vbox_main\" was not injected: check your FXML file 'LoginAndRegister.fxml'.";
+
         type_dropdown.getItems().addAll(
                 "Branch",
                 "Network",
