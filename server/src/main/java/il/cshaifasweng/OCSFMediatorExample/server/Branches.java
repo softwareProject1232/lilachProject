@@ -2,6 +2,8 @@ package il.cshaifasweng.OCSFMediatorExample.server;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -235,5 +237,22 @@ public class Branches {
 
     public void Logout(Integer id) {
         loggedUsers.remove(id);
+    }
+
+    public void pullBranchesFromDB() {
+        complaints.pullComplaintsFromDB();
+
+        networkUsers.pullUsersFromDB(null);
+
+        CriteriaBuilder builder = App.session.getCriteriaBuilder();
+        CriteriaQuery<Branch> query = builder.createQuery(Branch.class);
+        query.from(Branch.class);
+        List<Branch> data = App.session.createQuery(query).getResultList();
+        branchList.clear();
+        branchList.addAll(data);
+
+        for(Branch branch : branchList){
+            branch.pullBranchFromDB();
+        }
     }
 }

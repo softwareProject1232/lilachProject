@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class User {
         taz="";
         creditCard="";
         balance=0;
+        complaints=new ArrayList<Complaint>();
     }
     public User(String username, String password, String email, int type,String cred,String taz, Users userGroup, int balance)
     {
@@ -51,6 +53,7 @@ public class User {
         this.taz=taz;
         this.userGroup = userGroup;
         this.balance=balance;
+        this.complaints=new ArrayList<Complaint>();
     }
     public User(UserData userData){
         this.username = userData.username;
@@ -60,6 +63,8 @@ public class User {
         this.creditCard=userData.getCreditCard();
         this.taz=userData.getId();
         this.balance = userData.balance;
+        this.complaints=new ArrayList<Complaint>();
+        this.orders=new ArrayList<Order>();
     }
 
     public UserData getUserData(){
@@ -161,5 +166,18 @@ public class User {
         App.session.saveOrUpdate(this);
         App.session.flush();
         App.SafeCommit();
+    }
+
+    public void pullUserFromDB() {
+        for (Order order : orders) {
+            order = Hibernate.unproxy(order, Order.class);
+            order.pullOrderFromDB();
+        }
+
+        for (Complaint complaint : complaints) {
+            complaint = Hibernate.unproxy(complaint, Complaint.class);
+        }
+
+        userGroup = Hibernate.unproxy(userGroup, Users.class);
     }
 }

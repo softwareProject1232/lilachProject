@@ -2,6 +2,7 @@ package il.cshaifasweng.OCSFMediatorExample.server;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.ComplaintData;
 import il.cshaifasweng.OCSFMediatorExample.entities.ComplaintListData;
+import org.hibernate.Hibernate;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -58,6 +59,19 @@ public class Complaints {
                 App.session.flush();
                 App.SafeCommit();
             }
+        }
+    }
+
+    public void pullComplaintsFromDB() {
+        CriteriaBuilder builder = App.session.getCriteriaBuilder();
+        CriteriaQuery<Complaint> query = builder.createQuery(Complaint.class);
+        query.from(Complaint.class);
+        List<Complaint> data = App.session.createQuery(query).getResultList();
+        complaints.clear();
+        complaints.addAll(data);
+
+        for (Complaint c : complaints) {
+            c.issuedBy = Hibernate.unproxy(c.issuedBy, User.class);
         }
     }
 }

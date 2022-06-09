@@ -3,6 +3,7 @@ package il.cshaifasweng.OCSFMediatorExample.server;
 import il.cshaifasweng.OCSFMediatorExample.entities.BasketItemData;
 import il.cshaifasweng.OCSFMediatorExample.entities.ItemData;
 import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class Order {
         App.SafeStartTransaction();
         items=new ArrayList<BasketItem>();
         for(BasketItemData list : orderData.items){
-            BasketItem basketItem = new BasketItem();
+            BasketItem basketItem = new BasketItem(this);
             for(ItemData itemData : list.listItems){
                 Item item = App.catalog.SearchItemById(itemData.getId());
                 basketItem.listItems.add(item);
@@ -47,6 +48,7 @@ public class Order {
             items.add(basketItem);
             App.session.save(basketItem);
         }
+        App.session.saveOrUpdate(this);
         App.session.flush();
         App.SafeCommit();
 
@@ -108,5 +110,17 @@ public class Order {
             list.add(t);
         }
         return new OrderData(id, list,bracha,orderedBy.getUserData(), price, orderDate,orderGroup.branch.name, supplyDate, price);
+    }
+
+    public void pullOrderFromDB() {
+        orderGroup = Hibernate.unproxy(orderGroup, Orders.class);
+
+        orderedBy = Hibernate.unproxy(orderedBy, User.class);
+
+        for(BasketItem basketItem: items)
+        {
+            basketItem = Hibernate.unproxy(basketItem, BasketItem.class);
+            basketItem.pullBasketItemFromDB();
+        }
     }
 }

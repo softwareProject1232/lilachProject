@@ -3,6 +3,7 @@ package il.cshaifasweng.OCSFMediatorExample.server;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.BasketItemData;
 import il.cshaifasweng.OCSFMediatorExample.entities.ItemData;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,11 +22,12 @@ public class BasketItem {
     @ManyToOne(fetch = FetchType.LAZY)
     public Order orderIn;
 
-    public BasketItem() {this.listItems = new ArrayList<Item>();}
+    public BasketItem(Order orderIn) {this.listItems = new ArrayList<Item>(); this.orderIn = orderIn;}
     public BasketItem(List<Item> ilist)
     {
         listItems =ilist;
     }
+    public BasketItem(){this.listItems = new ArrayList<Item>();}
 
     public int getId() {
         return id;
@@ -50,5 +52,12 @@ public class BasketItem {
             basketItemData.listItems.add(item.GetItemData());
         }
         return basketItemData;
+    }
+
+    public void pullBasketItemFromDB() {
+        orderIn = Hibernate.unproxy(orderIn, Order.class);
+        for (Item item : listItems) {
+            item = Hibernate.unproxy(item, Item.class);
+        }
     }
 }

@@ -2,6 +2,7 @@ package il.cshaifasweng.OCSFMediatorExample.server;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.UserData;
 import il.cshaifasweng.OCSFMediatorExample.entities.UserListData;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -40,14 +41,25 @@ public class Users {
         App.session.flush();
         App.SafeCommit();
     }
-    public void pullUsersFromDB()
+    public void pullUsersFromDB(Branch branch)
     {
+        branch = Hibernate.unproxy(branch, Branch.class);
+
         CriteriaBuilder builder = App.session.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery(User.class);
         query.from(User.class);
         List<User> data = App.session.createQuery(query).getResultList();
         users.clear();
-        users.addAll(data);
+        for(User user: data)
+        {
+            user = Hibernate.unproxy(user, User.class);
+            user.pullUserFromDB();
+
+            if(user.userGroup.branch==branch)
+            {
+                users.add(user);
+            }
+        }
     }
 
     public User SearchUserById(int id){

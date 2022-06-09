@@ -25,7 +25,7 @@ public class App
         session = getSessionFactory().openSession();
 
         catalog=new Catalog();
-        catalog.generateItems();
+        //catalog.generateItems();
         catalog.pullItemsFromCatalog();
         /*for(Item item: catalog.items)
         {
@@ -33,7 +33,8 @@ public class App
         }testing the catalog*/
 
         branches = new Branches();
-        branches.GenerateValues();
+        //branches.GenerateValues();
+        branches.pullBranchesFromDB();
 
 
         /*users = new Users();

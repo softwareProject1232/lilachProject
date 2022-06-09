@@ -3,6 +3,7 @@ package il.cshaifasweng.OCSFMediatorExample.server;
 import il.cshaifasweng.OCSFMediatorExample.entities.NewUserBalanceData;
 import il.cshaifasweng.OCSFMediatorExample.entities.OrderData;
 import il.cshaifasweng.OCSFMediatorExample.entities.OrderListData;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -28,14 +29,23 @@ public class Orders {
         this.orderList = new ArrayList<Order>();
     }
 
-    public void pullOrdersFromDB()
+    public void pullOrdersFromDB(Branch branch)
     {
         CriteriaBuilder builder = App.session.getCriteriaBuilder();
         CriteriaQuery<Order> query = builder.createQuery(Order.class);
         query.from(Order.class);
         List<Order> data = App.session.createQuery(query).getResultList();
         orderList.clear();
-        orderList.addAll(data);
+
+        for(Order order: data)
+        {
+            if(order.orderGroup.branch==branch)
+            {
+                order = Hibernate.unproxy(order, Order.class);
+                order.pullOrderFromDB();
+                orderList.add(order);
+            }
+        }
     }
 
     public NewUserBalanceData MakeOrder(OrderData orderData){

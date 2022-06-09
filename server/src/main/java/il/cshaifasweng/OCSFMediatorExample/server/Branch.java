@@ -1,6 +1,8 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 
 @Entity
@@ -64,5 +66,13 @@ public class Branch {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void pullBranchFromDB() {
+        users = Hibernate.unproxy(users, Users.class);
+        orders = Hibernate.unproxy(orders, Orders.class);
+
+        users.pullUsersFromDB(this);
+        orders.pullOrdersFromDB(this);
     }
 }
