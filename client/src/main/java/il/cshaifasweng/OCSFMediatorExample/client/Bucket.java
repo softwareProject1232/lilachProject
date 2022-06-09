@@ -126,7 +126,14 @@ public class Bucket {
 
         b_remove.setText("Remove");
         b_remove.setOnMouseClicked(event ->  {;
-            System.out.println("Clicked ID: " + (id-1));
+            int i =0;
+            for (BasketItemData item: App.orderData.items){
+                if(item.listItems.get(0).getId() == id){
+                    break;
+                }
+                i++;
+            }
+            System.out.println("Clicked ID: " + (i));
             App.orderData.items.remove(App.orderData.items.get(index));
             buildBucket();
         });
