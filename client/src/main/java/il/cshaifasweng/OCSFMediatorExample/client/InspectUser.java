@@ -31,7 +31,7 @@ public class InspectUser {
         email_label.setPromptText(curr.getEmail());
         List<String> types = new ArrayList<String>();
         types.add("Branch");
-        types.add("Newtwork");
+        types.add("Network");
         types.add("Subcription");
         type_dropdown.setPromptText(curr.getType() == 4 ? "Manager" : types.get(curr.getType() - 1));
         id_label.setPromptText(curr.getId());
