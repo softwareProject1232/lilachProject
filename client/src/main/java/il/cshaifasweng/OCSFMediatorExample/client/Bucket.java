@@ -111,7 +111,7 @@ public class Bucket {
     }
     HBox generateItem(int id, String name, int price, String description,int index,int priceAfterDiscount){
         HBox ret = new HBox();
-        Label l_name = new Label(name+": "),l_desc = new Label(description), l_price = new Label("Price: " + price + "$");
+        Label l_name = new Label(name+":"),l_desc = new Label(" " + description + " "), l_price = new Label("Price: " + price + "$");
         if(price>priceAfterDiscount)
         {
             l_price.setText("Price: " + price +"$ -> " + priceAfterDiscount +"$");
@@ -120,20 +120,24 @@ public class Bucket {
         ret.setAlignment(Pos.CENTER);
         l_name.minWidth(10000);
         l_name.setUnderline(true);
-        l_name.setWrapText(true);
-        l_desc.setWrapText(true);
-        l_price.setWrapText(true);
 
         b_remove.setText("Remove");
         b_remove.setOnMouseClicked(event ->  {;
-            System.out.println("Clicked ID: " + (id-1));
-            App.orderData.items.remove(App.orderData.items.get(index));
+            int i =0;
+            for (BasketItemData item: App.orderData.items){
+                if(item.listItems.get(0).getId() == id){
+                    break;
+                }
+                i++;
+            }
+            System.out.println("Clicked ID: " + (i));
+            App.orderData.items.remove(App.orderData.items.get(i));
             buildBucket();
         });
         b_remove.setLayoutX(839);
         ret.setBorder(new Border(new BorderStroke(Color.BLACK,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        ret.setPrefWidth(580);
+        ret.setPrefSize(580,50);
         ret.setAlignment(Pos.CENTER);
         ret.getChildren().addAll(l_name,l_desc, l_price,b_remove);
         return ret;

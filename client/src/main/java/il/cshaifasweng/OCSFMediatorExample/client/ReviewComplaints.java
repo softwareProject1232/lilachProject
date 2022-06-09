@@ -101,6 +101,7 @@ public class ReviewComplaints {
         });
 
         ret.setPrefSize(350, 50);
+        System.out.println("Size" + ret.getHeight());
         ret.setBorder(new Border(new BorderStroke(Color.BLACK,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
