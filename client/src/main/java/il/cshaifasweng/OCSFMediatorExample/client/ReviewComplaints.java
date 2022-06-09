@@ -57,7 +57,8 @@ public class ReviewComplaints {
                 user = comp.issuedBy;
                 description = comp.complaintDescription;
                 temp = comp.issuedBy;
-                pane = generateItem(user, description,temp);
+                id=comp.id;
+                pane = generateItem(user, description,temp,id,comp);
                 index++;
                 addItem(pane);
             }
@@ -71,7 +72,7 @@ public class ReviewComplaints {
         ItemList.getChildren().removeAll();
         ItemList.getChildren().clear();
     }
-    HBox generateItem(UserData user, String description,UserData temp){
+    HBox generateItem(UserData user, String description,UserData temp,int id,ComplaintData comp){
         HBox ret = new HBox();
         Label l_name = new Label(user.getUsername()),l_desc = new Label(user.getBranchName()), l_price = new Label(description);
         Button refund = new Button();
@@ -84,6 +85,7 @@ public class ReviewComplaints {
             System.out.println("Clicked resolve " );
             try {
                 App.compuser=temp;
+                App.thiscomp=comp;
                 App.setRoot("RefundForComplaint");
             } catch (IOException e) {
                 e.printStackTrace();
@@ -93,8 +95,9 @@ public class ReviewComplaints {
         });
         delete.setText("Delete");
         delete.setOnMouseClicked(event ->  {;
-            //delete complaint function
-
+            SimpleClient myclient=SimpleClient.getClient();
+            myclient.requestreomvecmplaint(id);
+            buildComplaints();
         });
 
         ret.setPrefSize(350, 50);

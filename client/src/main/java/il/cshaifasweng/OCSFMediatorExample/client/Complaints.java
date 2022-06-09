@@ -37,7 +37,7 @@ public class Complaints {
     @FXML
     void sentComplaint(ActionEvent event) {
         SimpleClient myclient=SimpleClient.getClient();
-        ComplaintData cmp=new ComplaintData(TextField.getText(),App.userData);
+        ComplaintData cmp=new ComplaintData(TextField.getText(),App.userData,0);
         System.out.println(cmp.complaintDescription+","+cmp.issuedBy);
         myclient.sendComplaint(cmp);
         TextField.setText("");

@@ -47,17 +47,7 @@ public class MainMenu {
 
     @FXML
     void LoadReviewComplients(ActionEvent event) throws IOException {
-        App.setRoot("ReviewComplaint");
-    }
-
-    @FXML
-    void LoadSettings(ActionEvent event) throws IOException {
-        App.setRoot("settings");
-    }
-
-    @FXML
-    void LoadSettingsManager(ActionEvent event) throws IOException {
-        App.setRoot("settings");
+        App.setRoot("ReviewComplaints");
     }
 
     @FXML

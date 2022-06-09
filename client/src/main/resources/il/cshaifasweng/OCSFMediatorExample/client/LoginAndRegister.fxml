@@ -11,7 +11,7 @@
 
 <VBox fx:id="vbox_main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" visible="true" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.LoginAndRegister">
     <TabPane prefHeight="804.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE">
-        <Tab text="Login">
+        <Tab text="Login" styleClass="tab">
             <!-- create a login section -->
             <AnchorPane maxHeight="238.0" maxWidth="400.0" prefHeight="238.0" prefWidth="400.0" translateX="400.0" translateY="250.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
                 <Label fx:id="label_username" layoutX="10.0" layoutY="10.0" text="Username" />

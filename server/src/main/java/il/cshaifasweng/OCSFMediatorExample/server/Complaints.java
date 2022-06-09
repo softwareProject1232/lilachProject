@@ -34,7 +34,7 @@ public class Complaints {
     }
     public ComplaintData GetComplaintData(Complaint c)
     {
-        ComplaintData com=new ComplaintData(c.complaintDescription,c.issuedBy.getUserData());
+        ComplaintData com=new ComplaintData(c.complaintDescription,c.issuedBy.getUserData(),c.getId());
         return com;
     }
     public ComplaintListData GetComplaintListData()
