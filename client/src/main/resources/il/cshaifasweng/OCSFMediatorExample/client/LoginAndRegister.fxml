@@ -23,7 +23,7 @@
                 <Button fx:id="guest_login" layoutX="170.0" layoutY="138.0" mnemonicParsing="false" onAction="#login_as_guest" prefHeight="24.0" prefWidth="130.0" text="Login As Guest" />
             <Label fx:id="label_branch_login" layoutX="10.0" layoutY="100.0" text="Branch" />
             <ComboBox fx:id="branch_list_login" layoutX="100.0" layoutY="96.0" prefHeight="24.0" prefWidth="201.0" />
-            <Label fx:id="error" layoutX="15.0" layoutY="192.0" prefHeight="24.0" prefWidth="369.0" />
+            <Label fx:id="errorLogin" layoutX="15.0" layoutY="192.0" prefHeight="24.0" prefWidth="369.0" />
             </AnchorPane>
         </Tab>
         <Tab text="Register">
@@ -43,6 +43,7 @@
                 <TextField fx:id="textfield_id_register" layoutX="111.0" layoutY="210.0" prefHeight="30.0" prefWidth="200.0" />
                 <ComboBox fx:id="branch_list_register" layoutX="111.0" layoutY="250.0" prefHeight="24.0" prefWidth="201.0" />
                 <Button fx:id="register_login" layoutX="111.0" layoutY="290.0" mnemonicParsing="false" onAction="#register" text="Register" />
+                <Label fx:id="errorRegister" layoutX="15.0" layoutY="192.0" prefHeight="24.0" prefWidth="369.0" />
 
             </AnchorPane>
         </Tab>
