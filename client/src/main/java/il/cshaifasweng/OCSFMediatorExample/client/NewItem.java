@@ -26,6 +26,12 @@ public class NewItem {
 
     @FXML
     void addItemAction(ActionEvent event) throws IOException {
+        try {
+            int num=Integer.parseInt(PriceTF.getText());
+        } catch (NumberFormatException e) {
+            PriceTF.setText("Illegal input");
+            return;
+        }
         SimpleClient myclient=SimpleClient.getClient();
         myclient.addItem(NameTF.getText(),DescriptionTF.getText(),Integer.parseInt(PriceTF.getText()),ImageTF.getText(),App.data.itemsdata.get(App.thisitem));
         App.setRoot("PrimaryCatalog");
