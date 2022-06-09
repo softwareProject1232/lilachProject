@@ -104,7 +104,15 @@ public class CustomSelection {
         ret.setAlignment(Pos.CENTER);
         Button addToCart = new Button("Add to zer");
         addToCart.setOnMouseClicked(event -> {
-                cartList.listItems.add(App.data.itemsdata.get(id-1));
+                int i = 0;
+                for (ItemData item: App.data.itemsdata){
+                    if(item.getId() == id){
+                        App.thisitem = i;
+                        break;
+                    }
+                    i++;
+                }
+                cartList.listItems.add(App.data.itemsdata.get(i));
                 System.out.println("Added to cart\n");
             System.out.println("Added to cart\n");
         });
@@ -117,6 +125,7 @@ public class CustomSelection {
             for (ItemData item: App.data.itemsdata){
                 if(item.getId() == id){
                     App.thisitem = i;
+                    break;
                 }
                 i++;
             }

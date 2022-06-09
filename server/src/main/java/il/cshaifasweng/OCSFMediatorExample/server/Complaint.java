@@ -19,6 +19,7 @@ public class Complaint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(length=1000)
     public String complaintDescription;
     public java.time.LocalDate date;
 
